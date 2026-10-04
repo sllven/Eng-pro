@@ -3,334 +3,434 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>РАСКОЛОТЫЙ ГОРОД | Книга-катастрофа</title>
-    
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700;900&family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
-    <script src="https://cdn.tailwindcss.com"></script>
-    
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    fontFamily: {
-                        sans: ['Roboto', 'sans-serif'],
-                        heading: ['Montserrat', 'sans-serif'],
-                    },
-                    colors: {
-                        brand: {
-                            black: '#050505',
-                            dark: '#121217',
-                            slate: '#1e1e24',
-                            amber: '#ea580c', // Fiery accent
-                            red: '#991b1b'
-                        }
-                    },
-                    boxShadow: {
-                        'amber-glow': '0 0 30px -5px rgba(234, 88, 12, 0.4)',
-                        'red-glow': '0 0 40px -10px rgba(153, 27, 27, 0.5)',
-                        'book': '-5px 0px 10px rgba(0,0,0,0.5), 10px 20px 30px rgba(0,0,0,0.8)'
-                    }
-                }
-            }
-        }
-    </script>
+    <title>Расколотый Город | Shattered City</title>
     <style>
+        :root {
+            --bg-color: #0d0d0d;
+            --text-color: #e0e0e0;
+            --accent-color: #d35400;
+            --header-bg: rgba(0, 0, 0, 0.85);
+            --nav-bg: rgba(20, 20, 20, 0.95);
+        }
+
         body {
-            background-color: #050505;
-            color: #e5e7eb;
-            overflow-x: hidden;
-        }
-        
-        .cinematic-bg {
-            background: radial-gradient(circle at center, #1e1e24 0%, #050505 100%);
+            margin: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            line-height: 1.6;
         }
 
-        .book-cover {
-            transform: perspective(1000px) rotateY(-15deg);
-            transition: transform 0.5s ease, box-shadow 0.5s ease;
-            transform-style: preserve-3d;
-        }
-        
-        .book-cover:hover {
-            transform: perspective(1000px) rotateY(0deg) scale(1.02);
-            box-shadow: 0 0 40px -10px rgba(234, 88, 12, 0.6);
-        }
-
-        /* Language switch transition */
-        .lang-content {
-            transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out;
-        }
-        .fade-out {
-            opacity: 0;
-            transform: translateY(5px);
+        /* Шапка и переключатель языков */
+        header {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: var(--header-bg);
+            padding: 15px 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 1000;
+            box-sizing: border-box;
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid #333;
         }
 
-        .section-separator {
-            height: 2px;
-            background: linear-gradient(90deg, transparent, rgba(234, 88, 12, 0.5), transparent);
-            margin: 0 auto;
-            width: 80%;
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: var(--accent-color);
+        }
+
+        .lang-switch button {
+            background: none;
+            border: 1px solid var(--accent-color);
+            color: var(--text-color);
+            padding: 5px 10px;
+            cursor: pointer;
+            margin-left: 5px;
+            transition: all 0.3s ease;
+        }
+
+        .lang-switch button:hover, .lang-switch button.active {
+            background: var(--accent-color);
+            color: #fff;
+        }
+
+        /* Подшапка (Навигация) */
+        nav {
+            position: fixed;
+            top: 60px;
+            width: 100%;
+            background: var(--nav-bg);
+            padding: 10px 0;
+            text-align: center;
+            z-index: 999;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.5);
+            border-bottom: 1px solid #222;
+        }
+
+        nav a {
+            color: #aaa;
+            text-decoration: none;
+            margin: 0 15px;
+            font-size: 14px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: color 0.3s;
+        }
+
+        nav a:hover {
+            color: var(--accent-color);
+        }
+
+        /* Секции */
+        main {
+            margin-top: 130px;
+            padding: 20px;
+            max-width: 1000px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        section {
+            margin-bottom: 60px;
+            padding-top: 20px;
+        }
+
+        h1, h2, h3 {
+            color: #fff;
+            text-transform: uppercase;
+        }
+
+        h2 {
+            border-bottom: 2px solid var(--accent-color);
+            padding-bottom: 10px;
+            margin-bottom: 20px;
+        }
+
+        /* Постер */
+        .poster-container {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+        .poster-container img {
+            max-width: 100%;
+            border-radius: 10px;
+            box-shadow: 0 0 30px rgba(211, 84, 0, 0.4);
+            border: 2px solid #333;
+        }
+
+        /* Аккордеон сюжета */
+        details {
+            background: #1a1a1a;
+            margin-bottom: 15px;
+            border-radius: 5px;
+            border-left: 4px solid var(--accent-color);
+            overflow: hidden;
+        }
+
+        summary {
+            padding: 15px;
+            font-size: 18px;
+            font-weight: bold;
+            cursor: pointer;
+            background: #222;
+            transition: background 0.3s;
+            list-style: none;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        summary::-webkit-details-marker {
+            display: none;
+        }
+
+        summary:after {
+            content: '+';
+            font-size: 24px;
+            color: var(--accent-color);
+        }
+
+        details[open] summary:after {
+            content: '-';
+        }
+
+        summary:hover {
+            background: #2a2a2a;
+        }
+
+        .details-content {
+            padding: 20px;
+            background: #1a1a1a;
+            border-top: 1px solid #333;
+        }
+
+        /* Сетки для героев и катастрофы */
+        .grid-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+        }
+
+        .card {
+            background: #1a1a1a;
+            padding: 20px;
+            border-radius: 5px;
+            border-top: 3px solid var(--accent-color);
+        }
+
+        .highlight {
+            color: var(--accent-color);
+            font-weight: bold;
         }
     </style>
 </head>
-<body class="antialiased selection:bg-brand-amber selection:text-white">
+<body>
 
-    <nav class="fixed w-full z-50 bg-brand-black/90 backdrop-blur-md border-b border-white/10">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex justify-between items-center h-16">
-                <div class="flex-shrink-0 font-heading font-bold text-xl tracking-wider text-brand-amber lang-content" id="nav-title">
-                    РАСКОЛОТЫЙ ГОРОД
-                </div>
-                <div class="flex space-x-2">
-                    <button onclick="changeLang('ru')" class="lang-btn px-3 py-1 text-sm font-medium rounded transition-colors bg-brand-amber text-white border border-brand-amber" id="btn-ru">RU</button>
-                    <button onclick="changeLang('en')" class="lang-btn px-3 py-1 text-sm font-medium rounded transition-colors hover:text-brand-amber border border-transparent hover:border-brand-amber text-gray-300" id="btn-en">EN</button>
-                    <button onclick="changeLang('kk')" class="lang-btn px-3 py-1 text-sm font-medium rounded transition-colors hover:text-brand-amber border border-transparent hover:border-brand-amber text-gray-300" id="btn-kk">KK</button>
-                </div>
-            </div>
-        </div>
-    </nav>
-
-    <header class="relative pt-32 pb-20 lg:pt-48 lg:pb-32 cinematic-bg overflow-hidden">
-        <!-- Ambient background glows -->
-        <div class="absolute top-1/4 left-1/4 w-96 h-96 bg-brand-amber/10 rounded-full blur-[100px]"></div>
-        <div class="absolute bottom-0 right-1/4 w-96 h-96 bg-brand-red/10 rounded-full blur-[100px]"></div>
-
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-            <div class="lg:grid lg:grid-cols-12 lg:gap-16 items-center">
-                <div class="lg:col-span-6 text-center lg:text-left mb-16 lg:mb-0">
-                    <h1 class="text-4xl sm:text-5xl lg:text-7xl font-heading font-black tracking-tighter text-white mb-6 uppercase drop-shadow-lg lang-content" id="hero-title">
-                        РАСКОЛОТЫЙ <span class="text-brand-amber">ГОРОД</span>
-                    </h1>
-                    <p class="text-lg sm:text-xl text-gray-400 font-light mb-8 lang-content border-l-4 border-brand-amber pl-4 inline-block lg:block" id="hero-subtitle">
-                        Проект книги о Великом Новоморском землетрясении
-                    </p>
-                    <div class="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
-                        <a href="#disaster" class="px-8 py-3 bg-brand-amber hover:bg-orange-500 text-white font-bold rounded shadow-amber-glow transition-all duration-300 text-center lang-content" id="btn-explore">
-                            Узнать больше
-                        </a>
-                    </div>
-                </div>
-                
-                <div class="lg:col-span-6 flex justify-center lg:justify-end">
-                    <div class="relative w-full max-w-sm">
-                        <!-- The Book Cover Image -->
-                        <img 
-                            src="watermarked_img_1747507588426706641.jpg" 
-                            alt="Book Poster" 
-                            class="book-cover rounded-lg shadow-book w-full h-auto object-cover border border-white/10"
-                            onerror="this.src='https://placehold.co/600x900/121217/ea580c?text=POSTER+MISSING'"
-                        >
-                    </div>
-                </div>
-            </div>
+    <header>
+        <div class="logo" id="site-title">Расколотый Город</div>
+        <div class="lang-switch">
+            <button onclick="setLang('ru')" id="btn-ru" class="active">RU</button>
+            <button onclick="setLang('kk')" id="btn-kk">KK</button>
+            <button onclick="setLang('en')" id="btn-en">EN</button>
         </div>
     </header>
 
-    <div class="section-separator"></div>
+    <nav>
+        <a href="#poster" data-t="nav_poster">Постер</a>
+        <a href="#disaster" data-t="nav_disaster">Описание катастрофы</a>
+        <a href="#characters" data-t="nav_characters">Главные герои</a>
+        <a href="#content" data-t="nav_content">Содержание</a>
+        <a href="#finale" data-t="nav_finale">Финал</a>
+    </nav>
 
-    <section id="disaster" class="py-20 bg-brand-black">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="max-w-3xl mx-auto text-center mb-16">
-                <h2 class="text-3xl font-heading font-bold text-white mb-4 uppercase tracking-widest lang-content" id="sec1-title">Катастрофа</h2>
-                <div class="w-16 h-1 bg-brand-red mx-auto"></div>
+    <main>
+        <section id="poster">
+            <div class="poster-container">
+                <img src="watermarked_img_1747507588426706641.jpg" alt="Постер книги">
             </div>
-            <div class="bg-brand-slate p-8 rounded-xl border border-white/5 shadow-2xl relative overflow-hidden">
-                <div class="absolute -right-10 -top-10 text-9xl text-white/5 font-heading font-black rotate-12">8.5</div>
-                <p class="text-xl md:text-2xl text-gray-300 leading-relaxed font-light relative z-10 lang-content" id="sec1-text">
-                    Землетрясение 8.5 баллов. Город Новоморск разрушен за 45 секунд. Разрушение инфраструктуры, локальное цунами высотой 5 метров и смертоносные афтершоки.
+        </section>
+
+        <section id="disaster">
+            <h2 data-t="title_disaster">Описание катастрофы: Великое Новоморское землетрясение</h2>
+            <div class="grid-container">
+                <div class="card">
+                    <h3 data-t="disaster_scale_title">Масштаб</h3>
+                    <p data-t="disaster_scale_desc">8.5 баллов по шкале Рихтера. Эпицентр в 20 км от города.</p>
+                </div>
+                <div class="card">
+                    <h3 data-t="disaster_first_title">Первый толчок</h3>
+                    <p data-t="disaster_first_desc">Длится 45 секунд, но ощущается как вечность. Панельные дома складываются, небоскребы осыпают улицы тоннами бетона.</p>
+                </div>
+                <div class="card">
+                    <h3 data-t="disaster_tsunami_title">Вторичные эффекты</h3>
+                    <p data-t="disaster_tsunami_desc">Локальное цунами высотой 5 метров обрушивается на портовый район. Вспыхивают сотни пожаров. Грунт блокирует все выезды.</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="characters">
+            <h2 data-t="title_characters">Главные герои</h2>
+            <div class="grid-container">
+                <div class="card">
+                    <h3 data-t="char_1_name">Доктор Елена Петрова</h3>
+                    <p data-t="char_1_desc">50 лет. Ведущий сейсмолог. Годами предупреждала о катастрофе. Ее миссия в хаосе — найти свою дочь.</p>
+                </div>
+                <div class="card">
+                    <h3 data-t="char_2_name">Андрей Волков</h3>
+                    <p data-t="char_2_desc">32 года. Лейтенант спасательной службы. Возглавляет отряд добровольцев, чтобы пробиться к своей семье.</p>
+                </div>
+                <div class="card">
+                    <h3 data-t="char_3_name">Катя</h3>
+                    <p data-t="char_3_desc">16 лет. Дочь Елены. Оказалась заперта под землей в рухнувшем ТЦ «Атриум». Становится лидером для выживших.</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="content">
+            <h2 data-t="title_content">Содержание</h2>
+            
+            <details>
+                <summary data-t="part_1_title">Часть I: Затишье (Дни 1-2 до катастрофы)</summary>
+                <div class="details-content" data-t="part_1_desc">
+                    Введение в жизнь Новоморска. Напряжение между Еленой и властями. Обычные будни Андрея и Кати. Читатель видит город, который, не зная об этом, живет последние часы.
+                </div>
+            </details>
+
+            <details>
+                <summary data-t="part_2_title">Часть II: Разлом (День 1)</summary>
+                <div class="details-content" data-t="part_2_desc">
+                    Детальное описание 45 секунд катастрофы с разных точек зрения. Елена в Центре пытается оценить масштаб. Андрей на улице видит ад. Катя под землей в темноте. Хаос и паника первого часа.
+                </div>
+            </details>
+
+            <details>
+                <summary data-t="part_3_title">Часть III: Выживание (Дни 2-5)</summary>
+                <div class="details-content" data-t="part_3_desc">
+                    Андрей собирает команду, они пробираются через горящий город. Елена пытается использовать свои знания. Под землей в Кате просыпается лидер: она организует распределение ресурсов.
+                </div>
+            </details>
+
+            <details>
+                <summary data-t="part_4_title">Часть IV: Путь к свету (Дни 6-7)</summary>
+                <div class="details-content" data-t="part_4_desc">
+                    Судьбы героев сближаются. Андрей со своим отрядом пробивается к обрушенному «Атриуму». Елена координирует спасательную операцию. Последний мощный афтершок ставит все под угрозу.
+                </div>
+            </details>
+        </section>
+
+        <section id="finale">
+            <h2 data-t="title_finale">Финал</h2>
+            <div class="card">
+                <p data-t="finale_text">
+                    Финал книги — горько-сладкий. Новоморск стерт с лица земли. Андрею удается пробиться в «Атриум» за считанные минуты до полного обрушения подвала и спасти Катю. На поверхности Катя воссоединяется с матерью. Андрей находит руины своего дома и понимает, что спас других, но не смог спасти своих.<br><br>
+                    Последняя глава показывает эвакуацию. Город, как расколотый череп, остается позади. Книга заканчивается на ноте надежды: человеческий дух невозможно расколоть даже самым сильным землетрясением.
                 </p>
             </div>
-        </div>
-    </section>
-
-    <section id="characters" class="py-20 bg-brand-dark">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="max-w-3xl mx-auto text-center mb-16">
-                <h2 class="text-3xl font-heading font-bold text-white mb-4 uppercase tracking-widest lang-content" id="sec2-title">Главные Герои</h2>
-                <div class="w-16 h-1 bg-brand-amber mx-auto"></div>
-            </div>
-            
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-                <!-- Character 1 -->
-                <div class="bg-brand-black p-6 border-t-2 border-transparent hover:border-brand-amber transition-colors duration-300 rounded-b-lg shadow-lg group">
-                    <h3 class="text-xl font-bold text-white mb-2 font-heading group-hover:text-brand-amber transition-colors lang-content" id="char1-name">Доктор Елена Петрова</h3>
-                    <p class="text-gray-400 text-sm lang-content" id="char1-desc">
-                        50 лет, ведущий сейсмолог. Годами предупреждала о мега-землетрясении.
-                    </p>
-                </div>
-                
-                <!-- Character 2 -->
-                <div class="bg-brand-black p-6 border-t-2 border-transparent hover:border-brand-amber transition-colors duration-300 rounded-b-lg shadow-lg group">
-                    <h3 class="text-xl font-bold text-white mb-2 font-heading group-hover:text-brand-amber transition-colors lang-content" id="char2-name">Андрей Волков</h3>
-                    <p class="text-gray-400 text-sm lang-content" id="char2-desc">
-                        32 года, спасатель. Возглавляет отряд добровольцев в разрушенном городе.
-                    </p>
-                </div>
-
-                <!-- Character 3 -->
-                <div class="bg-brand-black p-6 border-t-2 border-transparent hover:border-brand-amber transition-colors duration-300 rounded-b-lg shadow-lg group">
-                    <h3 class="text-xl font-bold text-white mb-2 font-heading group-hover:text-brand-amber transition-colors lang-content" id="char3-name">Катя</h3>
-                    <p class="text-gray-400 text-sm lang-content" id="char3-desc">
-                        16 лет, дочь Елены. Застряла под землей в рухнувшем торговом центре.
-                    </p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <section id="chapters" class="py-20 bg-brand-black">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="max-w-3xl mx-auto text-center mb-16">
-                <h2 class="text-3xl font-heading font-bold text-white mb-4 uppercase tracking-widest lang-content" id="sec3-title">Содержание</h2>
-                <div class="w-16 h-1 bg-brand-red mx-auto"></div>
-            </div>
-            
-            <div class="space-y-6 max-w-4xl mx-auto relative before:absolute before:inset-0 before:ml-5 before:-translate-x-px md:before:mx-auto md:before:translate-x-0 before:h-full before:w-0.5 before:bg-gradient-to-b before:from-brand-amber before:to-brand-red">
-                
-                <div class="relative flex items-center justify-between md:justify-normal md:odd:flex-row-reverse group is-active">
-                    <div class="flex items-center justify-center w-10 h-10 rounded-full border border-brand-amber bg-brand-black text-brand-amber font-bold shrink-0 md:order-1 md:group-odd:-translate-x-1/2 md:group-even:translate-x-1/2 shadow-amber-glow z-10">I</div>
-                    <div class="w-[calc(100%-4rem)] md:w-[calc(50%-2.5rem)] p-4 rounded-lg bg-brand-slate border border-white/5">
-                        <p class="text-gray-300 font-medium lang-content" id="chap1">Часть 1: Затишье (Дни 1-2 до катастрофы)</p>
-                    </div>
-                </div>
-
-                <div class="relative flex items-center justify-between md:justify-normal md:odd:flex-row-reverse group is-active">
-                    <div class="flex items-center justify-center w-10 h-10 rounded-full border border-brand-amber bg-brand-black text-brand-amber font-bold shrink-0 md:order-1 md:group-odd:-translate-x-1/2 md:group-even:translate-x-1/2 z-10">II</div>
-                    <div class="w-[calc(100%-4rem)] md:w-[calc(50%-2.5rem)] p-4 rounded-lg bg-brand-slate border border-white/5">
-                        <p class="text-gray-300 font-medium lang-content" id="chap2">Часть 2: Разлом (День 1)</p>
-                    </div>
-                </div>
-
-                <div class="relative flex items-center justify-between md:justify-normal md:odd:flex-row-reverse group is-active">
-                    <div class="flex items-center justify-center w-10 h-10 rounded-full border border-brand-red bg-brand-black text-brand-red font-bold shrink-0 md:order-1 md:group-odd:-translate-x-1/2 md:group-even:translate-x-1/2 z-10">III</div>
-                    <div class="w-[calc(100%-4rem)] md:w-[calc(50%-2.5rem)] p-4 rounded-lg bg-brand-slate border border-white/5">
-                        <p class="text-gray-300 font-medium lang-content" id="chap3">Часть 3: Выживание (Дни 2-5)</p>
-                    </div>
-                </div>
-
-                <div class="relative flex items-center justify-between md:justify-normal md:odd:flex-row-reverse group is-active">
-                    <div class="flex items-center justify-center w-10 h-10 rounded-full border border-brand-red bg-brand-black text-brand-red font-bold shrink-0 md:order-1 md:group-odd:-translate-x-1/2 md:group-even:translate-x-1/2 shadow-red-glow z-10">IV</div>
-                    <div class="w-[calc(100%-4rem)] md:w-[calc(50%-2.5rem)] p-4 rounded-lg bg-brand-slate border border-white/5">
-                        <p class="text-gray-300 font-medium lang-content" id="chap4">Часть 4: Путь к свету (Дни 6-7)</p>
-                    </div>
-                </div>
-
-            </div>
-        </div>
-    </section>
-
-    <section id="finale" class="py-24 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-brand-slate via-brand-dark to-brand-black text-center border-t border-brand-red/20">
-        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-            <h2 class="text-3xl md:text-5xl font-heading font-black text-white mb-8 tracking-wider lang-content" id="sec4-title">ФИНАЛ</h2>
-            <p class="text-lg md:text-2xl text-gray-400 font-light italic leading-relaxed lang-content" id="sec4-text">
-                Спасение из ТРЦ 'Атриум', Новоморск стерт с лица земли. Эвакуация, горько-сладкий конец и надежда на возрождение.
-            </p>
-        </div>
-    </section>
-
-    <footer class="bg-black py-8 text-center text-gray-600 text-sm border-t border-white/5">
-        <p>&copy; 2024. All rights reserved. Promotional concept.</p>
-    </footer>
+        </section>
+    </main>
 
     <script>
         const translations = {
             ru: {
-                "nav-title": "РАСКОЛОТЫЙ ГОРОД",
-                "hero-title": "РАСКОЛОТЫЙ <span class='text-brand-amber'>ГОРОД</span>",
-                "hero-subtitle": "Проект книги о Великом Новоморском землетрясении",
-                "btn-explore": "Узнать больше",
-                "sec1-title": "Катастрофа",
-                "sec1-text": "Землетрясение 8.5 баллов. Город Новоморск разрушен за 45 секунд. Разрушение инфраструктуры, локальное цунами высотой 5 метров и смертоносные афтершоки.",
-                "sec2-title": "Главные Герои",
-                "char1-name": "Доктор Елена Петрова",
-                "char1-desc": "50 лет, сейсмолог. Годами предупреждала о мега-землетрясении.",
-                "char2-name": "Андрей Волков",
-                "char2-desc": "32 года, спасатель. Возглавляет отряд добровольцев в разрушенном городе.",
-                "char3-name": "Катя",
-                "char3-desc": "16 лет, дочь Елены. Застряла под землей в рухнувшем торговом центре.",
-                "sec3-title": "Содержание",
-                "chap1": "Часть 1: Затишье (Дни 1-2 до катастрофы)",
-                "chap2": "Часть 2: Разлом (День 1)",
-                "chap3": "Часть 3: Выживание (Дни 2-5)",
-                "chap4": "Часть 4: Путь к свету (Дни 6-7)",
-                "sec4-title": "ФИНАЛ",
-                "sec4-text": "Спасение из ТРЦ 'Атриум', Новоморск стерт с лица земли. Эвакуация, горько-сладкий конец и надежда на возрождение."
-            },
-            en: {
-                "nav-title": "SHATTERED CITY",
-                "hero-title": "SHATTERED <span class='text-brand-amber'>CITY</span>",
-                "hero-subtitle": "A book project about the Great Novomorsk Earthquake",
-                "btn-explore": "Explore More",
-                "sec1-title": "The Disaster",
-                "sec1-text": "8.5 magnitude earthquake. The city of Novomorsk is destroyed in 45 seconds. Infrastructure collapse, a 5-meter local tsunami, and deadly aftershocks.",
-                "sec2-title": "Characters",
-                "char1-name": "Dr. Elena Petrova",
-                "char1-desc": "50, seismologist. Warned about the mega-earthquake for years.",
-                "char2-name": "Andrey Volkov",
-                "char2-desc": "32, rescuer. Leads a volunteer squad in the ruined city.",
-                "char3-name": "Katya",
-                "char3-desc": "16, Elena's daughter. Trapped underground in a collapsed mall.",
-                "sec3-title": "Synopsis",
-                "chap1": "Part 1: The Calm (Days 1-2 before)",
-                "chap2": "Part 2: The Rupture (Day 1)",
-                "chap3": "Part 3: Survival (Days 2-5)",
-                "chap4": "Part 4: Path to Light (Days 6-7)",
-                "sec4-title": "FINALE",
-                "sec4-text": "Rescue from the 'Atrium' mall, Novomorsk wiped off the map. Evacuation, a bittersweet ending, and hope for rebirth."
+                site_title: "Расколотый Город",
+                nav_poster: "Постер",
+                nav_disaster: "Описание катастрофы",
+                nav_characters: "Главные герои",
+                nav_content: "Содержание",
+                nav_finale: "Финал",
+                
+                title_disaster: "Описание катастрофы: Великое Новоморское землетрясение",
+                disaster_scale_title: "Масштаб",
+                disaster_scale_desc: "8.5 баллов по шкале Рихтера. Эпицентр в 20 км от города.",
+                disaster_first_title: "Первый толчок",
+                disaster_first_desc: "Длится 45 секунд, но ощущается как вечность. Панельные дома складываются, небоскребы осыпают улицы тоннами бетона.",
+                disaster_tsunami_title: "Вторичные эффекты",
+                disaster_tsunami_desc: "Локальное цунами высотой 5 метров обрушивается на портовый район. Вспыхивают сотни пожаров. Грунт блокирует все выезды.",
+
+                title_characters: "Главные герои",
+                char_1_name: "Доктор Елена Петрова",
+                char_1_desc: "50 лет. Ведущий сейсмолог. Годами предупреждала о катастрофе. Ее миссия в хаосе — найти свою дочь.",
+                char_2_name: "Андрей Волков",
+                char_2_desc: "32 года. Лейтенант спасательной службы. Возглавляет отряд добровольцев, чтобы пробиться к своей семье.",
+                char_3_name: "Катя",
+                char_3_desc: "16 лет. Дочь Елены. Оказалась заперта под землей в рухнувшем ТЦ «Атриум». Становится лидером для выживших.",
+
+                title_content: "Содержание",
+                part_1_title: "Часть I: Затишье (Дни 1-2 до катастрофы)",
+                part_1_desc: "Введение в жизнь Новоморска. Напряжение между Еленой и властями. Обычные будни Андрея и Кати. Читатель видит город, который, не зная об этом, живет последние часы.",
+                part_2_title: "Часть II: Разлом (День 1)",
+                part_2_desc: "Детальное описание 45 секунд катастрофы с разных точек зрения. Елена в Центре пытается оценить масштаб. Андрей на улице видит ад. Катя под землей в темноте. Хаос и паника первого часа.",
+                part_3_title: "Часть III: Выживание (Дни 2-5)",
+                part_3_desc: "Андрей собирает команду, они пробираются через горящий город. Елена пытается использовать свои знания. Под землей в Кате просыпается лидер: она организует распределение ресурсов.",
+                part_4_title: "Часть IV: Путь к свету (Дни 6-7)",
+                part_4_desc: "Судьбы героев сближаются. Андрей со своим отрядом пробивается к обрушенному «Атриуму». Елена координирует спасательную операцию. Последний мощный афтершок ставит все под угрозу.",
+
+                title_finale: "Финал",
+                finale_text: "Финал книги — горько-сладкий. Новоморск стерт с лица земли. Андрею удается пробиться в «Атриум» за считанные минуты до полного обрушения подвала и спасти Катю. На поверхности Катя воссоединяется с матерью. Андрей находит руины своего дома и понимает, что спас других, но не смог спасти своих.<br><br>Последняя глава показывает эвакуацию. Город, как расколотый череп, остается позади. Книга заканчивается на ноте надежды: человеческий дух невозможно расколоть даже самым сильным землетрясением."
             },
             kk: {
-                "nav-title": "БҮЛІНГЕН ҚАЛА",
-                "hero-title": "БҮЛІНГЕН <span class='text-brand-amber'>ҚАЛА</span>",
-                "hero-subtitle": "Ұлы Новоморск жер сілкінісі туралы кітап жобасы",
-                "btn-explore": "Көбірек білу",
-                "sec1-title": "Апат",
-                "sec1-text": "8.5 балдық жер сілкінісі. Новоморск қаласы 45 секунд ішінде қирады. Инфрақұрылымның бұзылуы, 5 метрлік жергілікті цунами және қауіпті афтершоктар.",
-                "sec2-title": "Кейіпкерлер",
-                "char1-name": "Доктор Елена Петрова",
-                "char1-desc": "50 жаста, сейсмолог. Мега-жер сілкінісі туралы жылдар бойы ескерткен.",
-                "char2-name": "Андрей Волков",
-                "char2-desc": "32 жаста, құтқарушы. Қираған қалада еріктілер тобын басқарады.",
-                "char3-name": "Катя",
-                "char3-desc": "16 жаста, Еленаның қызы. Қираған сауда орталығында жер астында қалған.",
-                "sec3-title": "Мазмұны",
-                "chap1": "1-бөлім: Тыныштық (Апатқа дейінгі 1-2 күн)",
-                "chap2": "2-бөлім: Жарықшақ (1 күн)",
-                "chap3": "3-бөлім: Аман қалу (2-5 күн)",
-                "chap4": "4-бөлім: Жарыққа жол (6-7 күн)",
-                "sec4-title": "ФИНАЛ",
-                "sec4-text": "'Атриум' ОСО-нан құтқару, Новоморск жер бетінен жойылды. Эвакуация, мұңды-қуанышты соңы және қайта өрлеуге үміт."
+                site_title: "Жарылған Қала",
+                nav_poster: "Постер",
+                nav_disaster: "Апаттың сипаттамасы",
+                nav_characters: "Басты кейіпкерлер",
+                nav_content: "Мазмұны",
+                nav_finale: "Финал",
+
+                title_disaster: "Апаттың сипаттамасы: Ұлы Новоморск жер сілкінісі",
+                disaster_scale_title: "Масштабы",
+                disaster_scale_desc: "Рихтер шкаласы бойынша 8.5 балл. Эпицентрі қаладан 20 км қашықтықта.",
+                disaster_first_title: "Алғашқы дүмпу",
+                disaster_first_desc: "45 секундқа созылады, бірақ мәңгіліктей көрінеді. Панельді үйлер құлап, зәулім ғимараттар көшеге тонналаған бетон төгеді.",
+                disaster_tsunami_title: "Қосымша әсерлер",
+                disaster_tsunami_desc: "Биіктігі 5 метрлік цунами порт ауданына соғылады. Жүздеген өрт шығады. Топырақтың жылжуы барлық шығу жолдарын жауып тастайды.",
+
+                title_characters: "Басты кейіпкерлер",
+                char_1_name: "Доктор Елена Петрова",
+                char_1_desc: "50 жаста. Бас сейсмолог. Жылдар бойы апат туралы ескерткен. Хаостағы оның мақсаты — қызын табу.",
+                char_2_name: "Андрей Волков",
+                char_2_desc: "32 жаста. Құтқару қызметінің лейтенанты. Отбасына жету үшін еріктілер тобын басқарады.",
+                char_3_name: "Катя",
+                char_3_desc: "16 жаста. Еленаның қызы. Қираған «Атриум» СОО-да жер астында қамалып қалады. Тірі қалғандар үшін көшбасшыға айналады.",
+
+                title_content: "Мазмұны",
+                part_1_title: "I Бөлім: Тыныштық (Апатқа дейінгі 1-2 күн)",
+                part_1_desc: "Новоморск өмірімен танысу. Елена мен билік арасындағы шиеленіс. Андрей мен Катяның қарапайым күндері. Оқырман соңғы сағаттарын сүріп жатқанын білмейтін қаланы көреді.",
+                part_2_title: "II Бөлім: Жарылыс (1-күн)",
+                part_2_desc: "Апаттың 45 секундын әртүрлі көзқараспен егжей-тегжейлі сипаттау. Елена Орталықта ауқымды бағалауға тырысады. Андрей көшеде тозақты көреді. Катя қараңғыда жер астында.",
+                part_3_title: "III Бөлім: Тірі қалу (2-5 күндер)",
+                part_3_desc: "Андрей команда жинайды, олар жанып жатқан қала арқылы өтеді. Елена өз білімін пайдалануға тырысады. Жер астында Катя ресурстарды бөлуді ұйымдастырады.",
+                part_4_title: "IV Бөлім: Жарыққа жол (6-7 күндер)",
+                part_4_desc: "Кейіпкерлердің тағдыры тоғысады. Андрей отрядымен қираған «Атриумға» жетеді. Елена құтқару операциясын үйлестіреді. Соңғы күшті афтершок бәріне қауіп төндіреді.",
+
+                title_finale: "Финал",
+                finale_text: "Кітаптың финалы — ащы-тәтті. Новоморск жер бетінен жойылды. Андрей жертөле толық қирағанға дейін бірнеше минут бұрын «Атриумға» кіріп, Катяны құтқарады. Жер бетінде Катя анасымен қауышады. Андрей үйінің үйіндісін тауып, басқаларды құтқарғанын, бірақ өз отбасын сақтап қала алмағанын түсінеді.<br><br>Соңғы тарау эвакуацияны көрсетеді. Қала артта қалады. Кітап үмітпен аяқталады: адам рухын тіпті ең күшті жер сілкінісі де сындыра алмайды."
+            },
+            en: {
+                site_title: "Shattered City",
+                nav_poster: "Poster",
+                nav_disaster: "Disaster Description",
+                nav_characters: "Main Characters",
+                nav_content: "Content",
+                nav_finale: "Finale",
+
+                title_disaster: "Disaster Description: The Great Novomorsk Earthquake",
+                disaster_scale_title: "Scale",
+                disaster_scale_desc: "Magnitude 8.5 on the Richter scale. Epicenter 20 km from the city.",
+                disaster_first_title: "First Shock",
+                disaster_first_desc: "Lasts 45 seconds but feels like an eternity. Panel houses fold, skyscrapers rain tons of concrete onto the streets.",
+                disaster_tsunami_title: "Secondary Effects",
+                disaster_tsunami_desc: "A local 5-meter tsunami hits the port district. Hundreds of fires break out. Ground shifting blocks all exits.",
+
+                title_characters: "Main Characters",
+                char_1_name: "Dr. Elena Petrova",
+                char_1_desc: "50 years old. Lead seismologist. Warned about the disaster for years. Her mission in the chaos is to find her daughter.",
+                char_2_name: "Andrey Volkov",
+                char_2_desc: "32 years old. Rescue service lieutenant. Leads a team of volunteers to reach his family.",
+                char_3_name: "Katya",
+                char_3_desc: "16 years old. Elena's daughter. Trapped underground in the collapsed 'Atrium' mall. Becomes a leader for the survivors.",
+
+                title_content: "Content",
+                part_1_title: "Part I: The Calm (Days 1-2 before)",
+                part_1_desc: "Introduction to Novomorsk. Tension between Elena and the authorities. Normal days of Andrey and Katya. The city lives its final hours unknowingly.",
+                part_2_title: "Part II: The Fracture (Day 1)",
+                part_2_desc: "Detailed description of the 45-second disaster from different perspectives. Elena assesses the scale. Andrey sees hell on the streets. Katya is in the dark.",
+                part_3_title: "Part III: Survival (Days 2-5)",
+                part_3_desc: "Andrey gathers a team, moving through the burning city. Elena uses her knowledge. Underground, Katya organizes resource distribution.",
+                part_4_title: "Part IV: Path to Light (Days 6-7)",
+                part_4_desc: "The characters' fates intertwine. Andrey's team breaches the 'Atrium'. Elena coordinates the rescue. A massive final aftershock threatens everything.",
+
+                title_finale: "Finale",
+                finale_text: "The finale is bittersweet. Novomorsk is wiped off the map. Andrey breaches the 'Atrium' minutes before total collapse and saves Katya. On the surface, Katya reunites with her mother. Andrey finds the ruins of his home, realizing he saved others but lost his own.<br><br>The final chapter shows the evacuation. The city is left behind. The book ends on a note of hope: the human spirit cannot be shattered even by the strongest earthquake."
             }
         };
 
-        function changeLang(lang) {
-            // Update button styles
-            const buttons = document.querySelectorAll('.lang-btn');
-            buttons.forEach(btn => {
-                if(btn.id === `btn-${lang}`) {
-                    btn.classList.add('bg-brand-amber', 'text-white', 'border-brand-amber');
-                    btn.classList.remove('text-gray-300', 'border-transparent');
-                } else {
-                    btn.classList.remove('bg-brand-amber', 'text-white', 'border-brand-amber');
-                    btn.classList.add('text-gray-300', 'border-transparent');
+        function setLang(lang) {
+            // Update buttons
+            document.querySelectorAll('.lang-switch button').forEach(btn => btn.classList.remove('active'));
+            document.getElementById('btn-' + lang).classList.add('active');
+
+            // Update texts
+            if (lang === 'en') {
+                document.getElementById('site-title').innerText = translations[lang].site_title;
+            } else if (lang === 'kk') {
+                document.getElementById('site-title').innerText = translations[lang].site_title;
+            } else {
+                document.getElementById('site-title').innerText = translations.ru.site_title;
+            }
+
+            const elements = document.querySelectorAll('[data-t]');
+            elements.forEach(el => {
+                const key = el.getAttribute('data-t');
+                if (translations[lang][key]) {
+                    el.innerHTML = translations[lang][key];
                 }
             });
-
-            // Update content with fade effect
-            const elements = document.querySelectorAll('.lang-content');
-            
-            elements.forEach(el => el.classList.add('fade-out'));
-            
-            setTimeout(() => {
-                elements.forEach(el => {
-                    const id = el.id;
-                    if (translations[lang][id]) {
-                        el.innerHTML = translations[lang][id];
-                    }
-                    el.classList.remove('fade-out');
-                });
-            }, 300); // Wait for fade out
-            
-            document.documentElement.lang = lang;
         }
     </script>
 </body>
