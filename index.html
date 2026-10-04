@@ -576,10 +576,16 @@
         this.init();
       }
 
-      init() {
+            init() {
         this.bindEvents();
         this.updateLanguage(this.state.lang);
+        
+        // Проверяем ссылку при загрузке: если есть #book, открываем книгу
+        if (window.location.hash === '#book') {
+          this.showBook();
+        }
       }
+
 
       bindEvents() {
         this.langButtons.forEach(btn => {
@@ -602,6 +608,7 @@
         this.landingNav.classList.remove('hidden');
         this.viewBook.classList.add('hidden');
         window.scrollTo(0, 0);
+        history.pushState(null, null, ' '); // Очищает ссылку от #book
       }
 
       showBook() {
@@ -609,6 +616,7 @@
         this.landingNav.classList.add('hidden');
         this.viewBook.classList.remove('hidden');
         window.scrollTo(0, 0);
+        window.location.hash = 'book'; // Добавляет #book в ссылку
       }
 
       // i18n logic
