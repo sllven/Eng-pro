@@ -11,7 +11,7 @@
   
   <style>
     /* ==================================================
-       1. CSS Variables & Global Styles
+       1. CSS Variables & Global Styles (White-Blue Theme)
        ================================================== */
     :root {
       --bg-color: #f0f4f8;        
@@ -24,7 +24,7 @@
       --accent-light: #e0f2fe;    
       
       --font-primary: 'Inter', system-ui, -apple-system, sans-serif;
-      --font-serif: 'Merriweather', Georgia, serif; 
+      --font-serif: 'Merriweather', Georgia, serif;
       
       --space-xs: 0.5rem;
       --space-sm: 1rem;
@@ -36,18 +36,11 @@
       --radius-md: 12px;
       --shadow-sm: 0 1px 3px rgba(16, 42, 67, 0.05);
       --shadow-md: 0 4px 12px rgba(16, 42, 67, 0.08);
+      --shadow-lg: 0 10px 25px rgba(16, 42, 67, 0.1);
     }
 
-    * { 
-      box-sizing: border-box; 
-      margin: 0; 
-      padding: 0; 
-    }
-
-    html { 
-      scroll-behavior: smooth; 
-    }
-
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
     body {
       background-color: var(--bg-color);
       color: var(--text-main);
@@ -56,477 +49,128 @@
       overflow-x: hidden;
       -webkit-font-smoothing: antialiased;
     }
-
-    a { 
-      color: inherit; 
-      text-decoration: none; 
-      transition: color 0.2s; 
-    }
-
-    button { 
-      background: none; 
-      border: none; 
-      color: inherit; 
-      font: inherit; 
-      cursor: pointer; 
-    }
-
-    img { 
-      max-width: 100%; 
-      height: auto; 
-      display: block; 
-    }
-
-    :focus-visible { 
-      outline: 2px solid var(--accent-color); 
-      outline-offset: 4px; 
-    }
+    a { color: inherit; text-decoration: none; transition: color 0.2s; }
+    button { background: none; border: none; color: inherit; font: inherit; cursor: pointer; }
+    img { max-width: 100%; height: auto; display: block; }
+    :focus-visible { outline: 2px solid var(--accent-color); outline-offset: 4px; }
     
-    .hidden { 
-      display: none !important; 
-    }
+    .hidden { display: none !important; }
 
     /* ==================================================
        2. Typography Hierarchy
        ================================================== */
-    .title-display { 
-      font-size: clamp(2.5rem, 5vw, 4.5rem); 
-      font-weight: 900; 
-      line-height: 1.1; 
-      letter-spacing: -0.02em; 
-      margin-bottom: var(--space-sm); 
-      color: var(--text-main); 
-    }
-
-    .title-section { 
-      font-size: clamp(1.75rem, 4vw, 2.5rem); 
-      font-weight: 700; 
-      letter-spacing: -0.01em; 
-      margin-bottom: var(--space-lg); 
-      color: var(--text-main); 
-      border-bottom: 2px solid var(--accent-light); 
-      padding-bottom: var(--space-xs); 
-      display: inline-block; 
-    }
-
-    .title-item { 
-      font-size: 1.25rem; 
-      font-weight: 700; 
-      margin-bottom: var(--space-xs); 
-      color: var(--text-main); 
-    }
-
-    .text-lead { 
-      font-size: clamp(1.125rem, 2vw, 1.35rem); 
-      color: var(--text-muted); 
-      line-height: 1.6; 
-    }
-
-    .text-body { 
-      font-size: 1rem; 
-      color: var(--text-muted); 
-    }
+    .title-display { font-size: clamp(2.5rem, 5vw, 4.5rem); font-weight: 900; line-height: 1.1; letter-spacing: -0.02em; margin-bottom: var(--space-sm); color: var(--text-main); }
+    .title-section { font-size: clamp(1.75rem, 4vw, 2.5rem); font-weight: 700; letter-spacing: -0.01em; margin-bottom: var(--space-lg); color: var(--text-main); border-bottom: 2px solid var(--accent-light); padding-bottom: var(--space-xs); display: inline-block; }
+    .title-item { font-size: 1.25rem; font-weight: 700; margin-bottom: var(--space-xs); color: var(--text-main); }
+    .text-lead { font-size: clamp(1.125rem, 2vw, 1.35rem); color: var(--text-muted); line-height: 1.6; }
+    .text-body { font-size: 1rem; color: var(--text-muted); }
 
     /* ==================================================
        3. Layout & Grid
        ================================================== */
-    .container { 
-      width: 100%; 
-      max-width: 1100px; 
-      margin: 0 auto; 
-      padding: 0 var(--space-md); 
-    }
-
-    .section { 
-      padding: var(--space-xl) 0; 
-    }
-
-    .section-surface { 
-      background-color: var(--surface-color); 
-      border-top: 1px solid var(--border-color); 
-      border-bottom: 1px solid var(--border-color); 
-    }
-
-    .grid-12 { 
-      display: grid; 
-      grid-template-columns: repeat(12, 1fr); 
-      gap: var(--space-md); 
-    }
+    .container { width: 100%; max-width: 1100px; margin: 0 auto; padding: 0 var(--space-md); }
+    .section { padding: var(--space-xl) 0; }
+    .section-surface { background-color: var(--surface-color); border-top: 1px solid var(--border-color); border-bottom: 1px solid var(--border-color); }
+    .grid-12 { display: grid; grid-template-columns: repeat(12, 1fr); gap: var(--space-md); }
 
     /* ==================================================
        4. Headers & Footer
        ================================================== */
-    .header-wrapper { 
-      position: fixed; 
-      top: 0; 
-      left: 0; 
-      width: 100%; 
-      z-index: 100; 
-      background-color: rgba(255, 255, 255, 0.95); 
-      backdrop-filter: blur(12px); 
-      -webkit-backdrop-filter: blur(12px); 
-      box-shadow: var(--shadow-sm); 
-    }
-
-    .header-main { 
-      height: 60px; 
-      display: flex; 
-      justify-content: space-between; 
-      align-items: center; 
-      border-bottom: 1px solid var(--border-color); 
-    }
-
-    .header-sub { 
-      height: 44px; 
-      display: flex; 
-      justify-content: center; 
-      align-items: center; 
-      background-color: var(--bg-color); 
-      border-bottom: 1px solid var(--border-color); 
-      overflow-x: auto; 
-    }
+    .header-wrapper { position: fixed; top: 0; left: 0; width: 100%; z-index: 100; background-color: rgba(255, 255, 255, 0.95); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); box-shadow: var(--shadow-sm); }
+    .header-main { height: 60px; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid var(--border-color); }
+    .header-sub { height: 44px; display: flex; justify-content: center; align-items: center; background-color: var(--bg-color); border-bottom: 1px solid var(--border-color); overflow-x: auto; }
     
-    .logo { 
-      font-weight: 900; 
-      font-size: 1.25rem; 
-      text-transform: uppercase; 
-      letter-spacing: 0.05em; 
-      cursor: pointer;
-    }
-
-    .logo span { 
-      color: var(--accent-color); 
-    }
+    .logo { font-weight: 900; font-size: 1.25rem; text-transform: uppercase; letter-spacing: 0.05em; cursor: pointer;}
+    .logo span { color: var(--accent-color); }
     
-    .nav-links { 
-      display: flex; 
-      gap: var(--space-md); 
-      padding: 0 var(--space-sm); 
-      white-space: nowrap; 
-    }
-
-    .nav-link { 
-      font-size: 0.875rem; 
-      font-weight: 600; 
-      color: var(--text-muted); 
-      text-transform: uppercase; 
-      letter-spacing: 0.05em; 
-      transition: color 0.2s ease; 
-      cursor: pointer; 
-    }
-
-    .nav-link:hover { 
-      color: var(--accent-color); 
-    }
+    .nav-links { display: flex; gap: var(--space-md); padding: 0 var(--space-sm); white-space: nowrap; }
+    .nav-link { font-size: 0.875rem; font-weight: 600; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.05em; transition: color 0.2s ease; cursor: pointer; }
+    .nav-link:hover { color: var(--accent-color); }
     
-    .lang-switcher { 
-      display: flex; 
-      background: var(--bg-color); 
-      border-radius: var(--radius-sm); 
-      padding: 2px; 
-      border: 1px solid var(--border-color); 
-    }
+    .lang-switcher { display: flex; background: var(--bg-color); border-radius: var(--radius-sm); padding: 2px; border: 1px solid var(--border-color); }
+    .lang-btn { padding: 4px 12px; font-size: 0.75rem; font-weight: 700; color: var(--text-muted); border-radius: 4px; transition: all 0.2s ease; }
+    .lang-btn[aria-pressed="true"] { background-color: var(--surface-color); color: var(--accent-color); box-shadow: var(--shadow-sm); }
 
-    .lang-btn { 
-      padding: 4px 12px; 
-      font-size: 0.75rem; 
-      font-weight: 700; 
-      color: var(--text-muted); 
-      border-radius: 4px; 
-      transition: all 0.2s ease; 
-    }
-
-    .lang-btn[aria-pressed="true"] { 
-      background-color: var(--surface-color); 
-      color: var(--accent-color); 
-      box-shadow: var(--shadow-sm); 
-    }
-
-    .site-footer { 
-      padding: var(--space-md) 0; 
-      background-color: var(--text-main); 
-      color: #fff; 
-      text-align: center; 
-      font-size: 0.875rem; 
-    }
-
-    .site-footer a { 
-      color: #82caff; 
-      font-weight: bold; 
-      text-decoration: underline; 
-      cursor: pointer; 
-    }
-
-    .site-footer a:hover { 
-      color: #fff; 
-    }
+    .site-footer { padding: var(--space-md) 0; background-color: var(--text-main); color: #fff; text-align: center; font-size: 0.9rem; }
+    .site-footer a { color: #82caff; font-weight: bold; text-decoration: underline; cursor: pointer; transition: color 0.2s; }
+    .site-footer a:hover { color: #fff; }
 
     /* ==================================================
        5. Landing Page Components
        ================================================== */
-    .hero { 
-      padding-top: calc(104px + var(--space-lg)); 
-      padding-bottom: var(--space-lg); 
-    }
+    .hero { padding-top: calc(104px + var(--space-lg)); padding-bottom: var(--space-lg); }
+    .hero-content { grid-column: 1 / 7; display: flex; flex-direction: column; justify-content: center; }
+    .hero-visual { grid-column: 7 / 13; }
+    .hero-poster { width: 100%; height: auto; border-radius: var(--radius-md); box-shadow: var(--shadow-md); border: 1px solid var(--border-color); }
 
-    .hero-content { 
-      grid-column: 1 / 7; 
-      display: flex; 
-      flex-direction: column; 
-      justify-content: center; 
-    }
+    .disaster-lead { grid-column: 1 / 8; margin-bottom: var(--space-lg); }
+    .disaster-stats { grid-column: 9 / 13; border-left: 2px solid var(--accent-light); padding-left: var(--space-md); display: flex; flex-direction: column; gap: var(--space-md); }
 
-    .hero-visual { 
-      grid-column: 7 / 13; 
-    }
+    .character-list { display: flex; flex-direction: column; }
+    .character-item { display: grid; grid-template-columns: 1fr 2.5fr; gap: var(--space-md); padding: var(--space-md) 0; border-top: 1px solid var(--border-color); }
+    .character-role { font-size: 0.875rem; text-transform: uppercase; letter-spacing: 0.05em; font-weight: 700; color: var(--accent-color); margin-bottom: var(--space-xs); display: block; }
 
-    .hero-poster { 
-      width: 100%; 
-      height: auto; 
-      border-radius: var(--radius-md); 
-      box-shadow: var(--shadow-md); 
-      border: 1px solid var(--border-color); 
-    }
+    .accordion { background: var(--surface-color); border: 1px solid var(--border-color); border-radius: var(--radius-md); overflow: hidden; box-shadow: var(--shadow-sm); }
+    .accordion-item { border-bottom: 1px solid var(--border-color); }
+    .accordion-item:last-child { border-bottom: none; }
+    .accordion-trigger { width: 100%; display: flex; justify-content: space-between; align-items: center; padding: var(--space-md); text-align: left; background: var(--surface-color); transition: background-color 0.2s; }
+    .accordion-trigger:hover { background-color: var(--bg-color); }
+    .accordion-icon { width: 24px; height: 24px; position: relative; color: var(--accent-color); }
+    .accordion-icon::before, .accordion-icon::after { content: ''; position: absolute; background-color: currentColor; top: 50%; left: 50%; transform: translate(-50%, -50%); transition: transform 0.3s ease; }
+    .accordion-icon::before { width: 16px; height: 2px; }
+    .accordion-icon::after { width: 2px; height: 16px; }
+    .accordion-item.is-open .accordion-icon::after { transform: translate(-50%, -50%) rotate(90deg); }
+    .accordion-content-wrapper { display: grid; grid-template-rows: 0fr; transition: grid-template-rows 0.3s ease-out; background-color: var(--surface-color); }
+    .accordion-item.is-open .accordion-content-wrapper { grid-template-rows: 1fr; }
+    .accordion-content { overflow: hidden; }
+    .accordion-content p { padding: 0 var(--space-md) var(--space-md) var(--space-md); max-width: 90ch; }
 
-    .disaster-lead { 
-      grid-column: 1 / 8; 
-      margin-bottom: var(--space-lg); 
-    }
-
-    .disaster-stats { 
-      grid-column: 9 / 13; 
-      border-left: 2px solid var(--accent-light); 
-      padding-left: var(--space-md); 
-      display: flex; 
-      flex-direction: column; 
-      gap: var(--space-md); 
-    }
-
-    .character-list { 
-      display: flex; 
-      flex-direction: column; 
-    }
-
-    .character-item { 
-      display: grid; 
-      grid-template-columns: 1fr 2.5fr; 
-      gap: var(--space-md); 
-      padding: var(--space-md) 0; 
-      border-top: 1px solid var(--border-color); 
-    }
-
-    .character-role { 
-      font-size: 0.875rem; 
-      text-transform: uppercase; 
-      letter-spacing: 0.05em; 
-      font-weight: 700; 
-      color: var(--accent-color); 
-      margin-bottom: var(--space-xs); 
-      display: block; 
-    }
-
-    .accordion { 
-      background: var(--surface-color); 
-      border: 1px solid var(--border-color); 
-      border-radius: var(--radius-md); 
-      overflow: hidden; 
-      box-shadow: var(--shadow-sm); 
-    }
-
-    .accordion-item { 
-      border-bottom: 1px solid var(--border-color); 
-    }
-
-    .accordion-item:last-child { 
-      border-bottom: none; 
-    }
-
-    .accordion-trigger { 
-      width: 100%; 
-      display: flex; 
-      justify-content: space-between; 
-      align-items: center; 
-      padding: var(--space-md); 
-      text-align: left; 
-      background: var(--surface-color); 
-      transition: background-color 0.2s; 
-    }
-
-    .accordion-trigger:hover { 
-      background-color: var(--bg-color); 
-    }
-
-    .accordion-icon { 
-      width: 24px; 
-      height: 24px; 
-      position: relative; 
-      color: var(--accent-color); 
-    }
-
-    .accordion-icon::before, 
-    .accordion-icon::after { 
-      content: ''; 
-      position: absolute; 
-      background-color: currentColor; 
-      top: 50%; 
-      left: 50%; 
-      transform: translate(-50%, -50%); 
-      transition: transform 0.3s ease; 
-    }
-
-    .accordion-icon::before { 
-      width: 16px; 
-      height: 2px; 
-    }
-
-    .accordion-icon::after { 
-      width: 2px; 
-      height: 16px; 
-    }
-
-    .accordion-item.is-open .accordion-icon::after { 
-      transform: translate(-50%, -50%) rotate(90deg); 
-    }
-
-    .accordion-content-wrapper { 
-      display: grid; 
-      grid-template-rows: 0fr; 
-      transition: grid-template-rows 0.3s ease-out; 
-      background-color: var(--surface-color); 
-    }
-
-    .accordion-item.is-open .accordion-content-wrapper { 
-      grid-template-rows: 1fr; 
-    }
-
-    .accordion-content { 
-      overflow: hidden; 
-    }
-
-    .accordion-content p { 
-      padding: 0 var(--space-md) var(--space-md) var(--space-md); 
-      max-width: 80ch; 
-    }
-
+    /* ОТРЕДАКТИРОВАННЫЙ ФИНАЛ ДЛЯ ПК */
     .finale-layout { 
       grid-column: 2 / 12; 
-      text-align: center; 
-      padding: var(--space-lg); 
       background: var(--surface-color); 
-      border: 1px solid var(--accent-light); 
+      border: 1px solid var(--border-color); 
+      border-top: 4px solid var(--accent-color);
       border-radius: var(--radius-md); 
-      box-shadow: var(--shadow-sm); 
+      padding: var(--space-xl) var(--space-xl); 
+      box-shadow: var(--shadow-lg); 
+      text-align: left; /* Убрано центрирование, теперь текст выровнен по левому краю */
     }
-
+    .finale-layout .title-section {
+      border-bottom: none;
+      margin-bottom: var(--space-md);
+      color: var(--accent-color);
+    }
     .finale-layout p { 
-      margin-bottom: var(--space-sm); 
+      margin-bottom: 1.5rem; 
+      font-size: 1.15rem;
+      line-height: 1.8;
+      color: var(--text-main);
     }
 
     /* ==================================================
        6. Book Reader View Components
        ================================================== */
-    .book-reader { 
-      padding-top: calc(60px + var(--space-lg)); 
-      padding-bottom: var(--space-xl); 
-      background-color: #fdfdfc; 
-    }
-
-    .book-container { 
-      max-width: 800px; 
-      margin: 0 auto; 
-      padding: 0 var(--space-md); 
-    }
+    .book-reader { padding-top: calc(60px + var(--space-lg)); padding-bottom: var(--space-xl); background-color: #fdfdfc; }
+    .book-container { max-width: 800px; margin: 0 auto; padding: 0 var(--space-md); }
     
-    .back-btn { 
-      display: inline-flex; 
-      align-items: center; 
-      gap: 8px; 
-      font-weight: 600; 
-      color: var(--accent-color); 
-      margin-bottom: var(--space-lg); 
-      padding: 8px 16px; 
-      border: 1px solid var(--accent-color); 
-      border-radius: var(--radius-sm); 
-      transition: all 0.2s; 
-    }
-
-    .back-btn:hover { 
-      background-color: var(--accent-color); 
-      color: #fff; 
-    }
+    .back-btn { display: inline-flex; align-items: center; gap: 8px; font-weight: 600; color: var(--accent-color); margin-bottom: var(--space-lg); padding: 8px 16px; border: 1px solid var(--accent-color); border-radius: var(--radius-sm); transition: all 0.2s; }
+    .back-btn:hover { background-color: var(--accent-color); color: #fff; }
     
-    .book-header { 
-      text-align: center; 
-      margin-bottom: var(--space-xl); 
-      border-bottom: 2px solid var(--border-color); 
-      padding-bottom: var(--space-lg); 
-    }
-
-    .book-header h1 { 
-      font-family: var(--font-serif); 
-      font-size: clamp(2.5rem, 5vw, 4rem); 
-      color: var(--text-main); 
-      margin-bottom: var(--space-sm); 
-      line-height: 1.2; 
-    }
-
-    .book-author { 
-      font-size: 1.2rem; 
-      color: var(--text-muted); 
-      font-style: italic; 
-    }
+    .book-header { text-align: center; margin-bottom: var(--space-xl); border-bottom: 2px solid var(--border-color); padding-bottom: var(--space-lg); }
+    .book-header h1 { font-family: var(--font-serif); font-size: clamp(2.5rem, 5vw, 4rem); color: var(--text-main); margin-bottom: var(--space-sm); line-height: 1.2; }
+    .book-author { font-size: 1.2rem; color: var(--text-muted); font-style: italic; }
     
-    .book-section { 
-      margin-bottom: var(--space-xl); 
-    }
-
-    .book-section h2 { 
-      font-family: var(--font-primary); 
-      font-size: 2rem; 
-      color: var(--accent-color); 
-      margin-bottom: var(--space-md); 
-      text-transform: uppercase; 
-      letter-spacing: 0.05em; 
-      border-bottom: 1px solid var(--border-color); 
-      padding-bottom: var(--space-xs); 
-    }
+    .book-section { margin-bottom: var(--space-xl); }
+    .book-section h2 { font-family: var(--font-primary); font-size: 2rem; color: var(--accent-color); margin-bottom: var(--space-md); text-transform: uppercase; letter-spacing: 0.05em; border-bottom: 1px solid var(--border-color); padding-bottom: var(--space-xs); }
     
-    .book-text { 
-      font-family: var(--font-serif); 
-      font-size: 1.15rem; 
-      line-height: 1.8; 
-      color: #2d3748; 
-    }
-
-    .book-text p { 
-      margin-bottom: 1.5rem; 
-      text-align: justify; 
-    }
+    .book-text { font-family: var(--font-serif); font-size: 1.15rem; line-height: 1.8; color: #2d3748; }
+    .book-text p { margin-bottom: 1.5rem; text-align: justify; }
     
-    .book-character { 
-      margin-bottom: var(--space-md); 
-      background: #f8fafc; 
-      padding: var(--space-md); 
-      border-radius: var(--radius-sm); 
-      border-left: 4px solid var(--accent-color); 
-    }
-
-    .book-character h3 { 
-      font-family: var(--font-primary); 
-      font-size: 1.4rem; 
-      margin-bottom: var(--space-xs); 
-      color: var(--text-main); 
-    }
+    .book-character { margin-bottom: var(--space-md); background: #f8fafc; padding: var(--space-md); border-radius: var(--radius-sm); border-left: 4px solid var(--accent-color); }
+    .book-character h3 { font-family: var(--font-primary); font-size: 1.4rem; margin-bottom: var(--space-xs); color: var(--text-main); }
     
-    .book-chapter-title { 
-      font-family: var(--font-primary); 
-      font-size: 1.75rem; 
-      font-weight: 900; 
-      margin-top: var(--space-lg); 
-      margin-bottom: var(--space-md); 
-      color: var(--text-main); 
-      text-align: center; 
-    }
+    .book-chapter-title { font-family: var(--font-primary); font-size: 1.75rem; font-weight: 900; margin-top: var(--space-lg); margin-bottom: var(--space-md); color: var(--text-main); text-align: center; }
 
     /* ==================================================
        7. Responsive Styles
@@ -536,12 +180,13 @@
       .hero-visual { grid-column: 2 / 12; }
       .disaster-lead { grid-column: 1 / 13; }
       .disaster-stats { grid-column: 1 / 13; border-left: none; border-top: 2px solid var(--accent-light); padding-left: 0; padding-top: var(--space-md); }
+      .finale-layout { grid-column: 1 / 13; padding: var(--space-lg); }
     }
 
     @media (max-width: 768px) {
       .header-sub { justify-content: flex-start; }
       .character-item { grid-template-columns: 1fr; gap: var(--space-xs); }
-      .finale-layout { grid-column: 1 / 13; text-align: left; padding: var(--space-md); }
+      .finale-layout { padding: var(--space-md); }
       :root { --space-xl: 4rem; --space-lg: 2rem; }
       .book-text { font-size: 1.05rem; text-align: left; }
     }
@@ -561,364 +206,459 @@
       <div class="lang-switcher" aria-label="Language Switcher">
         <button class="lang-btn" data-lang="ru" aria-pressed="true">RU</button>
         <button class="lang-btn" data-lang="kz" aria-pressed="false">KZ</button>
-        <buttonПонял. В предыдущем варианте я сжал весь огромный текст в длинные сплошные строки внутри JavaScript (формат JSON), поэтому визуально количество строк кода сильно уменьшилось, хотя текста стало больше.
-
-Чтобы файл стал **реально огромным** и физически занимал тысячи строк, как ты и просил, я:
-1. Развернул весь CSS — теперь каждое свойство на отдельной строке.
-2. Изменил структуру текста книги: теперь каждая глава — это не одна сплошная строка, а массив абзацев. Каждое предложение и абзац на всех трех языках (русский, английский, казахский) вынесены на новую строку. 
-3. Значительно расширил сами главы, добавив больше художественного описания катастрофы.
-
-Скопируй этот код. Из-за вертикального форматирования и огромного объема текста этот файл `index.html` теперь по-настоящему массивный.
-
-```html
-<!DOCTYPE html>
-<html lang="ru">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Расколотый Город | Shattered City</title>
-  
-  <link rel="preconnect" href="[https://fonts.googleapis.com](https://fonts.googleapis.com)">
-  <link rel="preconnect" href="[https://fonts.gstatic.com](https://fonts.gstatic.com)" crossorigin>
-  <link 
-    href="[https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;900&family=Merriweather:wght@400;700&display=swap](https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;900&family=Merriweather:wght@400;700&display=swap)" 
-    rel="stylesheet"
-  >
-  
-  <style>
-    /* ==================================================
-       1. CSS Variables
-       ================================================== */
-    :root {
-      --bg-color: #f0f4f8;        
-      --surface-color: #ffffff;   
-      --border-color: #d9e2ec;    
-      --text-main: #102a43;       
-      --text-muted: #486581;      
-      --accent-color: #005c97;    
-      --accent-hover: #003e6b;    
-      --accent-light: #e0f2fe;    
-      
-      --font-primary: 'Inter', system-ui, -apple-system, sans-serif;
-      --font-serif: 'Merriweather', Georgia, serif; 
-      
-      --space-xs: 0.5rem;
-      --space-sm: 1rem;
-      --space-md: 2rem;
-      --space-lg: 4rem;
-      --space-xl: 6rem;
-      
-      --radius-sm: 6px;
-      --radius-md: 12px;
-      
-      --shadow-sm: 0 1px 3px rgba(16, 42, 67, 0.05);
-      --shadow-md: 0 4px 12px rgba(16, 42, 67, 0.08);
-    }
-
-    /* ==================================================
-       2. Global Styles
-       ================================================== */
-    * { 
-      box-sizing: border-box; 
-      margin: 0; 
-      padding: 0; 
-    }
-
-    html { 
-      scroll-behavior: smooth; 
-    }
-
-    body {
-      background-color: var(--bg-color);
-      color: var(--text-main);
-      font-family: var(--font-primary);
-      line-height: 1.6;
-      overflow-x: hidden;
-      -webkit-font-smoothing: antialiased;
-    }
-
-    a { 
-      color: inherit; 
-      text-decoration: none; 
-      transition: color 0.2s; 
-    }
-
-    button { 
-      background: none; 
-      border: none; 
-      color: inherit; 
-      font: inherit; 
-      cursor: pointer; 
-    }
-
-    img { 
-      max-width: 100%; 
-      height: auto; 
-      display: block; 
-    }
-
-    :focus-visible { 
-      outline: 2px solid var(--accent-color); 
-      outline-offset: 4px; 
-    }
+        <button class="lang-btn" data-lang="en" aria-pressed="false">EN</button>
+      </div>
+    </header>
     
-    .hidden { 
-      display: none !important; 
+    <nav class="header-sub container" id="landing-nav">
+      <div class="nav-links">
+        <a href="#poster" class="nav-link" data-i18n="nav_poster">Постер</a>
+        <a href="#disaster" class="nav-link" data-i18n="nav_disaster">Описание</a>
+        <a href="#characters" class="nav-link" data-i18n="nav_characters">Герои</a>
+        <a href="#chronicle" class="nav-link" data-i18n="nav_content">Сюжет</a>
+        <a href="#finale" class="nav-link" data-i18n="nav_finale">Финал</a>
+      </div>
+    </nav>
+  </div>
+
+  <!-- ==================================================
+       9. HTML Structure: LANDING VIEW
+       ================================================== -->
+  <div id="view-landing">
+    <main>
+      <!-- Постер -->
+      <section id="poster" class="hero section-surface">
+        <div class="container grid-12">
+          <div class="hero-content">
+            <h1 class="title-display" data-i18n="hero_title">Расколотый Город</h1>
+            <p class="text-lead" data-i18n="hero_subtitle">Масштабный роман о выживании, человечности и надежде в эпицентре катастрофы силой 8.5 баллов.</p>
+          </div>
+          <div class="hero-visual">
+            <img src="IMG_6494.jpeg" alt="Постер книги Расколотый Город" class="hero-poster" fetchpriority="high">
+          </div>
+        </div>
+      </section>
+
+      <!-- Описание катастрофы -->
+      <section id="disaster" class="section">
+        <div class="container grid-12">
+          <div class="disaster-lead">
+            <h2 class="title-section" data-i18n="disaster_title">Описание катастрофы</h2>
+            <p class="text-lead" data-i18n="disaster_main">Трагедия началась не с удара, а с глубокого, утробного гула, исходившего из самых недр земли. Тектоническая плита, копившая колоссальное напряжение более двухсот лет, внезапно лопнула. Магнитуда составила разрушительные 8.5 баллов по шкале Рихтера.</p>
+          </div>
+          <div class="disaster-stats">
+            <article>
+              <h3 class="title-item" data-i18n="card1_title">45 секунд ада</h3>
+              <p class="text-body" data-i18n="card1_text">Первичная волна достигла города за доли секунды. Асфальт вздыбался огромными волнами, спальные районы складывались этаж за этажом.</p>
+            </article>
+            <article>
+              <h3 class="title-item" data-i18n="card2_title">Подземный пожар</h3>
+              <p class="text-body" data-i18n="card2_text">Смещение почвы разорвало газопроводы. За десять минут вспыхнуло 400 крупных пожаров, слившихся в огненные смерчи.</p>
+            </article>
+            <article>
+              <h3 class="title-item" data-i18n="card3_title">Гнев океана</h3>
+              <p class="text-body" data-i18n="card3_text">Сдвиг морского дна спровоцировал оползень. На портовый район обрушилась стена воды высотой 5 метров.</p>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <!-- Герои -->
+      <section id="characters" class="section section-surface">
+        <div class="container">
+          <h2 class="title-section" data-i18n="char_title">Главные герои</h2>
+          <div class="character-list">
+            <article class="character-item">
+              <div>
+                <span class="character-role" data-i18n="char1_role">Сейсмолог</span>
+                <h3 class="title-item" data-i18n="char1_name">Елена Петрова</h3>
+              </div>
+              <div><p class="text-body" data-i18n="char1_text_short">В момент удара находится в бункере Центра мониторинга. Она единственная понимает истинный масштаб произошедшего. Ее цель — найти дочь-подростка.</p></div>
+            </article>
+            <article class="character-item">
+              <div>
+                <span class="character-role" data-i18n="char2_role">Лейтенант МЧС</span>
+                <h3 class="title-item" data-i18n="char2_name">Андрей Волков</h3>
+              </div>
+              <div><p class="text-body" data-i18n="char2_text_short">Выбравшись из метро на поверхность, он видит свой район в руинах. Отказавшись паниковать, прокладывает путь через горящие кварталы.</p></div>
+            </article>
+            <article class="character-item">
+              <div>
+                <span class="character-role" data-i18n="char3_role">Подросток</span>
+                <h3 class="title-item" data-i18n="char3_name">Катя Петрова</h3>
+              </div>
+              <div><p class="text-body" data-i18n="char3_text_short">Оказалась запертой на минус третьем этаже ТЦ. В условиях паники внезапно находит в себе волю к жизни, беря на себя лидерство.</p></div>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <!-- Содержание (Главы 1-4) -->
+      <section id="chronicle" class="section">
+        <div class="container">
+          <h2 class="title-section" data-i18n="plot_title">Содержание</h2>
+          <div class="accordion">
+            <div class="accordion-item">
+              <button class="accordion-trigger" aria-expanded="false">
+                <span class="title-item" data-i18n="plot_p1_title">Глава 1: Иллюзия</span>
+                <span class="accordion-icon"></span>
+              </button>
+              <div class="accordion-content-wrapper"><div class="accordion-content"><p class="text-body" data-i18n="plot_p1_text_short">Новоморск гудит и строится ввысь. Елена тщетно пытается достучаться до мэрии. Андрей готовится к концу смены. Читатель чувствует нарастающее напряжение от странного поведения природы: аномальный отлив и пугающая тишина птиц. Город живет свои последние спокойные часы, не подозревая о надвигающейся катастрофе.</p></div></div>
+            </div>
+            <div class="accordion-item">
+              <button class="accordion-trigger" aria-expanded="false">
+                <span class="title-item" data-i18n="plot_p2_title">Глава 2: Разлом</span>
+                <span class="accordion-icon"></span>
+              </button>
+              <div class="accordion-content-wrapper"><div class="accordion-content"><p class="text-body" data-i18n="plot_p2_text_short">В 08:14 утра происходит сокрушительный удар. 45 секунд ада стирают привычный мир. Мосты переламываются пополам, бетонные высотки рассыпаются в пыль, связь исчезает. Люди оказываются заперты под землей. Новоморск мгновенно погружается в первобытный хаос.</p></div></div>
+            </div>
+            <div class="accordion-item">
+              <button class="accordion-trigger" aria-expanded="false">
+                <span class="title-item" data-i18n="plot_p3_title">Глава 3: Закон Джунглей</span>
+                <span class="accordion-icon"></span>
+              </button>
+              <div class="accordion-content-wrapper"><div class="accordion-content"><p class="text-body" data-i18n="plot_p3_text_short">Город покрыт густым токсичным дымом. Начинается жестокая борьба за ресурсы. Полиции больше нет, на улицах властвуют мародеры. Андрей с небольшой группой пробирается через горящие руины, постоянно делая тяжелый моральный выбор. Под землей Катя делит остатки воды и пытается сохранить человеческий облик выживших.</p></div></div>
+            </div>
+            <div class="accordion-item">
+              <button class="accordion-trigger" aria-expanded="false">
+                <span class="title-item" data-i18n="plot_p4_title">Глава 4: Путь к свету</span>
+                <span class="accordion-icon"></span>
+              </button>
+              <div class="accordion-content-wrapper"><div class="accordion-content"><p class="text-body" data-i18n="plot_p4_text_short">Из рухнувшего торгового центра пробивается слабый сигнал SOS. Андрей принимает решение спуститься в смертельно опасный, осыпающийся кратер. Елена, найдя связь, координирует его действия по памяти чертежей. Начинается гонка со временем на фоне надвигающегося мощного афтершока.</p></div></div>
+            </div>
+            <!-- Глава 5 удалена из аккордеона, так как ниже идет секция "Финал" -->
+          </div>
+        </div>
+      </section>
+
+      <!-- Финал -->
+      <section id="finale" class="section">
+        <div class="container grid-12">
+          <div class="finale-layout">
+            <h2 class="title-section" data-i18n="finale_title">Финал</h2>
+            <p data-i18n="finale_p1">Группа Андрея, используя систему альпинистских полиспастов, успевает вытащить Катю и еще девятнадцать человек на поверхность за сто двадцать секунд до того, как подземные уровни «Атриума» с оглушительным ревом окончательно схлопываются, хороня под собой все тайны и надежды.</p>
+            <p data-i18n="finale_p2">Эвакуированные доставляются в полевой госпиталь, где происходит горькое воссоединение Кати с матерью. Но Андрей идет дальше. Он доходит до места, где стоял его дом, находя лишь уродливую гору спрессованного бетона. Спасатель, вернувший жизни десяткам людей, медленно опускается на колени. Он спас чужие миры, но навсегда потерял свою вселенную.</p>
+            <p data-i18n="finale_p3">Роман завершается масштабной панорамой руин Новоморска в лучах багрового заката. Город навсегда мертв и превращен в братскую могилу. Однако в глазах людей, прошедших сквозь кромешный ад, загорается новая, суровая искра жизни. Они доказали главную истину: земля может треснуть, бетон может раскрошиться в пыль, но истинную человеческую волю расколоть невозможно.</p>
+          </div>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <!-- ==================================================
+       10. HTML Structure: BOOK READER VIEW
+       ================================================== -->
+  <div id="view-book" class="hidden">
+    <main class="book-reader">
+      <div class="book-container">
+        <button class="back-btn" onclick="app.showLanding()">
+          ← <span data-i18n="btn_back">Вернуться на сайт</span>
+        </button>
+
+        <header class="book-header">
+          <h1 data-i18n="book_full_title">Расколотый Город</h1>
+          <p class="book-author" data-i18n="book_author">Автор: Мансур</p>
+        </header>
+
+        <section class="book-section">
+          <h2 data-i18n="book_sec_chars">Персонажи</h2>
+          <div class="book-character">
+            <h3 data-i18n="char1_name">Елена Петрова</h3>
+            <div class="book-text" data-i18n="book_char1_desc"></div>
+          </div>
+          <div class="book-character">
+            <h3 data-i18n="char2_name">Андрей Волков</h3>
+            <div class="book-text" data-i18n="book_char2_desc"></div>
+          </div>
+          <div class="book-character">
+            <h3 data-i18n="char3_name">Катя Петрова</h3>
+            <div class="book-text" data-i18n="book_char3_desc"></div>
+          </div>
+        </section>
+
+        <section class="book-section">
+          <h2 data-i18n="book_sec_disaster">Описание катастрофы</h2>
+          <div class="book-text" data-i18n="book_disaster_desc"></div>
+        </section>
+
+        <section class="book-section">
+          <h2 data-i18n="book_sec_content">Содержание романа</h2>
+          
+          <h3 class="book-chapter-title" data-i18n="plot_p1_title">Глава 1: Иллюзия</h3>
+          <div class="book-text" data-i18n="book_ch1_content"></div>
+          
+          <h3 class="book-chapter-title" data-i18n="plot_p2_title">Глава 2: Разлом</h3>
+          <div class="book-text" data-i18n="book_ch2_content"></div>
+          
+          <h3 class="book-chapter-title" data-i18n="plot_p3_title">Глава 3: Закон Джунглей</h3>
+          <div class="book-text" data-i18n="book_ch3_content"></div>
+          
+          <h3 class="book-chapter-title" data-i18n="plot_p4_title">Глава 4: Путь к свету</h3>
+          <div class="book-text" data-i18n="book_ch4_content"></div>
+          
+          <h3 class="book-chapter-title" data-i18n="plot_p5_title">Глава 5: Финал</h3>
+          <div class="book-text" data-i18n="book_ch5_content"></div>
+        </section>
+
+      </div>
+    </main>
+  </div>
+
+  <!-- Футер (общий для обоих видов) -->
+  <footer class="site-footer">
+    <div class="container">
+      <span data-i18n="footer_text1">Сайт создан с сюжета книги «</span><a onclick="app.showBook()" data-i18n="footer_link">Расколотый город</a><span data-i18n="footer_text2">» Автором который является Мансур</span>
+    </div>
+  </footer>
+
+  <!-- ==================================================
+       11. JavaScript Logic & Huge Localization Data
+       ================================================== -->
+  <script>
+    'use strict';
+
+    // Massive localized content providing a deeply immersive literary experience.
+    const translations = {
+      ru: {
+        logo_part1: "Расколотый", logo_part2: "Город",
+        nav_poster: "Постер", nav_disaster: "Катастрофа", nav_characters: "Герои", nav_content: "Сюжет", nav_finale: "Финал",
+        btn_back: "Вернуться на главную",
+        footer_text1: "Сайт создан с сюжета книги «", footer_link: "Расколотый город", footer_text2: "» Автором который является Мансур",
+        hero_title: "Расколотый Город", hero_subtitle: "Масштабный роман о выживании, человечности и надежде в эпицентре катастрофы силой 8.5 баллов.",
+        
+        disaster_title: "Описание катастрофы",
+        disaster_main: "Трагедия началась не с удара, а с глубокого, утробного гула, исходившего из недр земли. Тектоническая плита лопнула. Магнитуда 8.5 баллов по шкале Рихтера.",
+        card1_title: "45 секунд ада", card1_text: "Асфальт вздыбался огромными волнами, спальные районы складывались этаж за этажом.",
+        card2_title: "Подземный пожар", card2_text: "Смещение почвы разорвало газопроводы. Вспыхнуло 400 крупных пожаров.",
+        card3_title: "Гнев океана", card3_text: "На портовый район обрушилась стена воды высотой 5 метров, уничтожив инфраструктуру.",
+        
+        char_title: "Главные герои",
+        char1_role: "Ведущий сейсмолог", char1_name: "Елена Петрова", char1_text_short: "В момент удара находится в бункере Центра мониторинга. Ее главная цель — найти дочь.",
+        char2_role: "Лейтенант МЧС", char2_name: "Андрей Волков", char2_text_short: "Выбравшись из метро на поверхность, он видит свой район в руинах. Отказавшись паниковать, прокладывает путь через горящие кварталы.",
+        char3_role: "Подросток", char3_name: "Катя Петрова", char3_text_short: "Оказалась запертой на минус третьем этаже ТЦ. В условиях паники внезапно находит в себе волю к жизни.",
+        
+        plot_title: "Содержание",
+        plot_p1_title: "Глава 1: Иллюзия", plot_p1_text_short: "Новоморск гудит и строится ввысь. Елена тщетно пытается достучаться до мэрии. Андрей готовится к концу смены. Читатель чувствует нарастающее напряжение от странного поведения природы: аномальный отлив и пугающая тишина птиц. Город живет свои последние спокойные часы, не подозревая о надвигающейся катастрофе.",
+        plot_p2_title: "Глава 2: Разлом", plot_p2_text_short: "В 08:14 утра происходит сокрушительный удар. 45 секунд ада стирают привычный мир. Мосты переламываются пополам, бетонные высотки рассыпаются в пыль, связь исчезает. Люди оказываются заперты под землей. Новоморск мгновенно погружается в первобытный хаос.",
+        plot_p3_title: "Глава 3: Закон Джунглей", plot_p3_text_short: "Город покрыт густым токсичным дымом. Начинается жестокая борьба за ресурсы. Полиции больше нет, на улицах властвуют мародеры. Андрей с небольшой группой пробирается через горящие руины. Под землей Катя делит остатки воды и пытается сохранить человеческий облик выживших.",
+        plot_p4_title: "Глава 4: Путь к свету", plot_p4_text_short: "Из рухнувшего торгового центра пробивается слабый сигнал SOS. Андрей принимает решение спуститься в смертельно опасный, осыпающийся кратер. Елена, найдя связь, координирует его действия по памяти чертежей. Начинается гонка со временем на фоне надвигающегося афтершока.",
+        plot_p5_title: "Глава 5: Финал", plot_p5_text_short: "Последние минуты перед полным обрушением. Горькое спасение.",
+        
+        finale_title: "Финал",
+        finale_p1: "Группа Андрея, используя систему альпинистских полиспастов, успевает вытащить Катю и еще девятнадцать человек на поверхность за сто двадцать секунд до того, как подземные уровни «Атриума» с оглушительным ревом окончательно схлопываются, хороня под собой все тайны и надежды.",
+        finale_p2: "Эвакуированные доставляются в полевой госпиталь, где происходит горькое воссоединение Кати с матерью. Но Андрей идет дальше. Он доходит до места, где стоял его дом, находя лишь уродливую гору спрессованного бетона. Спасатель, вернувший жизни десяткам людей, медленно опускается на колени. Он спас чужие миры, но навсегда потерял свою вселенную.",
+        finale_p3: "Роман завершается масштабной панорамой руин Новоморска в лучах багрового заката. Город навсегда мертв и превращен в братскую могилу. Однако в глазах людей, прошедших сквозь кромешный ад, загорается новая, суровая искра жизни. Они доказали главную истину: земля может треснуть, бетон может раскрошиться в пыль, но истинную человеческую волю расколоть невозможно.",
+
+        // FULL BOOK CONTENT 
+        book_full_title: "Расколотый Город",
+        book_author: "Автор: Мансур",
+        book_sec_chars: "Персонажи",
+        book_char1_desc: "<p>Елена — женщина, чья жизнь была безвозвратно изменена много лет назад, когда разрушительное землетрясение в другом регионе забрало жизнь ее мужа. Эта травма превратилась в одержимость. Она стала одним из лучших сейсмологов страны. Последние пять лет она ежедневно боролась с бюрократической машиной Новоморска, доказывая, что тектоническая плита под городом находится на пределе излома. Ее отчеты, полные тревожных графиков и математических прогнозов, пылились в столах чиновников, не желавших останавливать многомиллиардные стройки на побережье.</p><p>Когда происходит катастрофа, Елена оказывается в безопасности подземного бункера Центра мониторинга. Перед ее глазами на мониторах разворачивается гибель мегаполиса. Как ученый, она холодно оценивает масштаб трагедии, но как мать — сходит с ума от ужаса, зная, что ее шестнадцатилетняя дочь находится где-то среди осыпающегося бетона и стекла.</p>",
+        book_char2_desc: "<p>Андрей Волков — тридцатидвухлетний лейтенант пожарно-спасательной службы, человек крепкой закалки, обожающий свою жену Анну и пятилетнего сына Илью. Утро катастрофы застает его в вагоне метро после изнурительной двадцатичетырехчасовой смены. Он спал стоя, прислонившись к дверям, когда земля буквально взбесилась.</p><p>Выбравшись из искореженного поезда на поверхность, Андрей сталкивается с реальностью, к которой не готовит ни один устав: его родной район стерт с лица земли. Отказавшись поддаться парализующему отчаянию, он сбрасывает остатки формы и, вооружившись лишь пожарным топором и тросом, начинает свой путь через пылающий ад. Андрей становится неформальным лидером для десятков потерянных людей, превращаясь из обычного спасателя в символ надежды мертвого города.</p>",
+        book_char3_desc: "<p>Катя — типичный подросток, находящийся в состоянии перманентного бунта против «душной» опеки матери. В то роковое утро она демонстративно хлопнула дверью квартиры, крикнув Елене, что та сумасшедшая параноик. Вместо школы Катя отправилась в гигантский подземный торгово-развлекательный центр «Атриум».</p><p>Когда начались толчки, бетонные перекрытия торгового центра рухнули, заперев сотни людей на минус третьем уровне. В кромешной тьме, под звуки стонов и скрежет рвущейся арматуры, Катя проходит стремительную трансформацию. Капризная школьница исчезает. Вместо нее появляется жесткий, собранный лидер, унаследовавший стальной характер матери. Она организует выживших, жестко пресекает панику и берет под контроль запасы питьевой воды, отсчитывая минуты до неминуемого конца.</p>",
+        book_sec_disaster: "Описание катастрофы: Великий Разлом",
+        book_disaster_desc: "<p>Трагедия началась в 08:14 утра не с оглушительного удара, а с глубокого, утробного гула, словно сама планета застонала от невыносимой боли. Тектоническая плита, копившая колоссальное напряжение более двухсот лет на глубине пятнадцати километров под морским дном, внезапно и с чудовищной силой лопнула по шву длиной в сто километров. Освободившаяся кинетическая энергия была эквивалентна взрыву тысяч атомных бомб. Магнитуда составила разрушительные 8.5 баллов по шкале Рихтера.</p><p>Эпицентр располагался всего в двадцати километрах от береговой линии Новоморска — процветающего, сияющего неоном мегаполиса с населением в три миллиона человек. Первичная P-волна достигла городских улиц за доли секунды, ударив снизу подобно гигантскому молоту наковальни. Фасады небоскребов из стекла и бетона взорвались одновременно, осыпая улицы, полные спешащих на работу людей, смертоносным дождем из миллионов осколков.</p><p>Затем пришла S-волна, сдвиговая волна, которая начала рвать землю на части. Земля ходила ходуном с амплитудой до двух метров. Асфальт вздыбался огромными волнами, поглощая автомобили и автобусы. Спальные районы, застроенные панельными многоэтажками, складывались этаж за этажом всего за несколько мгновений, поднимая в небо густые облака удушливой серой пыли, заслонившей утреннее солнце. Сдвиг морского дна спровоцировал массивный подводный оползень, и спустя двенадцать минут на руины портового района обрушилась пятиметровая стена черной океанской воды, смешанной с грязью и разорванными кораблями. Город перестал существовать всего за сорок пять секунд.</p>",
+        book_sec_content: "Содержание романа",
+        book_ch1_content: "<p>Роман начинается медленно, погружая читателя в пульсирующий ритм жизни огромного, беспечного мегаполиса. Новоморск гудит автомобильными пробками, сияет витринами и строится ввысь, отвоевывая у моря все новые и новые территории для элитных жилых комплексов. Мы знакомимся с Еленой Петровой, которая в ярости покидает кабинет заместителя мэра — ей в очередной раз отказали в финансировании программы сейсмоукрепления школ, назвав ее прогнозы «алармистским бредом».</p><p>Параллельно разворачивается утро Андрея Волкова. Он сдаёт смену в пожарной части, смеется над шутками коллег, проверяет альпинистское снаряжение в шкафчике, не подозревая, что через пару часов именно эта веревка спасет ему жизнь. Завтрак в семье Петровых заканчивается скандалом: Катя кричит на мать из-за ее тотального контроля и демонстративно уходит из дома. Читатель, вооруженный знанием о неминуемой трагедии, чувствует нарастающий, удушающий саспенс от каждой описываемой мелочи: от странных, нервных миграций птиц в городских парках, от необъяснимых микротрещин на свежем асфальте, от неестественно сильного отлива в заливе. Город дышит, смеется, любит и ненавидит, совершенно не подозревая, что песочные часы его существования уже отсчитывают последние песчинки.</p>",
+        book_ch2_content: "<p>Ровно в 08:14 утра время останавливается. Повествование резко ускоряется, переключаясь между персонажами со скоростью пулеметной очереди. Сорок пять секунд самой катастрофы описываются на пятидесяти страницах текста, где субъективное время героев растягивается в бесконечность. Центр мониторинга содрогается, тяжелые серверы с грохотом падают на пол, экраны заливаются красным светом тревоги, фиксируя немыслимую цифру: Магнитуда 8.5+. Елена, вцепившись побелевшими пальцами в край стола, с ужасом смотрит на карту города, где зеленые точки датчиков одна за другой гаснут, превращаясь в мертвую черную зону. Целые районы стираются с лица земли в прямом эфире.</p><p>Андрей, только что выбравшийся на поверхность из обесточенного поезда метро, видит, как знаменитый мост «Новый Свет», гордость архитектуры Новоморска, изгибается, словно резиновый, и с жутким металлическим стоном переламывается пополам, роняя десятки машин в кипящую воду залива. Тем временем под землей, на минус третьем этаже ТЦ «Атриум», Катя глохнет от невыносимого скрежета рвущегося металла и грохота падающих бетонных перекрытий. Свет гаснет мгновенно и навсегда. Начинается смертоносная давка в абсолютной, густой тьме, пахнущей пылью, кровью и разорванной канализацией. Привычный мир рухнул, оставив после себя лишь первобытный ужас.</p>",
+        book_ch3_content: "<p>Город погружается во мрак и хаос. Централизованная власть исчезла за секунды. Полиция и спасательные службы парализованы, их базы уничтожены, дороги непреодолимы из-за гигантских разломов. В разрушенных супермаркетах и аптеках начинается мародерство — люди дерутся насмерть за бутылку чистой воды и антибиотики. Андрей, вооруженный ломом, собирает вокруг себя небольшую группу: молодого студента-медика и крепкого портового грузчика. Вместе они пробираются через лабиринт из бетона, огня и искореженной арматуры. На каждом шагу Андрей сталкивается со страшными моральными дилеммами: остановиться и потратить драгоценные часы на спасение кричащего под завалами ребенка, или без оглядки бежать к руинам собственного дома, где под обломками, возможно, еще дышат его жена и сын.</p><p>В Центре Мониторинга Елена использует уцелевшую военную спутниковую связь. Она анализирует хаотичные сейсмограммы и понимает страшную правду: напряжение в плите не снято до конца. Надвигается серия катастрофических афтершоков, способных добить то немногое, что еще стоит. Под землей Катя организует импровизированный лагерь для выживших. Вода становится дороже золота. Девушка жестко, почти жестоко пресекает попытку группы обезумевших от страха мужчин забрать все припасы силой. Воздух стремительно становится токсичным, кислород выгорает, и надежда на спасение тает с каждым вздохом.</p>",
+        book_ch4_content: "<p>На шестой день пути героев начинают сходиться в одной точке. Радиолюбитель из группы Андрея, используя собранный из мусора приемник, ловит слабый, затухающий сигнал SOS. Сигнал исходит от автоматического маячка из рухнувшего «Атриума». Андрей понимает, что торговый центр находится прямо на его пути. Добравшись до огромной площади, он видит лишь циклопических размеров кратер, из которого поднимается едкий дым. Узнав через военных координаты Андрея, Елена выходит с ним на радиосвязь. Она знает чертежи «Атриума» наизусть, так как годами ранее пыталась запретить его строительство из-за нарушения сейсмических норм.</p><p>Елена становится «глазами» Андрея. Она направляет спасателя и его отряд в бездну, через лабиринт изуродованных вентиляционных шахт и технических туннелей, обходя нестабильные зоны, готовые обрушиться от малейшего звука. В этот момент происходит мощнейший афтершок магнитудой 6.8 баллов. Тоннель начинает схлопываться. У Андрея остаются буквально считанные минуты. Орудуя кувалдой и ломом на пределе человеческих возможностей, раздирая руки в кровь, он пробивает бетонную стену подвала и лучом фонаря выхватывает из тьмы изможденные, покрытые серой пылью лица людей. Среди них он видит Катю, которая из последних сил поддерживает голову умирающему охраннику.</p>",
+        book_ch5_content: "<p>Кульминация романа пропитана вкусом пепла, крови и горьких слез. Группа Андрея, используя систему альпинистских полиспастов, успевает вытащить Катю и еще девятнадцать человек на поверхность за сто двадцать секунд до того, как подземные уровни «Атриума» с оглушительным ревом окончательно схлопываются, хороня под собой все тайны и надежды. Вертолеты МЧС, наконец прорвавшиеся сквозь дым, эвакуируют спасенных на окраины города, где развернут колоссальный полевой госпиталь. Именно там, среди сотен окровавленных носилок и непрекращающихся стонов, Катя падает в объятия постаревшей, поседевшей за эту бесконечную неделю матери. Елена Петровой, отбросив рации, графики и свой холодный профессионализм, впервые в жизни просто рыдает в голос, судорожно сжимая в объятиях живую дочь.</p><p>Но для Андрея история не закончена. Отказавшись от медицинской помощи и эвакуации, он идет дальше, в эпицентр руин своего жилого квартала. Он достигает места, где стоял его дом. Там, где когда-то была его уютная квартира, детская кроватка и смех его жены, теперь возвышается лишь уродливая гора перекрученного, спрессованного бетона и арматуры высотой в три этажа. Раскопки не имеют смысла. Никто не мог выжить под таким колоссальным весом. Спасатель, чудом вернувший жизни десяткам людей, медленно опускается на колени перед гигантской братской могилой своей семьи. В оглушающей тишине он понимает страшную цену своего подвига: он спас чужие миры, но навсегда потерял свою собственную вселенную.</p><p>Роман завершается масштабной, почти кинематографичной панорамой с высоты птичьего полета. Последние лучи багрового заката освещают руины некогда великого Новоморска. Город навсегда мертв, правительство принимает тяжелое решение не восстанавливать его, а законсервировать территорию. Однако в бесконечных колоннах военных грузовиков, увозящих выживших в неизвестность, нет полной, черной безнадежности. В глазах людей, прошедших сквозь кромешный ад, потерявших всё материальное, загорается новая, суровая и пугающая искра жизни. Они обрели невероятную силу духа, доказав себе и небесам главную истину: земля под ногами может треснуть, бетон может раскрошиться в пыль, но истинную человеческую волю расколоть невозможно.</p>"
+      },
+      en: {
+        logo_part1: "Shattered", logo_part2: "City",
+        nav_poster: "Poster", nav_disaster: "Disaster", nav_characters: "Characters", nav_content: "Plot", nav_finale: "Finale",
+        btn_back: "Back to site",
+        footer_text1: "The site is created based on the book «", footer_link: "Shattered City", footer_text2: "» authored by Mansur",
+        hero_title: "Shattered City", hero_subtitle: "A massive novel about survival, humanity, and hope in the epicenter of an 8.5 magnitude catastrophe.",
+        
+        disaster_title: "Disaster Description",
+        disaster_main: "The tragedy began not with a strike, but with a deep roar from the earth. A tectonic plate snapped. Magnitude 8.5.",
+        card1_title: "45 Seconds of Hell", card1_text: "The asphalt buckled into huge waves, swallowing cars. Residential blocks folded floor by floor.",
+        card2_title: "Underground Inferno", card2_text: "Shifting soil layers ruptured gas pipelines. 400 major fires broke out, merging into firestorms.",
+        card3_title: "Wrath of the Ocean", card3_text: "A 5-meter wall of water crashed into the port district, obliterating infrastructure.",
+        
+        char_title: "Main Characters",
+        char1_role: "Lead Seismologist", char1_name: "Elena Petrova", char1_text_short: "At the moment of the strike, she is in a bunker. Her main goal is to find her daughter.",
+        char2_role: "Rescue Lieutenant", char2_name: "Andrey Volkov", char2_text_short: "He uses his professional skills to navigate through burning city blocks, leading survivors.",
+        char3_role: "Teenager", char3_name: "Katya Petrova", char3_text_short: "Trapped on the minus third floor of a collapsed mall, she steps up as a leader.",
+        
+        plot_title: "Content",
+        plot_p1_title: "Chapter 1: Illusion", plot_p1_text_short: "The city is buzzing, unknowingly living its final calm hours. Strange natural signs appear, building an atmosphere of dread.",
+        plot_p2_title: "Chapter 2: Fracture", plot_p2_text_short: "At 08:14 AM, the devastating strike happens. Bridges snap, communications die. Absolute chaos replaces the modern world.",
+        plot_p3_title: "Chapter 3: Law of the Jungle", plot_p3_text_short: "The fight for resources begins in the dark, ruined city. Andrey makes tough choices. Underground, Katya rations the last water.",
+        plot_p4_title: "Chapter 4: Path to Light", plot_p4_text_short: "Andrey descends into the dangerous crater of the collapsed mall to save survivors, guided by Elena via military radio.",
+        plot_p5_title: "Chapter 5: Finale", plot_p5_text_short: "A rescue moments before total collapse, followed by bitter realizations.",
+        
+        finale_title: "Finale",
+        finale_p1: "Andrey's group pulls Katya and others to the surface just two minutes before the underground levels completely collapse with a deafening roar.",
+        finale_p2: "Andrey reaches his home. Instead of a building, there is only a mountain of crushed concrete. He realizes he saved other worlds, but lost his own universe.",
+        finale_p3: "The city is forever dead, becoming a quarantined mass grave. But an unyielding will to live ignites in those who survived. Human will cannot be shattered.",
+
+        book_full_title: "Shattered City",
+        book_author: "Author: Mansur",
+        book_sec_chars: "Characters",
+        book_char1_desc: "<p>Elena is a brilliant seismologist whose life was irreparably broken years ago when her husband died in a massive earthquake. This trauma evolved into a professional obsession. For the past five years, she has relentlessly fought the bureaucracy of Novomorsk, warning them that the tectonic plate beneath the city is at its absolute breaking point. Her detailed, terrifying reports gathered dust on the desks of politicians who refused to halt multi-billion dollar coastal developments.</p><p>When the catastrophe finally hits, Elena is secure inside the underground bunker of the Seismological Monitoring Center. She is forced to watch the real-time death of her city on digital maps. As a scientist, she accurately calculates the scale of the horror, but as a mother, she is consumed by blinding panic, knowing her teenage daughter is trapped somewhere in the crumbling concrete above.</p>",
+        book_char2_desc: "<p>Andrey Volkov is a thirty-two-year-old rescue lieutenant, a tough, dedicated man deeply in love with his wife Anna and his five-year-old son Ilya. The morning of the quake catches him on a subway train after a grueling 24-hour shift. He was sleeping on his feet when the earth suddenly went mad.</p><p>Clawing his way out of the mangled train to the surface, Andrey faces a nightmare no training could prepare him for: his entire district has been wiped off the map. Refusing to surrender to paralyzing despair, he strips off the remnants of his uniform and, armed only with a firefighter's axe and a climbing rope, begins to carve a path through the burning inferno of the city. He unintentionally becomes a beacon of hope for dozens of lost, terrified survivors who rally behind him.</p>",
+        book_char3_desc: "<p>Katya is a rebellious sixteen-year-old, constantly at war with her mother's overbearing paranoia. On that fateful morning, she stormed out of the apartment after a screaming match, opting to skip school and hide out in the massive underground 'Atrium' shopping mall.</p><p>When the tremors strike, the mall's concrete ceilings collapse, sealing hundreds of people on the minus third level. Plunged into absolute, suffocating darkness amidst the screams of the dying, Katya undergoes a rapid transformation. The spoiled teenager vanishes, replaced by a fierce, focused leader channeling her mother's iron will. She organizes the panicked survivors, rigorously rations the remaining bottled water, and keeps hope alive as the oxygen slowly runs out.</p>",
+        book_sec_disaster: "The Anatomy of the Catastrophe",
+        book_disaster_desc: "<p>The tragedy began at exactly 08:14 AM, not with a sudden crash, but with a deep, guttural roar that made the air itself vibrate. A tectonic plate that had been storing unimaginable kinetic energy for two centuries, located fifteen kilometers beneath the ocean floor, suddenly snapped along a hundred-kilometer fault line. The released energy was equivalent to thousands of nuclear detonations. The magnitude reached a catastrophic 8.5 on the Richter scale.</p><p>The epicenter was a mere twenty kilometers from the coastline of Novomorsk, a glittering metropolis of three million people. The initial P-wave hit the city in fractions of a second, striking from below like a colossal hammer. The glass facades of towering skyscrapers exploded in unison, raining millions of deadly shards down upon the morning commuters. Then the destructive S-wave arrived, heaving the ground with an amplitude of up to two meters. The asphalt buckled into massive waves, swallowing vehicles whole. Vast residential districts composed of concrete panel buildings folded like houses of cards in mere seconds, blanketing the city in thick, choking dust. Twelve minutes later, the shifting seabed sent a five-meter-high wall of black ocean water, mud, and mangled ships crashing into the port district. The city of Novomorsk was utterly destroyed in forty-five seconds.</p>",
+        book_sec_content: "Chronicles of the Novel",
+        book_ch1_content: "<p>The novel opens slowly, immersing the reader in the vibrant, pulsing rhythm of a massive, careless metropolis. Novomorsk is buzzing with traffic, shining with neon, and building ever upwards into the sky. We see Elena storming out of the Deputy Mayor's office in fury after her funding for school reinforcements is denied yet again. Meanwhile, Andrey jokes with his crew at the firehouse, casually checking his climbing gear, unaware it will soon save his life.</p><p>Katya's morning ends in a bitter argument with Elena over breakfast, dismissing her mother's warnings as paranoia. The reader, armed with the dreadful knowledge of what is about to happen, feels suffocating suspense in every mundane detail: the strangely erratic flight patterns of birds, inexplicable micro-cracks appearing on new roads, and an unusually extreme low tide drawing water away from the harbor. The city breathes, laughs, and lives, entirely ignorant that the hourglass of its existence has only a few grains of sand left.</p>",
+        book_ch2_content: "<p>At precisely 08:14 AM, time stops. The narrative accelerates violently, switching perspectives at a breakneck pace. The forty-five seconds of the actual earthquake are stretched across fifty pages of excruciating detail. Elena's bunker shakes violently as servers crash to the floor, screens flashing crimson red with the impossible reading: Magnitude 8.5+. She watches in horror as the city's sensor grid goes dark, indicating total annihilation of entire neighborhoods.</p><p>Andrey, emerging from the dead subway, witnesses the magnificent 'New World' suspension bridge twist like rubber before snapping in half with a deafening metallic shriek, plunging dozens of cars into the boiling bay. Underground, Katya is deafened by the screech of tearing steel and the thunder of concrete slabs crashing down around her. The lights die instantly. A lethal stampede begins in the pitch-black, dust-choked darkness of the mall. The familiar world is gone, replaced instantly by primal, unadulterated terror.</p>",
+        book_ch3_content: "<p>Novomorsk descends into a dark, feral state of survival. Central authority evaporates in seconds. Police and rescue services are paralyzed, their stations buried, their roads impassable. Brutal looting erupts in ruined supermarkets as people fight to the death over bottled water and antibiotics. Andrey, armed with a heavy crowbar, leads a small, fragile group through the labyrinth of jagged concrete and raging fires. He is constantly tortured by moral dilemmas: stop and lose precious hours trying to dig out a screaming stranger, or ruthlessly press on toward his own family.</p><p>In the Monitoring Center, Elena hijacks a surviving military satellite link to analyze the chaotic seismic data. She realizes a terrifying truth: the tectonic tension is not fully released. A series of massive aftershocks is coming. Deep underground, Katya establishes a grim camp for the survivors. Water becomes more valuable than gold. With unexpected ruthlessness, the teenager stops a group of panicked men from hoarding the supplies. But the air is growing steadily more toxic, and hope evaporates with every labored breath.</p>",
+        book_ch4_content: "<p>On the sixth day, the paths of the characters finally converge. A radio operator in Andrey's group catches a fading, automated SOS signal transmitting from the ruins of the 'Atrium' mall. Andrey realizes the collapsed structure is directly in his path. Reaching the site, he finds a cyclopean crater smoking with toxic fumes. Elena, tracking Andrey's group via military channels, establishes radio contact with him. Having reviewed the mall's blueprints years ago to condemn its construction, she becomes Andrey's 'eyes'.</p><p>She guides the exhausted rescuer down into the abyss, navigating through mangled ventilation shafts and highly unstable service tunnels. Suddenly, a massive 6.8 magnitude aftershock hits. The tunnel begins to collapse around him. With only minutes left, operating on pure adrenaline, Andrey smashes through a concrete basement wall with a sledgehammer. His flashlight beam cuts through the darkness, illuminating the dust-covered, starving survivors. Among them is Katya, desperately trying to keep a wounded security guard alive.</p>",
+        book_ch5_content: "<p>The novel's climax is choked with ash, blood, and bitter tears. Using a complex pulley system, Andrey's team manages to haul Katya and nineteen others to the surface just one hundred and twenty seconds before the subterranean levels of the 'Atrium' completely collapse with a deafening roar, burying all remaining secrets forever. Military helicopters finally break through the smoke, evacuating the survivors to a colossal field hospital outside the quarantine zone. There, amidst hundreds of bloody stretchers, Katya collapses into the arms of her mother, who has aged ten years in a single week. Elena Petrova drops her radios and charts, breaking down in uncontrollable sobs as she holds her living daughter.</p><p>But Andrey's journey is not over. Refusing medical evacuation, he walks alone into the epicenter of his ruined neighborhood. He reaches the exact GPS coordinates of his apartment building. Where his cozy home, his wife's laughter, and his son's bed once stood, there is only a monstrous, compressed mountain of concrete and rebar three stories high. Digging is scientifically pointless; nothing could survive that weight. The hero who saved dozens falls to his knees in the deafening silence of the mass grave. He saved other worlds, but lost his entire universe.</p><p>The book ends with a sweeping, cinematic aerial view of the ruins bathed in a blood-red sunset. Novomorsk is dead, designated by the government as a permanently quarantined mass grave. Yet, in the endless convoys of military trucks carrying the survivors away into the unknown, there is no absolute darkness. In the eyes of the people who walked through hell and lost everything material, a new, fierce, and terrifying spark of life burns brightly. They have discovered an incredible resilience of spirit, proving that while the earth may crack and concrete may crumble into dust, the true human will is impossible to shatter.</p>"
+      },
+      kz: {
+        logo_part1: "Жарылған", logo_part2: "Қала",
+        nav_poster: "Постер", nav_disaster: "Апат", nav_characters: "Кейіпкерлер", nav_content: "Мазмұны", nav_finale: "Финал",
+        btn_back: "Сайтқа қайту",
+        footer_text1: "Сайт «", footer_link: "Жарылған қала", footer_text2: "» кітабының желісімен жасалды. Авторы: Мансур",
+        hero_title: "Жарылған Қала", hero_subtitle: "8.5 балдық апат ошағындағы аман қалу, адамгершілік және үміт туралы ауқымды роман.",
+        
+        disaster_title: "Апат сипаттамасы",
+        disaster_main: "Трагедия соққыдан емес, жердің тереңінен шыққан гүрілден басталды. Тектоникалық плита жарылды. Магнитудасы 8.5 балл.",
+        card1_title: "Тозақтың 45 секунды", card1_text: "Асфальт алып толқындармен көтеріліп, көпқабатты аудандар қабат-қабатымен құлады.",
+        card2_title: "Жерасты өрті", card2_text: "Газ құбырлары үзіліп, 400-ден астам ірі өрт тұтанып, алып отты құйындарға ұласты.",
+        card3_title: "Мұхит қаһары", card3_text: "Порт ауданына биіктігі 5 метрлік су қабырғасы соғылып, инфрақұрылымды жойды.",
+        
+        char_title: "Басты кейіпкерлер",
+        char1_role: "Бас сейсмолог", char1_name: "Елена Петрова", char1_text_short: "Соққы кезінде бункерде болады. Мақсаты — қызын табу.",
+        char2_role: "ТЖМ лейтенанты", char2_name: "Андрей Волков", char2_text_short: "Дүрбелеңге берілмей, ол жанып жатқан кварталдар арқылы жол салып, аман қалғандарды ертеді.",
+        char3_role: "Жасөспірім", char3_name: "Катя Петрова", char3_text_short: "Қираған СОО-ның астында қамалып, бойынан өмір сүруге деген ерік-жігер табады.",
+        
+        plot_title: "Мазмұны",
+        plot_p1_title: "1-тарау: Елес", plot_p1_text_short: "Қала гуілдеп, биікке бой көтеруде. Табиғаттың оғаш белгілерінен оқырман қауіпті сезінеді. Қала өзінің соңғы тыныш сағаттарын сүруде.",
+        plot_p2_title: "2-тарау: Жарылыс", plot_p2_text_short: "Сағат 08:14-те соққы болады. Көпірлер құлап, байланыс үзіледі. Жайлы әлем лезде жойылып, орнын үрей басады.",
+        plot_p3_title: "3-тарау: Джунгли заңы", plot_p3_text_short: "Ресурстар үшін қатыгез күрес басталады. Қала қараңғылықта. Андрей қирандылар арасында қиын таңдау жасайды.",
+        plot_p4_title: "4-тарау: Жарыққа жол", plot_p4_text_short: "Андрей кратерге түседі. Елена оны рация арқылы бағыттайды. Өліммен жарыс басталады.",
+        plot_p5_title: "5-тарау: Финал", plot_p5_text_short: "Қирандылар астынан соңғы минутта құтқару және ащы шындық.",
+        
+        finale_title: "Финал",
+        finale_p1: "Андрей тобы Катяны жертөле толық құлауға екі минут қалғанда жер бетіне алып шығады. Олар дала госпиталіне эвакуацияланады.",
+        finale_p2: "Андрей өз үйіне жетеді. Ғимараттың орнында бетон тауы жатыр. Құтқарушы басқалардың әлемін сақтап қалды, бірақ өзінікін жоғалтты.",
+        finale_p3: "Қала мәңгілікке өлі. Бірақ тозақтан аман қалған адамдарда өмірге деген қатал үміт ұшқыны жанады. Адамның ерік-жігерін сындыру мүмкін емес.",
+
+        // FULL BOOK CONTENT (KAZAKH)
+        book_full_title: "Жарылған Қала",
+        book_author: "Авторы: Мансур",
+        book_sec_chars: "Кейіпкерлер",
+        book_char1_desc: "<p>Елена — көп жылдар бұрын жойқын жер сілкінісі кезінде күйеуінен айырылып, өмірі біржолата өзгерген әйел. Бұл жарақат оның кәсіби құмарлығына айналды. Ол елдегі ең үздік сейсмологтардың бірі болды. Соңғы бес жыл бойы ол Новоморск бюрократиясымен күн сайын күресіп, қала астындағы тектоникалық плитаның сыну шегіне жеткенін дәлелдеумен болды. Оның есептері шенеуніктердің үстелдерінде шаң басып жатты.</p><p>Апат орын алған кезде Елена Мониторинг орталығының жерасты бункерінде қауіпсіз жерде болады. Оның көз алдында мониторларда мегаполистің жойылуы көрсетілуде. Ғалым ретінде ол трагедияның ауқымын салқынқандылықпен бағалайды, бірақ ана ретінде он алты жасар қызының құлап жатқан бетон мен шыны арасында екенін біліп, қорқыныштан есінен тана жаздайды.</p>",
+        book_char2_desc: "<p>Андрей Волков — отыз екі жастағы өрт сөндіру-құтқару қызметінің лейтенанты, әйелі Анна мен бес жасар ұлы Ильяны қатты жақсы көретін мықты адам. Апат таңы оны жиырма төрт сағаттық ауыр ауысымнан кейін метро вагонында қарсы алады. Ол есікке сүйеніп тіке тұрған күйі ұйықтап жатқанда, жер кенеттен сілкіне бастайды.</p><p>Мыжылған пойыздан жер бетіне шыққан Андрей ешбір жарғыда жазылмаған сұмдық шындықпен бетпе-бет келеді: оның туған ауданы жер бетінен жойылған. Үмітсіздікке берілуден бас тартып, ол өрт сөндіруші балтасы мен арқанмен ғана қаруланып, жанып жатқан тозақ арқылы өз жолын бастайды. Андрей ондаған адасқан адамдар үшін бейресми көшбасшыға айналып, қарапайым құтқарушыдан өлі қаланың үміт символына айналады.</p>",
+        book_char3_desc: "<p>Катя — анасының «тұншықтырғыш» қамқорлығына қарсы тұрақты бүлік жағдайында жүрген типтік жасөспірім. Сол таңда ол анасына оның параноик екенін айқайлап, есікті тарс жауып кетіп қалды. Мектептің орнына Катя алып жерасты «Атриум» ойын-сауық орталығына барды.</p><p>Дүмпулер басталғанда, сауда орталығының бетон жабындары құлап, жүздеген адамды минус үшінші қабатта қамап тастайды. Тас қараңғыда, ыңырсыған дауыстар мен жыртылған арматураның сықырлаған дыбысы астында Катя тез өзгереді. Қырсық оқушы қыз жоғалып, оның орнына анасының темірдей мінезін мұра еткен қатал, жинақы көшбасшы пайда болады. Ол аман қалғандарды ұйымдастырады, дүрбелеңді қатаң тоқтатады және ауа таусылып бара жатқанда ауыз су қорларын бақылауға алады.</p>",
+        book_sec_disaster: "Апаттың сипаттамасы: Ұлы Жарылыс",
+        book_disaster_desc: "<p>Трагедия таңғы сағат 08:14-те басталды. Ол қатты соққымен емес, планета төзбес ауырсынудан ыңырсығандай терең, қорқынышты гүрілмен келді. Теңіз түбінен он бес шақырым тереңдікте екі жүз жыл бойы орасан зор энергия жинаған тектоникалық плита кенеттен ұзындығы жүз шақырымдық тігіс бойымен жарылды. Босатылған энергия мыңдаған атом бомбасының жарылысына тең болды. Магнитудасы Рихтер шкаласы бойынша жойқын 8.5 баллды құрады.</p><p>Эпицентрі үш миллион халқы бар гүлденген мегаполис — Новоморск жағалауынан небәрі жиырма шақырым жерде болды. Алғашқы P-толқыны қала көшелеріне бірнеше секундта жетіп, төменнен алып балғамен ұрғандай болды. Зәулім ғимараттардың әйнек фасадтары бір уақытта жарылып, жұмысқа асыққан адамдар толы көшелерге миллиондаған өлімге әкелетін сынықтар жаңбыры болып жауды. Содан кейін жерді бөлшектей бастаған S-толқыны келді. Асфальт көліктерді жұтып, алып толқындармен көтерілді. Панельді көпқабатты үйлер бірнеше сәтте қабат-қабатымен құлап, аспанға қою сұр шаң бұлттарын көтерді. Теңіз түбінің жылжуы суасты көшкінін тудырып, он екі минуттан соң порт ауданына биіктігі бес метрлік мұхит суы, балшық және қираған кемелер соғылды. Қала қырық бес секунд ішінде жойылды.</p>",
+        book_sec_content: "Романның мазмұны",
+        book_ch1_content: "<p>Роман оқырманды алып мегаполистің ырғағына баяу енгізумен басталады. Новоморск кептелістермен гуілдеп, витриналармен жарқырап, теңізден жаңа аумақтарды жаулап, биікке бой көтеруде. Біз әкім орынбасарының кабинетінен ашуланып шыққан Елена Петровамен танысамыз — оған мектептерді сейсмикалық нығайту бағдарламасын қаржыландырудан тағы да бас тартылды. Ал Андрей Волков өрт сөндіру бөлімінде ауысымды тапсырып, әріптестерімен әзілдесіп, альпинистік құрал-жабдықтарын тексереді.</p><p>Петровтар отбасындағы таңғы ас жанжалмен аяқталады: Катя анасына айқайлап, үйден кетіп қалады. Оқырман әрбір ұсақ-түйектен өсіп келе жатқан, тұншықтырғыш саспенсті сезінеді: саябақтардағы құстардың оғаш көшуі, жаңа асфальттағы түсініксіз микрожарықтар және шығанақтағы әдеттегіден күшті су қайтуы. Қала өзінің соңғы сағаттарын сүріп жатқанын мүлдем білмейді.</p>",
+        book_ch2_content: "<p>Таңғы 08:14-те уақыт тоқтайды. Баяндау күрт жылдамдап, кейіпкерлер арасында пулемет кезегінің жылдамдығымен ауысады. Апаттың қырық бес секунды елу беттік мәтінде егжей-тегжейлі сипатталады. Мониторинг орталығы сілкінеді, ауыр серверлер еденге гүрс етіп құлайды, экрандар 8.5+ магнитудасын көрсетіп, қызыл түспен жыпылықтайды. Елена қала картасына үреймен қарайды, онда датчиктердің жасыл нүктелері бірінен соң бірі сөніп, өлі қара аймаққа айналуда.</p><p>Метродан жаңа ғана шыққан Андрей «Жаңа Әлем» көпірінің қақ бөлініп, ондаған көлікті суға құлатқанын көреді. Ал жер астында, «Атриум» СОО-ның минус үшінші қабатында, Катя жыртылған металдың сықырлаған даусынан және құлаған бетон жабындарының гүрсілінен саңырау бола жаздайды. Жарық сөнеді. Қараңғыда, шаң мен қан иісі аңқыған абсолютті тьмада өлімге әкелетін кептеліс басталады. Қалыпты әлем құлап, орнына тек жабайы үрей қалды.</p>",
+        book_ch3_content: "<p>Қала қараңғылық пен хаосқа батады. Орталықтандырылған билік секундтар ішінде жойылды. Қираған супермаркеттер мен дәріханаларда мародерлік басталады — адамдар бір бөтелке таза су үшін өліспей беріспейді. Сүйменмен қаруланған Андрей өз айналасына шағын топ жинайды. Олар бетон мен арматура лабиринті арқылы өтеді. Әр қадам сайын Андрей қорқынышты моральдық дилеммалармен бетпе-бет келеді: үйінді астында айқайлап жатқан баланы құтқару үшін қымбат сағаттарды жоғалту ма, әлде өз отбасын іздеуге асығу ма.</p><p>Мониторинг орталығында Елена әскери спутниктік байланысты пайдаланады. Ол сейсмограммаларды талдап, қорқынышты шындықты түсінеді: плитадағы кернеу толық алынбаған. Апатты афтершоктар сериясы жақындап келеді. Жер астында Катя аман қалғандар үшін лагерь ұйымдастырады. Су алтыннан да қымбатқа түседі. Қыз қорқыныштан есінен танған ер адамдар тобының барлық қорды күшпен тартып алу әрекетін қатаң тоқтатады. Ауа тез уланып, құтқарылу үміті әр дем алған сайын азаяды.</p>",
+        book_ch4_content: "<p>Алтыншы күні кейіпкерлердің жолдары бір нүктеде тоғыса бастайды. Андрей тобындағы радиоәуесқой қираған «Атриумнан» шыққан әлсіз SOS сигналын ұстайды. Андрей сауда орталығының дәл оның жолында екенін түсінеді. Орасан зор алаңға жеткенде ол тек түтін шығып жатқан алып кратерді көреді. Әскерилер арқылы Андрейдің координаттарын білген Елена онымен байланысқа шығады. Ол «Атриумның» сызбаларын жатқа біледі.</p><p>Елена Андрейдің «көзіне» айналады. Ол құтқарушыны желдеткіш шахталары мен техникалық туннельдер арқылы бағыттайды. Дәл осы кезде 6.8 балдық қуатты афтершок болады. Туннель құлай бастайды. Андрейде санаулы минуттар ғана қалады. Адам мүмкіндігінің шегінде кувалдамен жұмыс істеп, ол жертөленің бетон қабырғасын бұзып өтеді. Фонарь сәулесімен қараңғылықтан шаңға батқан адамдардың жүздерін табады. Олардың арасында күзетшіге көмектесіп жатқан Катя да бар еді.</p>",
+        book_ch5_content: "<p>Романның шарықтау шегі күл, қан және ащы көз жасына суарылған. Андрей тобы альпинистік жүйелерді пайдалана отырып, «Атриумның» жерасты деңгейлері толық құлауға жүз жиырма секунд қалғанда Катяны және тағы он тоғыз адамды жер бетіне шығарып үлгереді. Түтіннен әрең өткен ТЖМ тікұшақтары құтқарылғандарды дала госпиталіне эвакуациялайды. Сол жерде, қанға боялған жүздеген зембілдер арасында Катя бір апта ішінде қартайып кеткен анасының құшағына құлайды. Елена Петрова өмірінде бірінші рет дауыстап жылап, тірі қалған қызын құшақтайды.</p><p>Бірақ Андрей үшін оқиға аяқталған жоқ. Ол медициналық көмектен бас тартып, өз тұрғын ауданының эпицентріне қарай жүреді. Ол өз үйі тұрған жерге жетеді. Оның жайлы пәтері мен әйелінің күлкісі болған жерде енді тек үш қабаттық биіктіктегі мыжылған бетон мен арматура тауы ғана тұр еді. Қазудың еш мәні жоқ. Мұндай орасан зор салмақ астында ешкім тірі қала алмас еді. Ондаған адамға өмір сыйлаған құтқарушы өз отбасының алып қабірі алдында баяу тізерлейді. Ол басқалардың әлемін сақтап қалды, бірақ өзінің бүкіл ғаламшарын мәңгілікке жоғалтты.</p><p>Роман күн батқан кездегі қираған Новоморскінің панорамасымен аяқталады. Қала мәңгілікке өлі, үкімет оны қалпына келтірмеуге шешім қабылдады. Алайда тірі қалғандарды белгісіздікке алып бара жатқан әскери жүк көліктерінің шексіз колонналарында толық үмітсіздік жоқ. Тозақтан өтіп, барлық материалдық дүниесінен айырылған адамдардың көздерінде өмірге деген жаңа, қатал ұшқын жанады. Олар жер жарылып, бетон шаңға айналса да, адамның шынайы ерік-жігерін сындыру мүмкін емес екенін дәлелдеді.</p>"
+      }
+    };
+
+    // 12. Application Logic (SPA Routing & i18n)
+    class App {
+      constructor() {
+        this.state = { lang: 'ru' };
+        
+        // Cache views
+        this.viewLanding = document.getElementById('view-landing');
+        this.viewBook = document.getElementById('view-book');
+        this.landingNav = document.getElementById('landing-nav');
+        
+        // Cache elements
+        this.translatableElements = document.querySelectorAll('[data-i18n]');
+        this.langButtons = document.querySelectorAll('.lang-btn');
+        this.accordionTriggers = document.querySelectorAll('.accordion-trigger');
+        
+        this.init();
+      }
+
+      init() {
+        this.bindEvents();
+        this.updateLanguage(this.state.lang);
+      }
+
+      bindEvents() {
+        this.langButtons.forEach(btn => {
+          btn.addEventListener('click', (e) => {
+            const selectedLang = e.target.getAttribute('data-lang');
+            if (selectedLang !== this.state.lang) {
+              this.updateLanguage(selectedLang);
+            }
+          });
+        });
+
+        this.accordionTriggers.forEach(trigger => {
+          trigger.addEventListener('click', () => this.toggleAccordion(trigger));
+        });
+      }
+
+      // Router methods
+      showLanding() {
+        this.viewLanding.classList.remove('hidden');
+        this.landingNav.classList.remove('hidden');
+        this.viewBook.classList.add('hidden');
+        window.scrollTo(0, 0);
+      }
+
+      showBook() {
+        this.viewLanding.classList.add('hidden');
+        this.landingNav.classList.add('hidden');
+        this.viewBook.classList.remove('hidden');
+        window.scrollTo(0, 0);
+      }
+
+      // i18n logic
+      updateLanguage(lang) {
+        this.state.lang = lang;
+        const dict = translations[lang];
+        if (!dict) return;
+
+        this.translatableElements.forEach(el => {
+          const key = el.getAttribute('data-i18n');
+          if (dict[key]) {
+            el.innerHTML = dict[key]; // using innerHTML to render <p> tags for the book
+          }
+        });
+
+        this.langButtons.forEach(btn => {
+          const isActive = btn.getAttribute('data-lang') === lang;
+          btn.setAttribute('aria-pressed', isActive);
+        });
+        
+        document.documentElement.lang = lang;
+      }
+
+      // Accordion logic
+      toggleAccordion(trigger) {
+        const item = trigger.closest('.accordion-item');
+        const isExpanded = trigger.getAttribute('aria-expanded') === 'true';
+
+        document.querySelectorAll('.accordion-item').forEach(otherItem => {
+          if (otherItem !== item) {
+            otherItem.classList.remove('is-open');
+            otherItem.querySelector('.accordion-trigger').setAttribute('aria-expanded', 'false');
+          }
+        });
+
+        if (isExpanded) {
+          item.classList.remove('is-open');
+          trigger.setAttribute('aria-expanded', 'false');
+        } else {
+          item.classList.add('is-open');
+          trigger.setAttribute('aria-expanded', 'true');
+        }
+      }
     }
 
-    /* ==================================================
-       3. Typography
-       ================================================== */
-    .title-display { 
-      font-size: clamp(2.5rem, 5vw, 4.5rem); 
-      font-weight: 900; 
-      line-height: 1.1; 
-      letter-spacing: -0.02em; 
-      margin-bottom: var(--space-sm); 
-      color: var(--text-main); 
-    }
-
-    .title-section { 
-      font-size: clamp(1.75rem, 4vw, 2.5rem); 
-      font-weight: 700; 
-      letter-spacing: -0.01em; 
-      margin-bottom: var(--space-lg); 
-      color: var(--text-main); 
-      border-bottom: 2px solid var(--accent-light); 
-      padding-bottom: var(--space-xs); 
-      display: inline-block; 
-    }
-
-    .title-item { 
-      font-size: 1.25rem; 
-      font-weight: 700; 
-      margin-bottom: var(--space-xs); 
-      color: var(--text-main); 
-    }
-
-    .text-lead { 
-      font-size: clamp(1.125rem, 2vw, 1.35rem); 
-      color: var(--text-muted); 
-      line-height: 1.6; 
-    }
-
-    .text-body { 
-      font-size: 1rem; 
-      color: var(--text-muted); 
-    }
-
-    /* ==================================================
-       4. Layout Grid
-       ================================================== */
-    .container { 
-      width: 100%; 
-      max-width: 1100px; 
-      margin: 0 auto; 
-      padding: 0 var(--space-md); 
-    }
-
-    .section { 
-      padding: var(--space-xl) 0; 
-    }
-
-    .section-surface { 
-      background-color: var(--surface-color); 
-      border-top: 1px solid var(--border-color); 
-      border-bottom: 1px solid var(--border-color); 
-    }
-
-    .grid-12 { 
-      display: grid; 
-      grid-template-columns: repeat(12, 1fr); 
-      gap: var(--space-md); 
-    }
-
-    /* ==================================================
-       5. Header & Navigation
-       ================================================== */
-    .header-wrapper { 
-      position: fixed; 
-      top: 0; 
-      left: 0; 
-      width: 100%; 
-      z-index: 100; 
-      background-color: rgba(255, 255, 255, 0.95); 
-      backdrop-filter: blur(12px); 
-      -webkit-backdrop-filter: blur(12px); 
-      box-shadow: var(--shadow-sm); 
-    }
-
-    .header-main { 
-      height: 60px; 
-      display: flex; 
-      justify-content: space-between; 
-      align-items: center; 
-      border-bottom: 1px solid var(--border-color); 
-    }
-
-    .header-sub { 
-      height: 44px; 
-      display: flex; 
-      justify-content: center; 
-      align-items: center; 
-      background-color: var(--bg-color); 
-      border-bottom: 1px solid var(--border-color); 
-      overflow-x: auto; 
-    }
-    
-    .logo { 
-      font-weight: 900; 
-      font-size: 1.25rem; 
-      text-transform: uppercase; 
-      letter-spacing: 0.05em; 
-      cursor: pointer;
-    }
-
-    .logo span { 
-      color: var(--accent-color); 
-    }
-    
-    .nav-links { 
-      display: flex; 
-      gap: var(--space-md); 
-      padding: 0 var(--space-sm); 
-      white-space: nowrap; 
-    }
-
-    .nav-link { 
-      font-size: 0.875rem; 
-      font-weight: 600; 
-      color: var(--text-muted); 
-      text-transform: uppercase; 
-      letter-spacing: 0.05em; 
-      transition: color 0.2s ease; 
-      cursor: pointer; 
-    }
-
-    .nav-link:hover { 
-      color: var(--accent-color); 
-    }
-    
-    .lang-switcher { 
-      display: flex; 
-      background: var(--bg-color); 
-      border-radius: var(--radius-sm); 
-      padding: 2px; 
-      border: 1px solid var(--border-color); 
-    }
-
-    .lang-btn { 
-      padding: 4px 12px; 
-      font-size: 0.75rem; 
-      font-weight: 700; 
-      color: var(--text-muted); 
-      border-radius: 4px; 
-      transition: all 0.2s ease; 
-    }
-
-    .lang-btn[aria-pressed="true"] { 
-      background-color: var(--surface-color); 
-      color: var(--accent-color); 
-      box-shadow: var(--shadow-sm); 
-    }
-
-    .site-footer { 
-      padding: var(--space-md) 0; 
-      background-color: var(--text-main); 
-      color: #fff; 
-      text-align: center; 
-      font-size: 0.875rem; 
-    }
-
-    .site-footer a { 
-      color: #82caff; 
-      font-weight: bold; 
-      text-decoration: underline; 
-      cursor: pointer; 
-    }
-
-    .site-footer a:hover { 
-      color: #fff; 
-    }
-
-    /* ==================================================
-       6. Landing Page Sections
-       ================================================== */
-    .hero { 
-      padding-top: calc(104px + var(--space-lg)); 
-      padding-bottom: var(--space-lg); 
-    }
-
-    .hero-content { 
-      grid-column: 1 / 7; 
-      display: flex; 
-      flex-direction: column; 
-      justify-content: center; 
-    }
-
-    .hero-visual { 
-      grid-column: 7 / 13; 
-    }
-
-    .hero-poster { 
-      width: 100%; 
-      height: auto; 
-      border-radius: var(--radius-md); 
-      box-shadow: var(--shadow-md); 
-      border: 1px solid var(--border-color); 
-    }
-
-    .disaster-lead { 
-      grid-column: 1 / 8; 
-      margin-bottom: var(--space-lg); 
-    }
-
-    .disaster-stats { 
-      grid-column: 9 / 13; 
-      border-left: 2px solid var(--accent-light); 
-      padding-left: var(--space-md); 
-      display: flex; 
-      flex-direction: column; 
-      gap: var(--space-md); 
-    }
-
-    .character-list { 
-      display: flex; 
-      flex-direction: column; 
-    }
-
-    .character-item { 
-      display: grid; 
-      grid-template-columns: 1fr 2.5fr; 
-      gap: var(--space-md); 
-      padding: var(--space-md) 0; 
-      border-top: 1px solid var(--border-color); 
-    }
-
-    .character-role { 
-      font-size: 0.875rem; 
-      text-transform: uppercase; 
-      letter-spacing: 0.05em; 
-      font-weight: 700; 
-      color: var(--accent-color); 
-      margin-bottom: var(--space-xs); 
-      display: block; 
-    }
-
-    /* ==================================================
-       7. Accordion
-       ================================================== */
-    .accordion { 
-      background: var(--surface-color); 
-      border: 1px solid var(--border-color); 
-      border-radius: var(--radius-md); 
-      overflow: hidden; 
-      box-shadow: var(--shadow-sm); 
-    }
-
-    .accordion-item { 
-      border-bottom: 1px solid var(--border-color); 
-    }
-
-    .accordion-item:last-child { 
-      
+    // Init App
+    let app;
+    document.addEventListener('DOMContentLoaded', () => {
+      app = new App();
+    });
+  </script>
+</body>
+</html>
