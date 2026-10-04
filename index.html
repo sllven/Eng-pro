@@ -4,6 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Расколотый Город | Shattered City</title>
+    <!-- Подключаем библиотеку Anime.js -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js"></script>
     <style>
         /* Базовые стили и переменные */
         :root {
@@ -39,6 +41,9 @@
             backdrop-filter: blur(10px);
             border-bottom: 1px solid var(--border-color);
             z-index: 1000;
+            /* Скрываем для стартовой анимации */
+            opacity: 0; 
+            transform: translateY(-50px);
         }
 
         .top-bar {
@@ -126,6 +131,7 @@
             padding-bottom: 15px;
             border-bottom: 3px solid var(--accent);
             display: inline-block;
+            opacity: 0; /* Для анимации скролла */
         }
 
         /* Постер */
@@ -138,6 +144,7 @@
             box-shadow: 0 20px 50px rgba(0,0,0,0.8), 0 0 40px var(--accent-glow);
             border: 1px solid var(--border-color);
             margin-bottom: 60px;
+            opacity: 0; /* Для стартовой анимации */
         }
         
         .poster-wrapper img {
@@ -184,11 +191,13 @@
             border: 1px solid var(--border-color);
             border-top: 4px solid var(--accent);
             box-shadow: 0 10px 20px rgba(0,0,0,0.5);
-            transition: transform 0.3s;
+            transition: transform 0.3s, box-shadow 0.3s;
+            opacity: 0; /* Для анимации скролла */
         }
 
         .card:hover {
             transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(230, 74, 25, 0.2);
         }
 
         .card h3 {
@@ -206,6 +215,7 @@
             border-radius: 8px;
             border: 1px solid var(--border-color);
             overflow: hidden;
+            opacity: 0; /* Для анимации скролла */
         }
 
         .accordion-header {
@@ -260,66 +270,71 @@
             border-left: 5px solid var(--accent);
             border-radius: 8px;
             box-shadow: inset 0 0 50px rgba(0,0,0,0.8);
+            opacity: 0; /* Для анимации скролла */
+        }
+        
+        /* Класс для анимируемых текстов (язык) */
+        .text-animated {
+            display: inline-block;
         }
     </style>
 </head>
 <body>
 
-    <header>
+    <header id="site-header">
         <div class="top-bar">
-            <div class="logo">Расколотый <span>Город</span></div>
+            <div class="logo">Расколотый <span data-t="logo_span">Город</span></div>
             <div class="lang-switch">
                 <button onclick="setLanguage('ru')" id="btn-ru" class="active">RU</button>
-                <button onclick="setLanguage('kk')" id="btn-kk">KK</button>
+                <button onclick="setLanguage('kz')" id="btn-kz">KZ</button>
                 <button onclick="setLanguage('en')" id="btn-en">EN</button>
             </div>
         </div>
         <div class="sub-nav">
-            <a href="#poster" data-t="nav_poster">Постер</a>
-            <a href="#disaster" data-t="nav_disaster">Описание катастрофы</a>
-            <a href="#characters" data-t="nav_characters">Главные герои</a>
-            <a href="#content" data-t="nav_content">Содержание</a>
-            <a href="#finale" data-t="nav_finale">Финал</a>
+            <a href="#poster" data-t="nav_poster" class="text-animated">Постер</a>
+            <a href="#disaster" data-t="nav_disaster" class="text-animated">Описание катастрофы</a>
+            <a href="#characters" data-t="nav_characters" class="text-animated">Главные герои</a>
+            <a href="#content" data-t="nav_content" class="text-animated">Содержание</a>
+            <a href="#finale" data-t="nav_finale" class="text-animated">Финал</a>
         </div>
     </header>
 
     <main>
         <!-- ПОСТЕР -->
         <section id="poster">
-            <div class="poster-wrapper">
-                <!-- ВАЖНО: Убедитесь, что файл с этим именем лежит в папке с сайтом -->
+            <div class="poster-wrapper" id="main-poster">
                 <img src="IMG_6494.jpeg" alt="Постер книги Расколотый Город">
             </div>
         </section>
 
         <!-- ОПИСАНИЕ КАТАСТРОФЫ -->
         <section id="disaster">
-            <h2 class="section-title" data-t="title_disaster">Анатомия Катастрофы: Великий Разлом</h2>
+            <h2 class="section-title scroll-anim" data-t="title_disaster">Анатомия Катастрофы: Великий Разлом</h2>
             
-            <div class="finale-box" style="margin-bottom: 40px;">
-                <h3 style="color: var(--accent); margin-bottom: 20px; font-size: 26px;" data-t="disaster_main_title">Сейсмический сдвиг века</h3>
-                <p class="drop-cap" data-t="disaster_main_text">
+            <div class="finale-box scroll-anim" style="margin-bottom: 40px;">
+                <h3 style="color: var(--accent); margin-bottom: 20px; font-size: 26px;" data-t="disaster_main_title" class="text-animated">Сейсмический сдвиг века</h3>
+                <p class="drop-cap text-animated" data-t="disaster_main_text">
                     Трагедия началась не с удара, а с глубокого, утробного гула, исходившего из самых недр земли. Тектоническая плита, копившая напряжение более двухсот лет на глубине 15 километров под морским дном, внезапно лопнула. Магнитуда составила разрушительные 8.5 баллов по шкале Рихтера. Эпицентр располагался всего в 20 километрах от береговой линии Новоморска — мегаполиса с населением в три миллиона человек, совершенно не готового к удару такой силы. 
                 </p>
             </div>
 
             <div class="grid-3">
-                <div class="card">
-                    <h3 data-t="disaster_card1_title">Хронология удара: 45 Секунд Ада</h3>
-                    <p data-t="disaster_card1_text">
-                        Первичная P-волна достигла города за доли секунды. Жители описывали это как удар гигантского молота снизу. Окна небоскребов взорвались одновременно, осыпая улицы дождем из миллионов осколков. Затем пришла S-волна (сдвиговая волна). Земля начала ходить ходуном с амплитудой до двух метров. Асфальт вздыбался огромными волнами, разрывая машины. Панельные спальные районы «складывались» этаж за этажом всего за несколько секунд. Воздух мгновенно наполнился густой, удушливой серой пылью из раскрошенного бетона, заслонившей солнце.
+                <div class="card scroll-anim">
+                    <h3 data-t="disaster_card1_title" class="text-animated">Хронология удара: 45 Секунд Ада</h3>
+                    <p data-t="disaster_card1_text" class="text-animated">
+                        Первичная P-волна достигла города за доли секунды. Жители описывали это как удар гигантского молота снизу. Окна небоскребов взорвались одновременно. Затем пришла S-волна. Земля начала ходить ходуном с амплитудой до двух метров. Асфальт вздыбался огромными волнами. Панельные спальные районы «складывались» этаж за этажом.
                     </p>
                 </div>
-                <div class="card">
-                    <h3 data-t="disaster_card2_title">Цепная реакция: Огонь под землей</h3>
-                    <p data-t="disaster_card2_text">
-                        Смещение слоев почвы разорвало главные магистральные газопроводы, проложенные под старым центром. Искры от оборванных высоковольтных линий электропередач воспламенили выходящий газ. В течение первых десяти минут после толчка в городе вспыхнуло более 400 крупных пожаров. Огонь быстро сливался в огненные смерчи из-за ветров, тянущих кислород с залива. Система водоснабжения была уничтожена в первые секунды: трубы лопнули, давление упало до нуля. Пожарные расчеты, те, что смогли выбраться из-под завалов своих депо, оказались абсолютно бессильны перед стеной пламени.
+                <div class="card scroll-anim">
+                    <h3 data-t="disaster_card2_title" class="text-animated">Цепная реакция: Огонь под землей</h3>
+                    <p data-t="disaster_card2_text" class="text-animated">
+                        Смещение слоев почвы разорвало главные магистральные газопроводы. Искры от оборванных ЛЭП воспламенили выходящий газ. В городе вспыхнуло более 400 крупных пожаров. Система водоснабжения была уничтожена. Пожарные оказались абсолютно бессильны перед стеной пламени.
                     </p>
                 </div>
-                <div class="card">
-                    <h3 data-t="disaster_card3_title">Гнев океана: Локальное Цунами</h3>
-                    <p data-t="disaster_card3_text">
-                        Сдвиг морского дна спровоцировал массивный подводный оползень. Вода в заливе Новоморска начала стремительно отступать, обнажая километры дна, мертвую рыбу и остовы старых кораблей. Спустя всего 12 минут после землетрясения на портовый и промышленный районы обрушилась стена воды высотой пять метров. Это была не просто вода — это была черная жижа, смешанная с грязью, портовыми кранами, контейнерами и искореженными яхтами. Цунами смыло склады, уничтожило портовую инфраструктуру и затопило уцелевшие после землетрясения подвалы, где прятались люди.
+                <div class="card scroll-anim">
+                    <h3 data-t="disaster_card3_title" class="text-animated">Гнев океана: Локальное Цунами</h3>
+                    <p data-t="disaster_card3_text" class="text-animated">
+                        Сдвиг морского дна спровоцировал массивный подводный оползень. Спустя всего 12 минут на портовый район обрушилась стена воды высотой пять метров. Это была черная жижа с грязью и обломками яхт. Цунами смыло склады и затопило уцелевшие подвалы.
                     </p>
                 </div>
             </div>
@@ -327,27 +342,24 @@
 
         <!-- ГЛАВНЫЕ ГЕРОИ -->
         <section id="characters">
-            <h2 class="section-title" data-t="title_characters">Лица Трагедии: Главные Герои</h2>
+            <h2 class="section-title scroll-anim" data-t="title_characters">Лица Трагедии: Главные Герои</h2>
             <div class="grid-3">
-                <div class="card">
-                    <h3 data-t="char1_name">Доктор Елена Петрова (50 лет)</h3>
-                    <p data-t="char1_text">
-                        <b>Профессия:</b> Ведущий сейсмолог Центра Мониторинга.<br><br>
-                        Елена — женщина, чья жизнь посвящена изучению разломов земли. Она потеряла мужа во время землетрясения в Спитаке много лет назад, и эта травма сделала ее одержимой своей работой. Последние пять лет она бомбардировала мэрию отчетами о критическом росте напряжения в тектонической плите, требуя укрепить старые здания. Но ее доклады ложились в стол: признание сейсмической угрозы остановило бы многомиллиардные инвестиции в застройку побережья. В момент катастрофы Елена находится в укрепленном бункере Центра. Она единственная, кто понимает истинный масштаб произошедшего и неизбежность афтершоков. Ее холодный рассудок борется с материнской паникой: ее дочь-подросток находится в самом центре разрушающегося мегаполиса.
+                <div class="card scroll-anim">
+                    <h3 data-t="char1_name" class="text-animated">Доктор Елена Петрова (50 лет)</h3>
+                    <p data-t="char1_text" class="text-animated">
+                        <b>Профессия:</b> Ведущий сейсмолог Центра Мониторинга.<br><br>Потеряв мужа в Спитаке, Елена посвятила жизнь науке. Последние пять лет она бомбардировала мэрию отчетами о критическом напряжении тектонической плиты. Во время удара она в укрепленном бункере понимает масштаб трагедии. Ее миссия — найти дочь-подростка.
                     </p>
                 </div>
-                <div class="card">
-                    <h3 data-t="char2_name">Андрей Волков (32 года)</h3>
-                    <p data-t="char2_text">
-                        <b>Профессия:</b> Лейтенант МЧС, пожарный-спасатель.<br><br>
-                        Андрей возвращался домой после тяжелой 24-часовой смены. Он мечтал только о горячем душе и завтраке со своей женой Анной и пятилетним сыном Ильей. Удар застиг его в метро, на открытом участке перегона. Выбравшись из искореженного вагона на поверхность, он увидел свой район в руинах. Дом, где спала его семья, обрушился полностью. Отказавшись поддаваться отчаянию, Андрей, используя свои профессиональные навыки и опыт альпинизма, начинает прокладывать путь через горящие кварталы. Вокруг него стихийно собирается группа таких же потерянных, но готовых бороться людей. Андрей становится их неформальным лидером. Его цель — спасти как можно больше жизней по пути к руинам своего дома, надеясь на чудо.
+                <div class="card scroll-anim">
+                    <h3 data-t="char2_name" class="text-animated">Андрей Волков (32 года)</h3>
+                    <p data-t="char2_text" class="text-animated">
+                        <b>Профессия:</b> Лейтенант МЧС, спасатель.<br><br>Андрей возвращался с 24-часовой смены к жене и пятилетнему сыну. Землетрясение застало его в метро. Выбравшись на поверхность, он видит свой район уничтоженным. Отказавшись от отчаяния, Андрей прокладывает путь через горящий город, собирая отряд выживших.
                     </p>
                 </div>
-                <div class="card">
-                    <h3 data-t="char3_name">Катя Петрова (16 лет)</h3>
-                    <p data-t="char3_text">
-                        <b>Профессия:</b> Школьница, дочь Елены.<br><br>
-                        Этим утром Катя сильно поссорилась с матерью из-за ее "вечной паранойи". Назло Елене, Катя прогуляла школу и вместе с друзьями, Максом и Лизой, отправилась в гигантский подземный торгово-развлекательный комплекс «Атриум». Когда началось землетрясение, они находились на минус третьем этаже, в кинотеатре. Свет погас мгновенно, перекрытия рухнули, отрезав выходы. Катя оказывается запертой в кромешной тьме, в душном пространстве, заполняющемся бетонной пылью. В условиях абсолютной паники, истерики выживших и криков раненых, бунтующий подросток внезапно находит в себе стальной стержень матери. Именно Катя начинает организовывать людей, искать воду в обрушенных кафе, перевязывать раны и поддерживать искру надежды, пока кислород медленно заканчивается.
+                <div class="card scroll-anim">
+                    <h3 data-t="char3_name" class="text-animated">Катя Петрова (16 лет)</h3>
+                    <p data-t="char3_text" class="text-animated">
+                        <b>Профессия:</b> Школьница, дочь Елены.<br><br>Поссорившись с матерью, Катя прогуляла школу в подземном ТЦ «Атриум». При землетрясении перекрытия рухнули, заперев ее на минус третьем этаже. В кромешной тьме бунтующий подросток находит в себе силы организовать выживших и поддерживать искру надежды.
                     </p>
                 </div>
             </div>
@@ -355,69 +367,60 @@
 
         <!-- СОДЕРЖАНИЕ / СЮЖЕТ -->
         <section id="content">
-            <h2 class="section-title" data-t="title_content">Хроники Катастрофы (Сюжет)</h2>
+            <h2 class="section-title scroll-anim" data-t="title_content">Хроники Катастрофы (Сюжет)</h2>
             
             <div class="accordion">
-                <div class="accordion-item">
+                <div class="accordion-item scroll-anim">
                     <div class="accordion-header" onclick="toggleAccordion(this)">
-                        <span data-t="plot_part1_title">Часть I: Иллюзия стабильности (Дни 1-2 до катастрофы)</span>
+                        <span data-t="plot_part1_title" class="text-animated">Часть I: Иллюзия стабильности (Дни 1-2 до катастрофы)</span>
                         <div class="accordion-icon">+</div>
                     </div>
                     <div class="accordion-content">
                         <div class="accordion-content-inner">
-                            <p data-t="plot_part1_text">
-                                Книга начинается медленно, погружая читателя в ритм жизни огромного мегаполиса. Новоморск гудит, сияет неоном, строится ввысь, отвоевывая у моря новые территории. Мы знакомимся с Еленой Петровой, которая в ярости покидает кабинет заместителя мэра — ей снова отказали в финансировании программы сейсмоукрепления школ. График на ее мониторах показывает тревожные микровибрации, но начальство списывает их на строительство новой линии метро. <br><br>
-                                Параллельно мы видим жизнь Андрея Волкова: его любящую семью, быт пожарной части, шутки коллег. Андрей проверяет снаряжение, не подозревая, что скоро оно спасет ему жизнь. Катя ссорится с матерью за завтраком: "Ты не можешь контролировать все, мама, расслабься, мы не в зоне риска!". Читатель, зная о надвигающейся беде, чувствует нарастающее саспенс-напряжение от каждой мелочи: трещины на асфальте, странного поведения птиц в парке, необычно низкого отлива в заливе утром перед трагедией.
+                            <p data-t="plot_part1_text" class="text-animated">
+                                Книга начинается медленно, знакомя с мегаполисом Новоморском. Елена в ярости покидает мэрию. Андрей проверяет снаряжение. Катя ссорится с матерью. Читатель чувствует саспенс от каждой мелочи: трещин на асфальте, поведения птиц. Город живет последние спокойные часы.
                             </p>
                         </div>
                     </div>
                 </div>
 
-                <div class="accordion-item">
+                <div class="accordion-item scroll-anim">
                     <div class="accordion-header" onclick="toggleAccordion(this)">
-                        <span data-t="plot_part2_title">Часть II: Разлом и Хаос (День 1)</span>
+                        <span data-t="plot_part2_title" class="text-animated">Часть II: Разлом и Хаос (День 1)</span>
                         <div class="accordion-icon">+</div>
                     </div>
                     <div class="accordion-content">
                         <div class="accordion-content-inner">
-                            <p data-t="plot_part2_text">
-                                Ровно в 08:14 утра происходит удар. Повествование ускоряется до предела, переключаясь между героями каждые несколько абзацев. 45 секунд катастрофы описываются на пятидесяти страницах, где время субъективно растягивается. <br><br>
-                                Центр Елены содрогается, серверы падают, на экранах мигает красная тревога "Магнитуда 8.5+". Елена в ужасе смотрит на карту разрушений — датчики массово отключаются, фиксируя полное уничтожение целых районов. <br><br>
-                                Андрей оказывается на поверхности и видит апокалипсис: мост «Новый Свет» переламывается пополам, роняя десятки машин в воду. Небо становится черным от дыма. Андрей пробивается к пожарной части, но находит лишь руины и раздавленные машины. Он снимает с себя форму и понимает: он больше не спасатель на службе, он одиночка в мертвом городе. <br><br>
-                                Катя под землей. Звук рвущегося металла и грохот падающих бетонных плит оглушают. Она приходит в себя от боли и кашля. Ее друг Макс придавлен обломком. Вокруг темнота, крики и запах разорванной канализации и газа. Начинается паника, сотни людей бросаются к эскалаторам, давя друг друга, но проходы завалены многотонными плитами.
+                            <p data-t="plot_part2_text" class="text-animated">
+                                08:14 утра. Удар. 45 секунд ада. Центр Елены содрогается, фиксируя магнитуду 8.5. Андрей видит, как рушится мост. Катя под землей глохнет от скрежета металла. Начинается давка в полной темноте.
                             </p>
                         </div>
                     </div>
                 </div>
 
-                <div class="accordion-item">
+                <div class="accordion-item scroll-anim">
                     <div class="accordion-header" onclick="toggleAccordion(this)">
-                        <span data-t="plot_part3_title">Часть III: Закон Джунглей и Искры Человечности (Дни 2-5)</span>
+                        <span data-t="plot_part3_title" class="text-animated">Часть III: Закон Джунглей (Дни 2-5)</span>
                         <div class="accordion-icon">+</div>
                     </div>
                     <div class="accordion-content">
                         <div class="accordion-content-inner">
-                            <p data-t="plot_part3_text">
-                                Город погружается во тьму первобытного выживания. Централизованная власть рухнула. Полиция не функционирует. Начинается мародерство в разрушенных магазинах за еду и воду. <br><br>
-                                Андрей, вооружившись ломом и пожарным топором, собирает вокруг себя небольшую группу: врача скорой помощи, студента и крепкого рабочего. Вместе они пробираются через лабиринт из бетона и арматуры. Они сталкиваются со страшными моральными выборами: спасти кричащего под завалами человека, потеряв драгоценные часы, или идти дальше к своим семьям? Андрей заставляет группу останавливаться и помогать там, где это возможно. <br><br>
-                                В Центре Мониторинга Елена использует остатки военной спутниковой связи. Она анализирует сейсмограммы и понимает: надвигается серия катастрофических афтершоков. Она связывается с военными спасателями, пытаясь направить их в места скопления выживших. <br><br>
-                                Под землей Катя организует лагерь. Вода в бутылках из разбитого супермаркета становится главной валютой. Она жестко подавляет попытку нескольких мужчин забрать всю еду себе. Катя использует фонарик телефона экономно, распределяет пайки и успокаивает раненых. Воздух становится токсичным. Надежда угасает.
+                            <p data-t="plot_part3_text" class="text-animated">
+                                Город во тьме первобытного выживания. Андрей с небольшой группой пробирается через руины. Елена координирует спасателей по спутниковой связи. Под землей Катя организует лагерь, пресекая панику.
                             </p>
                         </div>
                     </div>
                 </div>
 
-                <div class="accordion-item">
+                <div class="accordion-item scroll-anim">
                     <div class="accordion-header" onclick="toggleAccordion(this)">
-                        <span data-t="plot_part4_title">Часть IV: Наперегонки со смертью (Дни 6-7)</span>
+                        <span data-t="plot_part4_title" class="text-animated">Часть IV: Наперегонки со смертью (Дни 6-7)</span>
                         <div class="accordion-icon">+</div>
                     </div>
                     <div class="accordion-content">
                         <div class="accordion-content-inner">
-                            <p data-t="plot_part4_text">
-                                Пути героев начинают сходиться. Радиолюбитель из группы Андрея ловит сигнал SOS с уцелевшего генератора в «Атриуме». Андрей понимает, что ТЦ находится по пути к его дому. Добравшись до площади перед торговым центром, они видят гигантский кратер. <br><br>
-                                Елена, узнав координаты группы Андрея через военных, связывается с ним по рации. Она знает архитектурный план «Атриума» наизусть, так как когда-то критиковала его проект за слабость перекрытий. Елена становится «глазами» Андрея, направляя его отряд через вентиляционные шахты и технические туннели, обходя нестабильные зоны. <br><br>
-                                Андрей спускается в бездну. Происходит мощный афтершок (магнитуда 6.8). Тоннель начинает схлопываться. У Андрея есть считанные минуты. Он пробивает стену подвала и находит изможденных людей. Катя, еле держащаяся на ногах, помогает вытаскивать раненых. Они начинают подъем по спасательным тросам сквозь узкую шахту.
+                            <p data-t="plot_part4_text" class="text-animated">
+                                Радиолюбитель ловит SOS из «Атриума». Андрей спускается в кратер. Елена направляет отряд через вентиляционные шахты. Начинается мощнейший афтершок в 6.8 баллов. У Андрея считанные минуты.
                             </p>
                         </div>
                     </div>
@@ -427,16 +430,16 @@
 
         <!-- ФИНАЛ -->
         <section id="finale">
-            <h2 class="section-title" data-t="title_finale">Эпилог: Расколотый, но не сломленный</h2>
-            <div class="finale-box">
-                <p class="drop-cap" data-t="finale_text1">
-                    Кульминация истории пропитана пеплом и горькими слезами. Группа Андрея успевает вытащить Катю и еще два десятка человек на поверхность за две минуты до того, как подземные уровни «Атриума» окончательно схлопываются, погребая под собой все. Вертолеты МЧС эвакуируют спасенных на окраины города, где развернут полевой госпиталь. Именно там, среди сотен носилок и стонов, Катя падает в объятия постаревшей за неделю матери. Елена, отбросив рации и карты, впервые в жизни просто плачет, сжимая дочь.
+            <h2 class="section-title scroll-anim" data-t="title_finale">Эпилог: Расколотый, но не сломленный</h2>
+            <div class="finale-box scroll-anim">
+                <p class="drop-cap text-animated" data-t="finale_text1">
+                    Группа Андрея успевает вытащить Катю на поверхность за две минуты до полного обрушения подвалов. Вертолеты МЧС увозят их в полевой госпиталь, где Катя со слезами воссоединяется с матерью Еленой.
                 </p>
-                <p data-t="finale_text2">
-                    Андрей, отказавшись от эвакуации, идет дальше. Он достигает своего района. То, что когда-то было уютным жилым кварталом с детскими площадками, теперь представляет собой гору перемолотого бетона, высотой в три этажа. Раскопки не имеют смысла. Никто не мог выжить под таким весом. Спасатель, вернувший десятки детей матерям за эту неделю, падает на колени перед руинами собственного дома. Он спас чужие миры, но потерял свою вселенную.
+                <p data-t="finale_text2" class="text-animated">
+                    Андрей доходит до своего дома. Вместо здания — гора бетона. Раскопки бессмысленны. Спасатель, вернувший жизни десяткам людей, падает на колени перед могилой своей семьи.
                 </p>
-                <p data-t="finale_text3">
-                    Книга завершается масштабной панорамой с высоты птичьего полета. Последние лучи заката освещают руины Новоморска. Город навсегда мертв, власти принимают решение не восстанавливать его, а законсервировать как гигантскую братскую могилу. Однако, в машинах эвакуации, увозящих выживших, нет полной безнадежности. В людях, переживших ад, загорается новая, суровая искра жизни. Они потеряли всё материальное, но обрели невероятную силу духа. «Земля может треснуть, бетон может раскрошиться, но человеческую волю расколоть невозможно», — гласят последние строки романа.
+                <p data-t="finale_text3" class="text-animated">
+                    Финальная панорама показывает руины Новоморска в лучах заката. Но в эвакуационных колоннах загорается суровая искра жизни: пережив ад, люди обрели невероятную силу духа. Человеческую волю невозможно расколоть.
                 </p>
             </div>
         </section>
@@ -444,9 +447,10 @@
     </main>
 
     <script>
-        // База переводов с масштабными текстами
+        // База переводов с исправленным кодом 'kz'
         const translations = {
             ru: {
+                logo_span: "Город",
                 nav_poster: "Постер",
                 nav_disaster: "Катастрофа",
                 nav_characters: "Герои",
@@ -487,6 +491,7 @@
                 finale_text3: "Финальная панорама показывает руины Новоморска в лучах заката. Город навсегда мертв и превращен в братскую могилу. Но в эвакуационных колоннах загорается суровая искра жизни: пережив ад, люди обрели невероятную силу духа. Человеческую волю невозможно расколоть."
             },
             en: {
+                logo_span: "City",
                 nav_poster: "Poster",
                 nav_disaster: "Disaster",
                 nav_characters: "Characters",
@@ -495,38 +500,39 @@
                 
                 title_disaster: "Anatomy of the Disaster: The Great Rift",
                 disaster_main_title: "The Seismic Shift of the Century",
-                disaster_main_text: "The tragedy began not with a strike, but with a deep, guttural roar from the bowels of the earth. A tectonic plate that had accumulated tension for over two centuries 15 kilometers beneath the seabed suddenly snapped. The magnitude reached a devastating 8.5 on the Richter scale. The epicenter was located just 20 kilometers from the coastline of Novomorsk — a metropolis of three million people completely unprepared for a blow of this magnitude.",
+                disaster_main_text: "The tragedy began not with a strike, but with a deep, guttural roar from the bowels of the earth. A tectonic plate that had accumulated tension for over two centuries 15 kilometers beneath the seabed suddenly snapped. The magnitude reached a devastating 8.5 on the Richter scale.",
                 disaster_card1_title: "Chronology of the Strike: 45 Seconds of Hell",
-                disaster_card1_text: "The initial P-wave reached the city in fractions of a second. Residents described it as the blow of a giant hammer from below. Skyscraper windows exploded simultaneously. Then came the S-wave. The earth began to heave with an amplitude of up to two meters. The asphalt buckled in huge waves. Panel residential areas 'folded' floor by floor.",
+                disaster_card1_text: "The initial P-wave reached the city in fractions of a second. Residents described it as the blow of a giant hammer from below. Skyscraper windows exploded simultaneously. Then came the S-wave. The earth began to heave with an amplitude of up to two meters.",
                 disaster_card2_title: "Chain Reaction: Fire Underground",
-                disaster_card2_text: "The shifting soil layers ruptured the main gas pipelines. Sparks from severed power lines ignited the escaping gas. Over 400 massive fires erupted in the city, merging into firestorms. The water supply system was destroyed. Firefighters found themselves absolutely powerless against the wall of flames.",
+                disaster_card2_text: "The shifting soil layers ruptured the main gas pipelines. Sparks from severed power lines ignited the escaping gas. Over 400 massive fires erupted in the city, merging into firestorms. The water supply system was destroyed.",
                 disaster_card3_title: "Wrath of the Ocean: Local Tsunami",
-                disaster_card3_text: "The seabed shift triggered a massive underwater landslide. Just 12 minutes after the earthquake, a five-meter-high wall of water crashed into the port district. It was a black sludge mixed with mud and yacht wreckage. The tsunami washed away warehouses and flooded the surviving basements.",
+                disaster_card3_text: "The seabed shift triggered a massive underwater landslide. Just 12 minutes after the earthquake, a five-meter-high wall of water crashed into the port district. It was a black sludge mixed with mud and yacht wreckage.",
 
                 title_characters: "Faces of Tragedy: Main Characters",
                 char1_name: "Dr. Elena Petrova (50 years old)",
-                char1_text: "<b>Profession:</b> Lead Seismologist.<br><br>Having lost her husband in a previous quake, Elena dedicated her life to science. For five years she bombarded the city hall with reports about the critical plate tension, but was ignored for the sake of real estate investments. During the strike, she is in a fortified bunker. Her mission is to find her teenage daughter in the ruins of the metropolis.",
+                char1_text: "<b>Profession:</b> Lead Seismologist.<br><br>Having lost her husband in a previous quake, Elena dedicated her life to science. For five years she bombarded the city hall with reports about the critical plate tension. During the strike, she is in a fortified bunker. Her mission is to find her teenage daughter.",
                 char2_name: "Andrey Volkov (32 years old)",
-                char2_text: "<b>Profession:</b> Rescue Lieutenant.<br><br>Andrey was returning from a 24-hour shift to his wife and 5-year-old son. The quake caught him in the subway. Reaching the surface, he finds his district destroyed. Refusing to despair, he uses his mountaineering skills to navigate the burning city, gathering a squad of survivors to save anyone they can on his way home.",
+                char2_text: "<b>Profession:</b> Rescue Lieutenant.<br><br>Andrey was returning from a 24-hour shift to his wife and 5-year-old son. The quake caught him in the subway. Refusing to despair, he uses his mountaineering skills to navigate the burning city, gathering a squad of survivors.",
                 char3_name: "Katya Petrova (16 years old)",
-                char3_text: "<b>Profession:</b> High School Student.<br><br>After arguing with her mother, Katya skipped school in the underground 'Atrium' mall. During the quake, the ceilings collapsed, trapping her on minus third floor. In complete darkness and panic, the rebellious teenager finds a core of steel. She organizes people, rations water, and maintains hope as oxygen runs out.",
+                char3_text: "<b>Profession:</b> High School Student.<br><br>After arguing with her mother, Katya skipped school in the underground 'Atrium' mall. During the quake, she is trapped on minus third floor. In complete darkness and panic, the rebellious teenager finds a core of steel to organize survivors.",
 
                 title_content: "Chronicles of the Disaster (Plot)",
                 plot_part1_title: "Part I: Illusion of Stability",
-                plot_part1_text: "The book starts slowly, introducing Novomorsk. Elena furiously leaves the city hall after being denied funding. Andrey checks his gear at the fire station. Katya argues with her mother. The reader feels suspense from every detail: cracks in the asphalt, bird behavior, low tide. The city lives its last calm hours.",
+                plot_part1_text: "The book starts slowly, introducing Novomorsk. Elena furiously leaves the city hall after being denied funding. Andrey checks his gear. The city lives its last calm hours.",
                 plot_part2_title: "Part II: The Fracture and Chaos (Day 1)",
-                plot_part2_text: "08:14 AM. The strike. 45 seconds of hell are described in detail. Elena's center records an 8.5 magnitude. Andrey sees the 'New World' bridge collapse. Katya goes deaf from grinding metal underground as her friend is pinned by a slab. Stampedes begin in complete darkness.",
+                plot_part2_text: "08:14 AM. The strike. 45 seconds of hell. Elena's center records an 8.5 magnitude. Andrey sees the bridge collapse. Katya goes deaf from grinding metal underground. Stampedes begin in complete darkness.",
                 plot_part3_title: "Part III: Law of the Jungle (Days 2-5)",
-                plot_part3_text: "The city descends into primal survival mode. Looting, no authority, no water. Andrey leads a small group through ruins, facing moral dilemmas. Elena analyzes incoming aftershocks. Underground, Katya sets up a camp, harshly stopping attempts to steal food by force. The air turns toxic.",
+                plot_part3_text: "The city descends into primal survival mode. Andrey leads a small group through ruins. Elena analyzes incoming aftershocks. Underground, Katya sets up a camp, harshly stopping attempts to steal food by force.",
                 plot_part4_title: "Part IV: Race Against Death (Days 6-7)",
-                plot_part4_text: "A radio operator catches an SOS from 'Atrium'. Andrey decides to descend into the crater. Elena contacts him and guides his squad through ventilation shafts using blueprints. A massive 6.8 aftershock begins. Andrey has minutes to breach the wall and pull Katya and others out.",
+                plot_part4_text: "A radio operator catches an SOS from 'Atrium'. Andrey decides to descend into the crater. Elena contacts him and guides his squad through ventilation shafts. A massive 6.8 aftershock begins.",
 
                 title_finale: "Epilogue: Shattered, but not Broken",
-                finale_text1: "The climax is soaked in ash. Andrey's group pulls Katya to the surface just two minutes before the basements completely collapse. Helicopters take them to a field hospital, where Katya tearfully reunites with her mother Elena.",
-                finale_text2: "Andrey reaches his home. Instead of a building, there is a mountain of concrete. Digging is pointless. The rescuer who saved dozens falls to his knees before his family's grave. He saved other worlds, but lost his own.",
-                finale_text3: "The final panorama shows the ruins of Novomorsk at sunset. The city is forever dead, turned into a mass grave. But in the evacuation convoys, a spark of life ignites: having survived hell, people found incredible strength of spirit. Human will cannot be shattered."
+                finale_text1: "Andrey's group pulls Katya to the surface just two minutes before the basements completely collapse. Helicopters take them to a field hospital, where Katya tearfully reunites with her mother Elena.",
+                finale_text2: "Andrey reaches his home. Instead of a building, there is a mountain of concrete. Digging is pointless. The rescuer who saved dozens falls to his knees before his family's grave.",
+                finale_text3: "The final panorama shows the ruins of Novomorsk at sunset. The city is forever dead, turned into a mass grave. But having survived hell, people found incredible strength of spirit. Human will cannot be shattered."
             },
-            kk: {
+            kz: {
+                logo_span: "Қала",
                 nav_poster: "Постер",
                 nav_disaster: "Апат",
                 nav_characters: "Кейіпкерлер",
@@ -535,54 +541,135 @@
                 
                 title_disaster: "Апат Анатомиясы: Ұлы Жарылыс",
                 disaster_main_title: "Ғасырдың сейсмикалық жылжуы",
-                disaster_main_text: "Трагедия соққыдан емес, жердің тереңінен шыққан гүрілден басталды. Теңіз түбінен 15 шақырым тереңдікте екі жүз жыл бойы кернеу жинаған тектоникалық плита кенеттен жарылды. Магнитудасы Рихтер шкаласы бойынша 8.5 баллды құрады. Эпицентрі мұндай соққыға мүлдем дайын емес үш миллион халқы бар мегаполис — Новоморск жағалауынан небәрі 20 шақырым жерде орналасты.",
+                disaster_main_text: "Трагедия соққыдан емес, жердің тереңінен шыққан гүрілден басталды. Теңіз түбінен 15 шақырым тереңдікте екі жүз жыл бойы кернеу жинаған тектоникалық плита кенеттен жарылды. Магнитудасы Рихтер шкаласы бойынша 8.5 баллды құрады.",
                 disaster_card1_title: "Соққы хронологиясы: Тозақтың 45 секунды",
-                disaster_card1_text: "Алғашқы P-толқыны қалаға бірнеше секундта жетті. Тұрғындар оны төменнен ұрған алып балғаның соққысындай сезінді. Зәулім ғимараттардың терезелері бір уақытта жарылып кетті. Содан кейін S-толқыны келді. Жер екі метрге дейін тербеле бастады. Асфальт үлкен толқындармен көтерілді. Панельді үйлер қабат-қабатымен құлады.",
+                disaster_card1_text: "Алғашқы P-толқыны қалаға бірнеше секундта жетті. Зәулім ғимараттардың терезелері бір уақытта жарылып кетті. Содан кейін S-толқыны келді. Жер екі метрге дейін тербеле бастады. Асфальт үлкен толқындармен көтерілді.",
                 disaster_card2_title: "Тізбекті реакция: Жер астындағы өрт",
-                disaster_card2_text: "Топырақ қабаттарының жылжуы негізгі газ құбырларын үзді. Үзілген электр желілерінің ұшқындары газды тұтандырды. Қалада 400-ден астам ірі өрт шығып, отты құйындарға ұласты. Сумен қамту жүйесі жойылды. Өрт сөндірушілер жалын қабырғасының алдында дәрменсіз болды.",
+                disaster_card2_text: "Топырақ қабаттарының жылжуы негізгі газ құбырларын үзді. Қалада 400-ден астам ірі өрт шығып, отты құйындарға ұласты. Сумен қамту жүйесі жойылды. Өрт сөндірушілер жалын қабырғасының алдында дәрменсіз болды.",
                 disaster_card3_title: "Мұхит қаһары: Жергілікті Цунами",
-                disaster_card3_text: "Теңіз түбінің жылжуы үлкен су асты көшкінін тудырды. Жер сілкінісінен кейін 12 минуттан соң порт ауданына биіктігі бес метрлік су қабырғасы соғылды. Бұл балшық пен яхта сынықтары араласқан қара қоймалжың еді. Цунами қоймаларды шайып, аман қалған жертөлелерді суға батырды.",
+                disaster_card3_text: "Теңіз түбінің жылжуы үлкен су асты көшкінін тудырды. Жер сілкінісінен кейін 12 минуттан соң порт ауданына биіктігі бес метрлік су қабырғасы соғылды. Бұл балшық пен яхта сынықтары араласқан қара қоймалжың еді.",
 
                 title_characters: "Трагедия Бейнелері: Басты Кейіпкерлер",
                 char1_name: "Доктор Елена Петрова (50 жаста)",
-                char1_text: "<b>Кәсібі:</b> Бас сейсмолог.<br><br>Спитактағы зілзалада күйеуінен айырылған Елена өмірін ғылымға арнады. Соңғы бес жыл бойы әкімдікке қауіп туралы ескерткенімен, құрылысқа бөлінетін инвестиция үшін оны елемеді. Апат кезінде ол бункерде болып, трагедияның ауқымын түсінеді. Оның мақсаты — қираған мегаполисте қызын табу.",
+                char1_text: "<b>Кәсібі:</b> Бас сейсмолог.<br><br>Спитактағы зілзалада күйеуінен айырылған Елена өмірін ғылымға арнады. Апат кезінде ол бункерде болып, трагедияның ауқымын түсінеді. Оның мақсаты — қираған мегаполисте қызын табу.",
                 char2_name: "Андрей Волков (32 жаста)",
-                char2_text: "<b>Кәсібі:</b> ТЖМ лейтенанты, құтқарушы.<br><br>Андрей ауысымнан әйелі мен 5 жасар ұлына қайтып келе жатқан. Жер сілкінісі оны метрода ұстады. Жер бетіне шығып, ауданының қирағанын көреді. Альпинизм дағдыларын қолданып, ол жанып жатқан қала арқылы жол салып, үйіне барар жолда тірі қалғандарды құтқару үшін отряд жинайды.",
+                char2_text: "<b>Кәсібі:</b> ТЖМ лейтенанты, құтқарушы.<br><br>Андрей ауысымнан әйелі мен 5 жасар ұлына қайтып келе жатқан. Жер сілкінісі оны метрода ұстады. Жер бетіне шығып, ауданының қирағанын көреді. Ол жанып жатқан қала арқылы жол салып, құтқару үшін отряд жинайды.",
                 char3_name: "Катя Петрова (16 жаста)",
-                char3_text: "<b>Кәсібі:</b> Оқушы, Еленаның қызы.<br><br>Анасымен ұрсысып, Катя «Атриум» жерасты СОО-на кетіп қалады. Жер сілкінісі кезінде төбе құлап, ол минус үшінші қабатта қамалады. Қараңғылық пен дүрбелеңде бүлікшіл жасөспірім бойынан мықты мінез табады. Ол адамдарды ұйымдастырып, суды бөліп, оттегі таусылғанша үміт отын сақтайды.",
+                char3_text: "<b>Кәсібі:</b> Оқушы, Еленаның қызы.<br><br>Анасымен ұрсысып, Катя «Атриум» жерасты СОО-на кетіп қалады. Жер сілкінісі кезінде ол минус үшінші қабатта қамалады. Қараңғылық пен дүрбелеңде жасөспірім бойынан мықты мінез тауып, адамдарды ұйымдастырады.",
 
                 title_content: "Апат Хроникасы (Желісі)",
                 plot_part1_title: "I Бөлім: Тұрақтылық елесі",
-                plot_part1_text: "Кітап Новоморск қаласымен таныстырудан басталады. Елена қаржыландырудан бас тартқан әкімдіктен ашуланып шығады. Андрей жабдықтарын тексереді. Катя анасымен ұрсысады. Оқырман әр ұсақ-түйектен қауіпті сезінеді. Қала соңғы тыныш сағаттарын сүруде.",
+                plot_part1_text: "Кітап Новоморск қаласымен таныстырудан басталады. Елена қаржыландырудан бас тартқан әкімдіктен ашуланып шығады. Қала соңғы тыныш сағаттарын сүруде.",
                 plot_part2_title: "II Бөлім: Жарылыс пен Хаос (1-күн)",
-                plot_part2_text: "Таңғы 08:14. Соққы. Тозақтың 45 секунды егжей-тегжейлі сипатталады. Елена орталығы 8.5 магнитуданы тіркейді. Андрей «Жаңа Әлем» көпірінің құлағанын көреді. Катя жер астында металл сықырлағаннан саңырау бола жаздайды, досы тақтаның астында қалады. Қараңғыда кептеліс басталады.",
+                plot_part2_text: "Таңғы 08:14. Соққы. Тозақтың 45 секунды. Елена орталығы 8.5 магнитуданы тіркейді. Андрей көпірдің құлағанын көреді. Катя жер астында қамалады.",
                 plot_part3_title: "III Бөлім: Джунгли Заңы (2-5 күндер)",
-                plot_part3_text: "Қала жабайы тірі қалу режиміне өтеді. Мародерлік, билік пен судың жоқтығы. Андрей кішігірім топпен қирандылар арасынан өтеді. Елена келе жатқан күшті афтершоктарды талдайды. Жер астында Катя лагерь ұйымдастырып, тамақты күшпен тартып алмақ болғандарды тоқтатады.",
+                plot_part3_text: "Қала жабайы тірі қалу режиміне өтеді. Андрей кішігірім топпен қирандылар арасынан өтеді. Елена күшті афтершоктарды талдайды. Жер астында Катя лагерь ұйымдастырады.",
                 plot_part4_title: "IV Бөлім: Өліммен жарыс (6-7 күндер)",
-                plot_part4_text: "Радиоәуесқой «Атриумнан» SOS сигналын ұстайды. Андрей кратерге түсуге шешім қабылдайды. Елена онымен рация арқылы байланысып, отрядты желдеткіш шахталары арқылы бағыттайды. 6.8 балдық күшті афтершок басталады. Андрейде қабырғаны бұзып, Катяны алып шығу үшін санаулы минуттар ғана бар.",
+                plot_part4_text: "Радиоәуесқой «Атриумнан» SOS сигналын ұстайды. Андрей кратерге түсуге шешім қабылдайды. Елена рация арқылы оны бағыттайды. 6.8 балдық күшті афтершок басталады.",
 
                 title_finale: "Эпилог: Жарылған, бірақ Сынбаған",
-                finale_text1: "Шарықтау шегі күлге малынған. Андрей тобы Катяны жертөле толық қирауға екі минут қалғанда жер бетіне алып шығады. Тікұшақтар оларды дала госпиталіне әкетеді, онда Катя көзіне жас алып, анасы Еленамен қауышады.",
-                finale_text2: "Андрей үйіне жетеді. Ғимараттың орнында бетон тауы жатыр. Қазудың мәні жоқ. Ондаған адамның өмірін сақтап қалған құтқарушы өз отбасының қабірі алдында тізерлейді. Ол басқалардың әлемін сақтап қалды, бірақ өзінікін жоғалтты.",
-                finale_text3: "Қорытынды панорама күн батқан кездегі қираған Новоморскіні көрсетеді. Қала мәңгілікке өлі және бауырластар зиратына айналды. Бірақ эвакуациялық колонналарда өмір ұшқыны жанады: тозақтан аман өткен адамдар рухтың керемет күшін тапты. Адамның ерік-жігерін сындыру мүмкін емес."
+                finale_text1: "Андрей тобы Катяны жертөле толық қирауға екі минут қалғанда жер бетіне алып шығады. Катя көзіне жас алып, анасы Еленамен қауышады.",
+                finale_text2: "Андрей үйіне жетеді. Ғимараттың орнында бетон тауы жатыр. Ондаған адамның өмірін сақтап қалған құтқарушы өз отбасының қабірі алдында тізерлейді.",
+                finale_text3: "Қорытынды панорама қираған Новоморскіні көрсетеді. Қала мәңгілікке өлі. Бірақ эвакуациялық колонналарда өмір ұшқыны жанады: адамның ерік-жігерін сындыру мүмкін емес."
             }
         };
 
+        // Анимация при старте страницы
+        window.addEventListener('DOMContentLoaded', () => {
+            // Появление шапки
+            anime({
+                targets: '#site-header',
+                translateY: [-50, 0],
+                opacity: [0, 1],
+                duration: 1200,
+                easing: 'easeOutExpo'
+            });
+
+            // Появление постера
+            anime({
+                targets: '#main-poster',
+                scale: [0.95, 1],
+                opacity: [0, 1],
+                duration: 1500,
+                delay: 400,
+                easing: 'easeOutQuart'
+            });
+        });
+
+        // Анимация элементов при скролле с помощью Intersection Observer
+        const observerOptions = {
+            threshold: 0.1, // срабатывает, когда элемент виден на 10%
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const scrollObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    anime({
+                        targets: entry.target,
+                        translateY: [50, 0],
+                        opacity: [0, 1],
+                        duration: 800,
+                        easing: 'easeOutCubic'
+                    });
+                    scrollObserver.unobserve(entry.target); // Анимируем только один раз
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.scroll-anim').forEach(el => {
+            scrollObserver.observe(el);
+        });
+
+
+        // Функция переключения языка
         function setLanguage(lang) {
             // Кнопки
             document.querySelectorAll('.lang-switch button').forEach(btn => btn.classList.remove('active'));
             document.getElementById('btn-' + lang).classList.add('active');
 
-            // Замена текста
+            // Собираем все элементы с текстом для перевода
             const elements = document.querySelectorAll('[data-t]');
+            
+            // Анимация смены текста
+            anime({
+                targets: '.text-animated',
+                opacity: [1, 0],
+                translateY: [0, -5],
+                duration: 200,
+                easing: 'easeInSine',
+                complete: function() {
+                    // Замена текста, когда он исчез
+                    elements.forEach(el => {
+                        const key = el.getAttribute('data-t');
+                        if (translations[lang][key]) {
+                            el.innerHTML = translations[lang][key];
+                        }
+                    });
+
+                    // Плавное появление нового текста
+                    anime({
+                        targets: '.text-animated',
+                        opacity: [0, 1],
+                        translateY: [5, 0],
+                        duration: 300,
+                        easing: 'easeOutSine'
+                    });
+                }
+            });
+            
+            // Отдельно меняем тексты без класса .text-animated, если они есть
             elements.forEach(el => {
-                const key = el.getAttribute('data-t');
-                if (translations[lang][key]) {
-                    el.innerHTML = translations[lang][key];
+                if(!el.classList.contains('text-animated')) {
+                     const key = el.getAttribute('data-t');
+                     if (translations[lang][key]) {
+                         el.innerHTML = translations[lang][key];
+                     }
                 }
             });
         }
 
+        // Функция аккордеона
         function toggleAccordion(header) {
             const item = header.parentElement;
             item.classList.toggle('active-accordion');
