@@ -125,25 +125,30 @@
     .accordion-content { overflow: hidden; }
     .accordion-content p { padding: 0 var(--space-md) var(--space-md) var(--space-md); max-width: 90ch; }
 
-    /* ОТРЕДАКТИРОВАННЫЙ ФИНАЛ ДЛЯ ПК */
+    /* МАСШТАБНЫЙ И РАСТЯНУТЫЙ ФИНАЛ */
     .finale-layout { 
-      grid-column: 2 / 12; 
+      grid-column: 1 / 13; /* Растянут на всю ширину сетки (наравне с другими блоками) */
       background: var(--surface-color); 
       border: 1px solid var(--border-color); 
       border-top: 4px solid var(--accent-color);
       border-radius: var(--radius-md); 
-      padding: var(--space-xl) var(--space-xl); 
-      box-shadow: var(--shadow-lg); 
-      text-align: left; /* Убрано центрирование, теперь текст выровнен по левому краю */
+      padding: var(--space-lg) var(--space-xl); 
+      box-shadow: var(--shadow-md); 
+      text-align: left;
     }
     .finale-layout .title-section {
       border-bottom: none;
       margin-bottom: var(--space-md);
       color: var(--accent-color);
     }
+    .finale-columns {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: var(--space-lg);
+    }
     .finale-layout p { 
-      margin-bottom: 1.5rem; 
-      font-size: 1.15rem;
+      margin-bottom: 1.25rem; 
+      font-size: 1.125rem;
       line-height: 1.8;
       color: var(--text-main);
     }
@@ -151,24 +156,25 @@
     /* ==================================================
        6. Book Reader View Components
        ================================================== */
-    .book-reader { padding-top: calc(60px + var(--space-lg)); padding-bottom: var(--space-xl); background-color: #fdfdfc; }
-    .book-container { max-width: 800px; margin: 0 auto; padding: 0 var(--space-md); }
+    .book-reader { padding-top: calc(60px + var(--space-lg)); padding-bottom: var(--space-xl); background-color: #f8fafc; }
+    .book-container { max-width: 850px; margin: 0 auto; padding: 0 var(--space-md); background: var(--surface-color); padding: 4rem 5rem; border-radius: var(--radius-md); border: 1px solid var(--border-color); box-shadow: var(--shadow-lg); }
     
-    .back-btn { display: inline-flex; align-items: center; gap: 8px; font-weight: 600; color: var(--accent-color); margin-bottom: var(--space-lg); padding: 8px 16px; border: 1px solid var(--accent-color); border-radius: var(--radius-sm); transition: all 0.2s; }
+    .back-btn { display: inline-flex; align-items: center; gap: 8px; font-weight: 600; color: var(--accent-color); margin-bottom: var(--space-lg); padding: 8px 16px; border: 1px solid var(--accent-color); border-radius: var(--radius-sm); transition: all 0.2s; cursor: pointer; }
     .back-btn:hover { background-color: var(--accent-color); color: #fff; }
     
     .book-header { text-align: center; margin-bottom: var(--space-xl); border-bottom: 2px solid var(--border-color); padding-bottom: var(--space-lg); }
     .book-header h1 { font-family: var(--font-serif); font-size: clamp(2.5rem, 5vw, 4rem); color: var(--text-main); margin-bottom: var(--space-sm); line-height: 1.2; }
-    .book-author { font-size: 1.2rem; color: var(--text-muted); font-style: italic; }
+    .book-author { font-size: 1.2rem; color: var(--text-muted); font-style: italic; font-family: var(--font-primary); }
     
     .book-section { margin-bottom: var(--space-xl); }
     .book-section h2 { font-family: var(--font-primary); font-size: 2rem; color: var(--accent-color); margin-bottom: var(--space-md); text-transform: uppercase; letter-spacing: 0.05em; border-bottom: 1px solid var(--border-color); padding-bottom: var(--space-xs); }
     
-    .book-text { font-family: var(--font-serif); font-size: 1.15rem; line-height: 1.8; color: #2d3748; }
-    .book-text p { margin-bottom: 1.5rem; text-align: justify; }
+    .book-text { font-family: var(--font-serif); font-size: 1.15rem; line-height: 1.9; color: #2d3748; }
+    .book-text p { margin-bottom: 1.5rem; text-align: justify; text-indent: 2rem; }
     
-    .book-character { margin-bottom: var(--space-md); background: #f8fafc; padding: var(--space-md); border-radius: var(--radius-sm); border-left: 4px solid var(--accent-color); }
-    .book-character h3 { font-family: var(--font-primary); font-size: 1.4rem; margin-bottom: var(--space-xs); color: var(--text-main); }
+    .book-character { margin-bottom: var(--space-lg); background: #f1f5f9; padding: 2rem; border-radius: var(--radius-sm); border-left: 4px solid var(--accent-color); }
+    .book-character h3 { font-family: var(--font-primary); font-size: 1.5rem; margin-bottom: var(--space-sm); color: var(--text-main); }
+    .book-character .book-text p { text-indent: 0; }
     
     .book-chapter-title { font-family: var(--font-primary); font-size: 1.75rem; font-weight: 900; margin-top: var(--space-lg); margin-bottom: var(--space-md); color: var(--text-main); text-align: center; }
 
@@ -180,15 +186,17 @@
       .hero-visual { grid-column: 2 / 12; }
       .disaster-lead { grid-column: 1 / 13; }
       .disaster-stats { grid-column: 1 / 13; border-left: none; border-top: 2px solid var(--accent-light); padding-left: 0; padding-top: var(--space-md); }
-      .finale-layout { grid-column: 1 / 13; padding: var(--space-lg); }
+      .finale-columns { grid-template-columns: 1fr; gap: 0; }
+      .finale-layout { padding: var(--space-lg); }
     }
 
     @media (max-width: 768px) {
       .header-sub { justify-content: flex-start; }
       .character-item { grid-template-columns: 1fr; gap: var(--space-xs); }
       .finale-layout { padding: var(--space-md); }
+      .book-container { padding: 1.5rem; }
       :root { --space-xl: 4rem; --space-lg: 2rem; }
-      .book-text { font-size: 1.05rem; text-align: left; }
+      .book-text { font-size: 1.05rem; text-align: left; text-indent: 0; }
     }
   </style>
 </head>
@@ -226,7 +234,6 @@
        ================================================== -->
   <div id="view-landing">
     <main>
-      <!-- Постер -->
       <section id="poster" class="hero section-surface">
         <div class="container grid-12">
           <div class="hero-content">
@@ -239,12 +246,11 @@
         </div>
       </section>
 
-      <!-- Описание катастрофы -->
       <section id="disaster" class="section">
         <div class="container grid-12">
           <div class="disaster-lead">
             <h2 class="title-section" data-i18n="disaster_title">Описание катастрофы</h2>
-            <p class="text-lead" data-i18n="disaster_main">Трагедия началась не с удара, а с глубокого, утробного гула, исходившего из самых недр земли. Тектоническая плита, копившая колоссальное напряжение более двухсот лет, внезапно лопнула. Магнитуда составила разрушительные 8.5 баллов по шкале Рихтера.</p>
+            <p class="text-lead" data-i18n="disaster_main">Трагедия началась не с удара, а с глубокого, утробного гула, исходившего из недр земли. Тектоническая плита, копившая колоссальное напряжение более двухсот лет, внезапно лопнула. Магнитуда составила разрушительные 8.5 баллов по шкале Рихтера.</p>
           </div>
           <div class="disaster-stats">
             <article>
@@ -263,7 +269,6 @@
         </div>
       </section>
 
-      <!-- Герои -->
       <section id="characters" class="section section-surface">
         <div class="container">
           <h2 class="title-section" data-i18n="char_title">Главные герои</h2>
@@ -293,7 +298,6 @@
         </div>
       </section>
 
-      <!-- Содержание (Главы 1-4) -->
       <section id="chronicle" class="section">
         <div class="container">
           <h2 class="title-section" data-i18n="plot_title">Содержание</h2>
@@ -326,19 +330,25 @@
               </button>
               <div class="accordion-content-wrapper"><div class="accordion-content"><p class="text-body" data-i18n="plot_p4_text_short">Из рухнувшего торгового центра пробивается слабый сигнал SOS. Андрей принимает решение спуститься в смертельно опасный, осыпающийся кратер. Елена, найдя связь, координирует его действия по памяти чертежей. Начинается гонка со временем на фоне надвигающегося мощного афтершока.</p></div></div>
             </div>
-            <!-- Глава 5 удалена из аккордеона, так как ниже идет секция "Финал" -->
           </div>
         </div>
       </section>
 
-      <!-- Финал -->
-      <section id="finale" class="section">
+      <!-- Секция Финал (отделена фоном `section-surface` и растянута на всю ширину `grid-12`) -->
+      <section id="finale" class="section section-surface">
         <div class="container grid-12">
           <div class="finale-layout">
             <h2 class="title-section" data-i18n="finale_title">Финал</h2>
-            <p data-i18n="finale_p1">Группа Андрея, используя систему альпинистских полиспастов, успевает вытащить Катю и еще девятнадцать человек на поверхность за сто двадцать секунд до того, как подземные уровни «Атриума» с оглушительным ревом окончательно схлопываются, хороня под собой все тайны и надежды.</p>
-            <p data-i18n="finale_p2">Эвакуированные доставляются в полевой госпиталь, где происходит горькое воссоединение Кати с матерью. Но Андрей идет дальше. Он доходит до места, где стоял его дом, находя лишь уродливую гору спрессованного бетона. Спасатель, вернувший жизни десяткам людей, медленно опускается на колени. Он спас чужие миры, но навсегда потерял свою вселенную.</p>
-            <p data-i18n="finale_p3">Роман завершается масштабной панорамой руин Новоморска в лучах багрового заката. Город навсегда мертв и превращен в братскую могилу. Однако в глазах людей, прошедших сквозь кромешный ад, загорается новая, суровая искра жизни. Они доказали главную истину: земля может треснуть, бетон может раскрошиться в пыль, но истинную человеческую волю расколоть невозможно.</p>
+            <div class="finale-columns">
+              <div>
+                <p data-i18n="finale_p1">Группа Андрея, используя систему альпинистских полиспастов, успевает вытащить Катю и еще девятнадцать человек на поверхность за сто двадцать секунд до того, как подземные уровни «Атриума» с оглушительным ревом окончательно схлопываются, хороня под собой все тайны и надежды.</p>
+                <p data-i18n="finale_p2">Эвакуированные доставляются в полевой госпиталь, где происходит горькое воссоединение Кати с матерью. Но Андрей идет дальше. Он доходит до места, где стоял его дом, находя лишь уродливую гору спрессованного бетона.</p>
+              </div>
+              <div>
+                <p data-i18n="finale_p2_extra">Спасатель, вернувший жизни десяткам людей, медленно опускается на колени. Он спас чужие миры, но навсегда потерял свою вселенную.</p>
+                <p data-i18n="finale_p3">Роман завершается масштабной панорамой руин Новоморска в лучах багрового заката. Город навсегда мертв и превращен в братскую могилу. Однако в глазах людей, прошедших сквозь кромешный ад, загорается новая, суровая искра жизни. Они доказали главную истину: земля может треснуть, бетон может раскрошиться в пыль, но истинную человеческую волю расколоть невозможно.</p>
+              </div>
+            </div>
           </div>
         </div>
       </section>
@@ -404,20 +414,18 @@
     </main>
   </div>
 
-  <!-- Футер (общий для обоих видов) -->
   <footer class="site-footer">
     <div class="container">
-      <span data-i18n="footer_text1">Сайт создан с сюжета книги «</span><a onclick="app.showBook()" data-i18n="footer_link">Расколотый город</a><span data-i18n="footer_text2">» Автором который является Мансур</span>
+      <span data-i18n="footer_text1">Сайт создан с сюжета книги «</span><a href="#book" onclick="event.preventDefault(); app.showBook();" data-i18n="footer_link">Расколотый город</a><span data-i18n="footer_text2">» Автором который является Мансур</span>
     </div>
   </footer>
 
   <!-- ==================================================
-       11. JavaScript Logic & Huge Localization Data
+       11. JavaScript Logic & Massive Localization Data
        ================================================== -->
   <script>
     'use strict';
 
-    // Massive localized content providing a deeply immersive literary experience.
     const translations = {
       ru: {
         logo_part1: "Расколотый", logo_part2: "Город",
@@ -440,16 +448,16 @@
         plot_title: "Содержание",
         plot_p1_title: "Глава 1: Иллюзия", plot_p1_text_short: "Новоморск гудит и строится ввысь. Елена тщетно пытается достучаться до мэрии. Андрей готовится к концу смены. Читатель чувствует нарастающее напряжение от странного поведения природы: аномальный отлив и пугающая тишина птиц. Город живет свои последние спокойные часы, не подозревая о надвигающейся катастрофе.",
         plot_p2_title: "Глава 2: Разлом", plot_p2_text_short: "В 08:14 утра происходит сокрушительный удар. 45 секунд ада стирают привычный мир. Мосты переламываются пополам, бетонные высотки рассыпаются в пыль, связь исчезает. Люди оказываются заперты под землей. Новоморск мгновенно погружается в первобытный хаос.",
-        plot_p3_title: "Глава 3: Закон Джунглей", plot_p3_text_short: "Город покрыт густым токсичным дымом. Начинается жестокая борьба за ресурсы. Полиции больше нет, на улицах властвуют мародеры. Андрей с небольшой группой пробирается через горящие руины. Под землей Катя делит остатки воды и пытается сохранить человеческий облик выживших.",
-        plot_p4_title: "Глава 4: Путь к свету", plot_p4_text_short: "Из рухнувшего торгового центра пробивается слабый сигнал SOS. Андрей принимает решение спуститься в смертельно опасный, осыпающийся кратер. Елена, найдя связь, координирует его действия по памяти чертежей. Начинается гонка со временем на фоне надвигающегося афтершока.",
+        plot_p3_title: "Глава 3: Закон Джунглей", plot_p3_text_short: "Город покрыт густым токсичным дымом. Начинается жестокая борьба за ресурсы. Полиции больше нет, на улицах властвуют мародеры. Андрей с небольшой группой пробирается через горящие руины, постоянно делая тяжелый моральный выбор. Под землей Катя делит остатки воды и пытается сохранить человеческий облик выживших.",
+        plot_p4_title: "Глава 4: Путь к свету", plot_p4_text_short: "Из рухнувшего торгового центра пробивается слабый сигнал SOS. Андрей принимает решение спуститься в смертельно опасный, осыпающийся кратер. Елена, найдя связь, координирует его действия по памяти чертежей. Начинается гонка со временем на фоне надвигающегося мощного афтершока.",
         plot_p5_title: "Глава 5: Финал", plot_p5_text_short: "Последние минуты перед полным обрушением. Горькое спасение.",
         
         finale_title: "Финал",
         finale_p1: "Группа Андрея, используя систему альпинистских полиспастов, успевает вытащить Катю и еще девятнадцать человек на поверхность за сто двадцать секунд до того, как подземные уровни «Атриума» с оглушительным ревом окончательно схлопываются, хороня под собой все тайны и надежды.",
-        finale_p2: "Эвакуированные доставляются в полевой госпиталь, где происходит горькое воссоединение Кати с матерью. Но Андрей идет дальше. Он доходит до места, где стоял его дом, находя лишь уродливую гору спрессованного бетона. Спасатель, вернувший жизни десяткам людей, медленно опускается на колени. Он спас чужие миры, но навсегда потерял свою вселенную.",
+        finale_p2: "Эвакуированные доставляются в полевой госпиталь, где происходит горькое воссоединение Кати с матерью. Но Андрей идет дальше. Он доходит до места, где стоял его дом, находя лишь уродливую гору спрессованного бетона.",
+        finale_p2_extra: "Спасатель, вернувший жизни десяткам людей, медленно опускается на колени. Он спас чужие миры, но навсегда потерял свою вселенную.",
         finale_p3: "Роман завершается масштабной панорамой руин Новоморска в лучах багрового заката. Город навсегда мертв и превращен в братскую могилу. Однако в глазах людей, прошедших сквозь кромешный ад, загорается новая, суровая искра жизни. Они доказали главную истину: земля может треснуть, бетон может раскрошиться в пыль, но истинную человеческую волю расколоть невозможно.",
 
-        // FULL BOOK CONTENT 
         book_full_title: "Расколотый Город",
         book_author: "Автор: Мансур",
         book_sec_chars: "Персонажи",
@@ -479,7 +487,7 @@
         card3_title: "Wrath of the Ocean", card3_text: "A 5-meter wall of water crashed into the port district, obliterating infrastructure.",
         
         char_title: "Main Characters",
-        char1_role: "Lead Seismologist", char1_name: "Elena Petrova", char1_text_short: "At the moment of the strike, she is in a bunker. Her main goal is to find her daughter.",
+        char1_role: "Lead Seismologist", char1_name: "Dr. Elena Petrova", char1_text_short: "At the moment of the strike, she is in a bunker. Her main goal is to find her daughter.",
         char2_role: "Rescue Lieutenant", char2_name: "Andrey Volkov", char2_text_short: "He uses his professional skills to navigate through burning city blocks, leading survivors.",
         char3_role: "Teenager", char3_name: "Katya Petrova", char3_text_short: "Trapped on the minus third floor of a collapsed mall, she steps up as a leader.",
         
@@ -493,6 +501,7 @@
         finale_title: "Finale",
         finale_p1: "Andrey's group pulls Katya and others to the surface just two minutes before the underground levels completely collapse with a deafening roar.",
         finale_p2: "Andrey reaches his home. Instead of a building, there is only a mountain of crushed concrete. He realizes he saved other worlds, but lost his own universe.",
+        finale_p2_extra: "The rescuer who saved dozens falls to his knees in the silence of the mass grave. His mission is accomplished, but his heart is broken forever.",
         finale_p3: "The city is forever dead, becoming a quarantined mass grave. But an unyielding will to live ignites in those who survived. Human will cannot be shattered.",
 
         book_full_title: "Shattered City",
@@ -538,9 +547,9 @@
         finale_title: "Финал",
         finale_p1: "Андрей тобы Катяны жертөле толық құлауға екі минут қалғанда жер бетіне алып шығады. Олар дала госпиталіне эвакуацияланады.",
         finale_p2: "Андрей өз үйіне жетеді. Ғимараттың орнында бетон тауы жатыр. Құтқарушы басқалардың әлемін сақтап қалды, бірақ өзінікін жоғалтты.",
+        finale_p2_extra: "Одағам адамға өмір сыйлаған құтқарушы отбасының қабірі алдында тізерлейді. Миссия аяқталды, бірақ жүрегі мәңгілікке сынық.",
         finale_p3: "Қала мәңгілікке өлі. Бірақ тозақтан аман қалған адамдарда өмірге деген қатал үміт ұшқыны жанады. Адамның ерік-жігерін сындыру мүмкін емес.",
 
-        // FULL BOOK CONTENT (KAZAKH)
         book_full_title: "Жарылған Қала",
         book_author: "Авторы: Мансур",
         book_sec_chars: "Кейіпкерлер",
@@ -548,7 +557,7 @@
         book_char2_desc: "<p>Андрей Волков — отыз екі жастағы өрт сөндіру-құтқару қызметінің лейтенанты, әйелі Анна мен бес жасар ұлы Ильяны қатты жақсы көретін мықты адам. Апат таңы оны жиырма төрт сағаттық ауыр ауысымнан кейін метро вагонында қарсы алады. Ол есікке сүйеніп тіке тұрған күйі ұйықтап жатқанда, жер кенеттен сілкіне бастайды.</p><p>Мыжылған пойыздан жер бетіне шыққан Андрей ешбір жарғыда жазылмаған сұмдық шындықпен бетпе-бет келеді: оның туған ауданы жер бетінен жойылған. Үмітсіздікке берілуден бас тартып, ол өрт сөндіруші балтасы мен арқанмен ғана қаруланып, жанып жатқан тозақ арқылы өз жолын бастайды. Андрей ондаған адасқан адамдар үшін бейресми көшбасшыға айналып, қарапайым құтқарушыдан өлі қаланың үміт символына айналады.</p>",
         book_char3_desc: "<p>Катя — анасының «тұншықтырғыш» қамқорлығына қарсы тұрақты бүлік жағдайында жүрген типтік жасөспірім. Сол таңда ол анасына оның параноик екенін айқайлап, есікті тарс жауып кетіп қалды. Мектептің орнына Катя алып жерасты «Атриум» ойын-сауық орталығына барды.</p><p>Дүмпулер басталғанда, сауда орталығының бетон жабындары құлап, жүздеген адамды минус үшінші қабатта қамап тастайды. Тас қараңғыда, ыңырсыған дауыстар мен жыртылған арматураның сықырлаған дыбысы астында Катя тез өзгереді. Қырсық оқушы қыз жоғалып, оның орнына анасының темірдей мінезін мұра еткен қатал, жинақы көшбасшы пайда болады. Ол аман қалғандарды ұйымдастырады, дүрбелеңді қатаң тоқтатады және ауа таусылып бара жатқанда ауыз су қорларын бақылауға алады.</p>",
         book_sec_disaster: "Апаттың сипаттамасы: Ұлы Жарылыс",
-        book_disaster_desc: "<p>Трагедия таңғы сағат 08:14-те басталды. Ол қатты соққымен емес, планета төзбес ауырсынудан ыңырсығандай терең, қорқынышты гүрілмен келді. Теңіз түбінен он бес шақырым тереңдікте екі жүз жыл бойы орасан зор энергия жинаған тектоникалық плита кенеттен ұзындығы жүз шақырымдық тігіс бойымен жарылды. Босатылған энергия мыңдаған атом бомбасының жарылысына тең болды. Магнитудасы Рихтер шкаласы бойынша жойқын 8.5 баллды құрады.</p><p>Эпицентрі үш миллион халқы бар гүлденген мегаполис — Новоморск жағалауынан небәрі жиырма шақырым жерде болды. Алғашқы P-толқыны қала көшелеріне бірнеше секундта жетіп, төменнен алып балғамен ұрғандай болды. Зәулім ғимараттардың әйнек фасадтары бір уақытта жарылып, жұмысқа асыққан адамдар толы көшелерге миллиондаған өлімге әкелетін сынықтар жаңбыры болып жауды. Содан кейін жерді бөлшектей бастаған S-толқыны келді. Асфальт көліктерді жұтып, алып толқындармен көтерілді. Панельді көпқабатты үйлер бірнеше сәтте қабат-қабатымен құлап, аспанға қою сұр шаң бұлттарын көтерді. Теңіз түбінің жылжуы суасты көшкінін тудырып, он екі минуттан соң порт ауданына биіктігі бес метрлік мұхит суы, балшық және қираған кемелер соғылды. Қала қырық бес секунд ішінде жойылды.</p>",
+        book_disaster_desc: "<p>Трагедия таңғы сағат 08:14-те басталды. Ол қатты соққымен емес, планета төзбес ауырсынудан ыңырсығандай терең, қорқынышты гүрілден келді. Теңіз түбінен он бес шақырым тереңдікте екі жүз жыл бойы орасан зор энергия жинаған тектоникалық плита кенеттен ұзындығы жүз шақырымдық тігіс бойымен жарылды. Босатылған энергия мыңдаған атом бомбасының жарылысына тең болды. Магнитудасы Рихтер шкаласы бойынша жойқын 8.5 баллды құрады.</p><p>Эпицентрі үш миллион халқы бар гүлденген мегаполис — Новоморск жағалауынан небәрі жиырма шақырым жерде болды. Алғашқы P-толқыны қала көшелеріне бірнеше секундта жетіп, төменнен алып балғамен ұрғандай болды. Зәулім ғимараттардың әйнек фасадтары бір уақытта жарылып, жұмысқа асыққан адамдар толы көшелерге миллиондаған өлімге әкелетін сынықтар жаңбыры болып жауды. Содан кейін жерді бөлшектей бастаған S-толқыны келді. Асфальт көліктерді жұтып, алып толқындармен көтерілді. Панельді көпқабатты үйлер бірнеше сәтте қабат-қабатымен құлап, аспанға қою сұр шаң бұлттарын көтерді. Теңіз түбінің жылжуы суасты көшкінін тудырып, он екі минуттан соң порт ауданына биіктігі бес метрлік мұхит суы, балшық және қираған кемелер соғылды. Қала қырық бес секунд ішінде жойылды.</p>",
         book_sec_content: "Романның мазмұны",
         book_ch1_content: "<p>Роман оқырманды алып мегаполистің ырғағына баяу енгізумен басталады. Новоморск кептелістермен гуілдеп, витриналармен жарқырап, теңізден жаңа аумақтарды жаулап, биікке бой көтеруде. Біз әкім орынбасарының кабинетінен ашуланып шыққан Елена Петровамен танысамыз — оған мектептерді сейсмикалық нығайту бағдарламасын қаржыландырудан тағы да бас тартылды. Ал Андрей Волков өрт сөндіру бөлімінде ауысымды тапсырып, әріптестерімен әзілдесіп, альпинистік құрал-жабдықтарын тексереді.</p><p>Петровтар отбасындағы таңғы ас жанжалмен аяқталады: Катя анасына айқайлап, үйден кетіп қалады. Оқырман әрбір ұсақ-түйектен өсіп келе жатқан, тұншықтырғыш саспенсті сезінеді: саябақтардағы құстардың оғаш көшуі, жаңа асфальттағы түсініксіз микрожарықтар және шығанақтағы әдеттегіден күшті су қайтуы. Қала өзінің соңғы сағаттарын сүріп жатқанын мүлдем білмейді.</p>",
         book_ch2_content: "<p>Таңғы 08:14-те уақыт тоқтайды. Баяндау күрт жылдамдап, кейіпкерлер арасында пулемет кезегінің жылдамдығымен ауысады. Апаттың қырық бес секунды елу беттік мәтінде егжей-тегжейлі сипатталады. Мониторинг орталығы сілкінеді, ауыр серверлер еденге гүрс етіп құлайды, экрандар 8.5+ магнитудасын көрсетіп, қызыл түспен жыпылықтайды. Елена қала картасына үреймен қарайды, онда датчиктердің жасыл нүктелері бірінен соң бірі сөніп, өлі қара аймаққа айналуда.</p><p>Метродан жаңа ғана шыққан Андрей «Жаңа Әлем» көпірінің қақ бөлініп, ондаған көлікті суға құлатқанын көреді. Ал жер астында, «Атриум» СОО-ның минус үшінші қабатында, Катя жыртылған металдың сықырлаған даусынан және құлаған бетон жабындарының гүрсілінен саңырау бола жаздайды. Жарық сөнеді. Қараңғыда, шаң мен қан иісі аңқыған абсолютті тьмада өлімге әкелетін кептеліс басталады. Қалыпты әлем құлап, орнына тек жабайы үрей қалды.</p>",
@@ -558,17 +567,15 @@
       }
     };
 
-    // 12. Application Logic (SPA Routing & i18n)
+    // 12. Application Logic (SPA Routing, Hash & i18n)
     class App {
       constructor() {
         this.state = { lang: 'ru' };
         
-        // Cache views
         this.viewLanding = document.getElementById('view-landing');
         this.viewBook = document.getElementById('view-book');
         this.landingNav = document.getElementById('landing-nav');
         
-        // Cache elements
         this.translatableElements = document.querySelectorAll('[data-i18n]');
         this.langButtons = document.querySelectorAll('.lang-btn');
         this.accordionTriggers = document.querySelectorAll('.accordion-trigger');
@@ -576,16 +583,14 @@
         this.init();
       }
 
-            init() {
+      init() {
         this.bindEvents();
         this.updateLanguage(this.state.lang);
         
-        // Проверяем ссылку при загрузке: если есть #book, открываем книгу
         if (window.location.hash === '#book') {
           this.showBook();
         }
       }
-
 
       bindEvents() {
         this.langButtons.forEach(btn => {
@@ -602,13 +607,12 @@
         });
       }
 
-      // Router methods
       showLanding() {
         this.viewLanding.classList.remove('hidden');
         this.landingNav.classList.remove('hidden');
         this.viewBook.classList.add('hidden');
         window.scrollTo(0, 0);
-        history.pushState(null, null, ' '); // Очищает ссылку от #book
+        history.pushState(null, null, ' ');
       }
 
       showBook() {
@@ -616,10 +620,9 @@
         this.landingNav.classList.add('hidden');
         this.viewBook.classList.remove('hidden');
         window.scrollTo(0, 0);
-        window.location.hash = 'book'; // Добавляет #book в ссылку
+        window.location.hash = 'book';
       }
 
-      // i18n logic
       updateLanguage(lang) {
         this.state.lang = lang;
         const dict = translations[lang];
@@ -628,7 +631,7 @@
         this.translatableElements.forEach(el => {
           const key = el.getAttribute('data-i18n');
           if (dict[key]) {
-            el.innerHTML = dict[key]; // using innerHTML to render <p> tags for the book
+            el.innerHTML = dict[key];
           }
         });
 
@@ -640,7 +643,6 @@
         document.documentElement.lang = lang;
       }
 
-      // Accordion logic
       toggleAccordion(trigger) {
         const item = trigger.closest('.accordion-item');
         const isExpanded = trigger.getAttribute('aria-expanded') === 'true';
@@ -662,7 +664,6 @@
       }
     }
 
-    // Init App
     let app;
     document.addEventListener('DOMContentLoaded', () => {
       app = new App();
