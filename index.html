@@ -245,7 +245,7 @@
         }
 
         .active-accordion .accordion-content {
-            max-height: 2000px; /* Большое значение для раскрытия массивного текста */
+            max-height: 2000px;
         }
         
         .active-accordion .accordion-icon {
@@ -288,7 +288,7 @@
         <section id="poster">
             <div class="poster-wrapper">
                 <!-- ВАЖНО: Убедитесь, что файл с этим именем лежит в папке с сайтом -->
-                <img src="watermarked_img_1747507588426706641.jpg" alt="Постер книги Расколотый Город">
+                <img src="IMG_6494.jpeg" alt="Постер книги Расколотый Город">
             </div>
         </section>
 
@@ -585,12 +585,6 @@
 
         function toggleAccordion(header) {
             const item = header.parentElement;
-            
-            // Если нужно, чтобы открывался только один за раз:
-            // document.querySelectorAll('.accordion-item').forEach(otherItem => {
-            //    if (otherItem !== item) otherItem.classList.remove('active-accordion');
-            // });
-
             item.classList.toggle('active-accordion');
         }
     </script>
